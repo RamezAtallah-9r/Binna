@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BINNA Final Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tailwind.config.js"></script>
+  <style>body{font-family:'IBM Plex Arabic',sans-serif;background:linear-gradient(135deg,#F3FFD1 0%,#FFF5CC 50%,#FFE7D2 100%);color:#1A1A1A}.cut{clip-path:polygon(18px 0%,100% 0%,100% calc(100% - 18px),calc(100% - 18px) 100%,0% 100%,0% 18px)}</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+  <main class="max-w-5xl w-full bg-white/80 shadow-soft cut p-8 border-r-4 border-binnaGreen">
+    <div class="flex items-center gap-4 mb-8"><img src="assets/binna-logo.png" class="h-20 w-auto" alt="BINNA Logo"><div><h1 class="text-4xl font-black text-charcoal">BINNA Final Project</h1><p class="font-bold text-steel">Customer + Supplier + Admin</p></div></div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <a class="bg-charcoal text-white p-6 cut block hover:-translate-y-1 transition" href="customer/landing.html"><h2 class="text-2xl font-black text-binnaGreen">Customer</h2><p class="text-white/60 mt-2 font-bold">الموقع، المتاجر، السلة، AI، الطلبات</p></a>
+      <a class="bg-white p-6 cut block border border-charcoal/10 shadow-soft hover:-translate-y-1 transition" href="supplier/supplier-overview.html"><h2 class="text-2xl font-black">Supplier</h2><p class="text-steel mt-2 font-bold">لوحة المورد والطلبات والمخزون</p></a>
+      <a class="bg-white p-6 cut block border border-charcoal/10 shadow-soft hover:-translate-y-1 transition" href="admin/index.html"><h2 class="text-2xl font-black">Admin</h2><p class="text-steel mt-2 font-bold">إدارة المستخدمين والموردين والطلبات</p></a>
+    </div>
+  </main>
+</body>
+</html>

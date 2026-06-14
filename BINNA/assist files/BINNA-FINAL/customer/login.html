@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول | بناء - BINNA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(176, 220, 0, 0.18);
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+            font-weight: 800;
+            padding: 15px 34px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .custom-checkbox:checked {
+            background-color: #b0dc00;
+            border-color: #b0dc00;
+        }
+
+        .reveal,
+        .reveal-left,
+        .reveal-right {
+            opacity: 0;
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+
+        .reveal-right {
+            transform: translateX(48px);
+        }
+
+        .reveal-left {
+            transform: translateX(-48px);
+        }
+
+        .reveal.visible,
+        .reveal-left.visible,
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <nav class="navbar px-6 py-3 text-white">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="landing.html" class="flex items-center">
+                <img src="../assets/binna-logo.png" alt="BINNA Logo" class="h-16 md:h-20 w-auto">
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold text-white/70">
+                <a href="landing.html" class="hover:text-binnaGreen transition">الرئيسية</a>
+                <a href="landing.html#contact" class="hover:text-binnaGreen transition">تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="flex flex-1 flex-col lg:flex-row min-h-screen pt-24">
+
+        <!-- RIGHT SIDE: LOGIN FORM -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 relative z-10">
+            <div
+                class="w-full max-w-md bg-white/90 backdrop-blur-xl p-8 md:p-10 cut-card shadow-soft border border-white/50 reveal-right">
+
+                <!-- MOBILE LOGO -->
+                <div class="lg:hidden flex justify-center mb-8">
+                    <img src="../assets/binna-logo.png" alt="BINNA Logo" class="h-28 w-auto">
+                </div>
+
+                <div class="mb-8 text-center lg:text-right">
+                    <h1 class="text-3xl font-black text-charcoal mb-3 leading-tight">أهلاً بعودتك 👋</h1>
+                    <p class="text-steel font-semibold leading-relaxed text-sm md:text-base">
+                        سجل دخولك لمتابعة مشاريعك، إدارة طلباتك، واستخدام مساعد الذكاء الاصطناعي.
+                    </p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault();">
+
+                    <div class="space-y-2">
+                        <label for="email" class="block text-charcoal font-bold text-sm">
+                            البريد الإلكتروني أو رقم الهاتف
+                        </label>
+                        <input type="text" id="email" placeholder="example@binna.com"
+                            class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label for="password" class="block text-charcoal font-bold text-sm">كلمة المرور</label>
+                            <a href="#"
+                                class="text-sm font-bold text-safetyOrange hover:text-warmYellow transition-colors">
+                                نسيت كلمة المرور؟
+                            </a>
+                        </div>
+
+                        <div class="relative">
+                            <input type="password" id="password" placeholder="••••••••"
+                                class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300">
+                            <button type="button" id="togglePassword"
+                                class="absolute left-3 top-1/2 -translate-y-1/2 text-steel hover:text-charcoal transition-colors"
+                                aria-label="إظهار كلمة المرور">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="remember"
+                            class="custom-checkbox w-5 h-5 rounded border-2 border-charcoal/20 bg-white cursor-pointer appearance-none">
+                        <label for="remember" class="text-sm font-bold text-charcoal/70 cursor-pointer">
+                            تذكرني على هذا الجهاز
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-orange w-full flex items-center justify-center gap-2">
+                        <span>تسجيل الدخول</span>
+                    </button>
+                </form>
+
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-charcoal/10"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-white/90 text-steel font-bold">أو المتابعة عبر</span>
+                    </div>
+                </div>
+
+                <button
+                    class="w-full bg-white border-2 border-charcoal/10 text-charcoal font-bold py-3.5 px-6 hover:bg-concrete hover:border-charcoal/20 transition-all duration-300 flex items-center justify-center gap-3">
+                    <span>Google</span>
+                </button>
+
+                <p class="text-center mt-8 text-steel font-semibold">
+                    ليس لديك حساب؟
+                    <a href="signup.html"
+                        class="text-binnaGreen font-black hover:text-charcoal transition-colors underline decoration-2 underline-offset-4">
+                        سجل الآن مجاناً
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- LEFT SIDE: BRANDING -->
+        <div
+            class="hidden lg:flex w-1/2 bg-charcoal text-white p-12 lg:p-16 flex-col justify-between relative overflow-hidden reveal-left">
+
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: linear-gradient(#b0dc00 1px, transparent 1px), linear-gradient(90deg, #b0dc00 1px, transparent 1px); background-size: 30px 30px;">
+            </div>
+
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-binnaGreen/20 rounded-full blur-3xl">
+            </div>
+
+            <div class="relative z-10">
+
+                <div class="mb-10 flex justify-center">
+                    <img src="../assets/binna-logo.png" alt="BINNA Logo" class="w-80 h-auto">
+                </div>
+
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-2 mb-8"
+                    style="clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);">
+                    <span class="w-2 h-2 bg-binnaGreen rounded-full animate-pulse"></span>
+                    <span class="text-xs font-grotesk font-bold tracking-wider text-binnaGreen">
+                        SMART BUILDING AI
+                    </span>
+                </div>
+
+                <h2 class="text-4xl xl:text-5xl font-black leading-tight mb-6 font-grotesk">
+                    طوّر المكان اللي حولك، <br>
+                    <span class="text-binnaGreen">وإحنا بنسهّل عليك الطريق.</span>
+                </h2>
+
+                <p class="text-white/60 text-lg leading-relaxed font-semibold mb-10 max-w-md">
+                    منصة تجمع بين متاجر مواد البناء ومساعد ذكاء اصطناعي يفهم مشروعك، يحسب احتياجاتك، ويقارن الأسعار
+                    بدقة.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/10 p-4 backdrop-blur-sm">
+                        <div class="w-10 h-10 bg-binnaGreen/20 flex items-center justify-center text-xl">📐</div>
+                        <div>
+                            <div class="font-black text-white">حساب كميات ذكي</div>
+                            <div class="text-sm text-white/50 font-semibold">
+                                ارفع المخطط واحصل على قائمة المواد فوراً
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/10 p-4 backdrop-blur-sm">
+                        <div class="w-10 h-10 bg-catYellow/20 flex items-center justify-center text-xl">🏪</div>
+                        <div>
+                            <div class="font-black text-white">مقارنة أسعار فورية</div>
+                            <div class="text-sm text-white/50 font-semibold">
+                                من عشرات الموردين المعتمدين في منطقتك
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 mt-12 pt-8 border-t border-white/10">
+                <div class="flex items-center gap-1 text-catYellow mb-2 text-lg">
+                    ★★★★★
+                </div>
+                <p class="text-white/80 font-semibold italic leading-relaxed">
+                    "وفرت عليّ أكثر من 30% من ميزانية التشطيب، والذكاء الاصطناعي حدد لي نواقص لم أكن أنتبه لها."
+                </p>
+                <p class="text-white/40 text-sm mt-3 font-bold font-grotesk">
+                    — م. أحمد، مقاول مستقل
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealItems = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealItems.forEach((item) => revealObserver.observe(item));
+
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePassword');
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                });
+            }
+        });
+    </script>
+
+<script defer src="../script.js"></script>
+</body>
+
+</html>

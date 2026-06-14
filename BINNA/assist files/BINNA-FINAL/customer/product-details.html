@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أسمنت بورتلاندي 50 كغ | بناء - BINNA</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --warm-yellow: #F7B928;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .cut-card-sm {
+            clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+        }
+
+        .logo-shield {
+            clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+        }
+
+        .btn-orange,
+        .btn-green,
+        .btn-dark {
+            font-weight: 800;
+            padding: 12px 24px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: var(--charcoal);
+        }
+
+        .btn-green:hover {
+            background: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .btn-dark {
+            background: var(--charcoal);
+            color: var(--green);
+        }
+
+        .btn-dark:hover {
+            background: var(--green);
+            color: var(--charcoal);
+            transform: translateY(-3px);
+        }
+
+        .section-divider {
+            width: 72px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+            margin-bottom: 16px;
+            border-radius: 2px;
+        }
+
+        .glow-underline {
+            position: relative;
+            display: inline-block;
+            color: var(--charcoal);
+        }
+
+        .glow-underline::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            left: 0;
+            height: 6px;
+            background: var(--green);
+            box-shadow: 0 0 22px rgba(176, 220, 0, .85), 0 0 44px rgba(176, 220, 0, .35);
+            border-radius: 999px;
+        }
+
+        .product-gallery {
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-thumbnail {
+            background: white;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .gallery-thumbnail.active {
+            border-color: var(--green);
+            box-shadow: 0 0 15px rgba(176, 220, 0, 0.5);
+        }
+
+        .gallery-thumbnail:hover {
+            border-color: var(--green);
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(176, 220, 0, 0.1);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--green);
+            width: fit-content;
+        }
+
+        .quantity-selector button {
+            background: transparent;
+            border: none;
+            color: var(--green);
+            font-weight: 800;
+            cursor: pointer;
+            padding: 8px 12px;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-selector button:hover {
+            background: rgba(176, 220, 0, 0.1);
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 800;
+            color: var(--charcoal);
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, rgba(176, 220, 0, 0.2), rgba(255, 205, 17, 0.2));
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .review-card {
+            border-left: 4px solid var(--green);
+            padding: 16px;
+            background: white;
+        }
+
+        .tab-button.active {
+            background: var(--green);
+            color: var(--charcoal);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .tab-button {
+            background: white;
+            color: var(--charcoal);
+            border: 2px solid rgba(176, 220, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            border-color: var(--green);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- TOP HEADER / NAVBAR -->
+    <header
+        class="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-binnaGreen/20">
+        <div class="flex items-center gap-3">
+            <div class="logo-shield w-10 h-11 bg-binnaGreen flex items-center justify-center">
+                <span class="text-charcoal font-black text-lg font-grotesk">ب</span>
+            </div>
+            <div>
+                <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA</div>
+                <div class="text-white/40 text-xs font-bold">تفاصيل المنتج</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="relative p-2 text-white/70 hover:text-binnaGreen transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span
+                    class="absolute top-1 right-1 w-2.5 h-2.5 bg-safetyOrange rounded-full border-2 border-charcoal"></span>
+            </button>
+            <div class="text-right hidden sm:block">
+                <div class="text-sm font-bold">أحمد الخليل</div>
+                <div class="text-xs text-binnaGreen/70">عميل / مقاول</div>
+            </div>
+            <div
+                class="w-10 h-10 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-sm font-bold text-binnaGreen">
+                أخ
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 sm:p-8 overflow-y-auto space-y-8">
+        <div class="max-w-7xl mx-auto w-full">
+
+            <!-- BREADCRUMB -->
+            <div class="mb-6 reveal">
+                <a href="stors-product.html" class="text-binnaGreen font-bold text-sm hover:underline">المتاجر والمواد</a>
+                <span class="text-steel mx-2">/</span>
+                <a href="store-details.html" class="text-binnaGreen font-bold text-sm hover:underline">شركة القدس</a>
+                <span class="text-steel mx-2">/</span>
+                <span class="text-steel text-sm">أسمنت بورتلاندي 50 كغ</span>
+            </div>
+
+            <!-- PRODUCT MAIN SECTION -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 reveal">
+
+                <!-- PRODUCT GALLERY -->
+                <div class="lg:col-span-1">
+                    <!-- Main Image -->
+                    <div class="product-gallery h-80 cut-card shadow-soft mb-4 border-4 border-binnaGreen/20">
+                        🧱
+                    </div>
+
+                    <!-- Thumbnails -->
+                    <div class="grid grid-cols-4 gap-2">
+                        <div class="gallery-thumbnail active cut-card-sm border-2 h-20 cursor-pointer"
+                            onclick="selectImage(this)">
+                            🧱
+                        </div>
+                        <div class="gallery-thumbnail cut-card-sm border-2 h-20 cursor-pointer"
+                            onclick="selectImage(this)">
+                            📦
+                        </div>
+                        <div class="gallery-thumbnail cut-card-sm border-2 h-20 cursor-pointer"
+                            onclick="selectImage(this)">
+                            ✓
+                        </div>
+                        <div class="gallery-thumbnail cut-card-sm border-2 h-20 cursor-pointer"
+                            onclick="selectImage(this)">
+                            ⭐
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT INFO -->
+                <div class="lg:col-span-2 space-y-6">
+
+                    <!-- Product Header -->
+                    <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-binnaGreen">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <div class="section-divider"></div>
+                                <h1 class="text-2xl md:text-3xl font-black text-charcoal font-grotesk mb-2">
+                                    أسمنت <span class="glow-underline">بورتلاندي</span> 50 كغ
+                                </h1>
+                                <p class="text-steel text-sm font-semibold">الأسمنت الأبيض عالي الجودة - درجة أولى</p>
+                            </div>
+                            <button class="text-3xl hover:scale-110 transition">❤️</button>
+                        </div>
+
+                        <!-- Rating and Reviews -->
+                        <div class="flex items-center gap-4 mb-4 pb-4 border-b border-charcoal/10">
+                            <div class="flex items-center gap-1">
+                                <span class="text-catYellow text-lg">★★★★★</span>
+                                <span class="font-bold text-charcoal">4.9</span>
+                            </div>
+                            <span class="text-xs font-bold text-steel">(234 تقييم)</span>
+                            <span class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">
+                                ✓ موثق
+                            </span>
+                        </div>
+
+                        <!-- Price Section -->
+                        <div class="price-tag mb-4">
+                            <div class="text-xs font-bold text-steel mb-2">السعر الحالي</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-black text-safetyOrange font-grotesk">₪45</span>
+                                <span class="text-lg text-steel line-through">₪52</span>
+                            </div>
+                            <div class="text-xs font-bold text-binnaGreen mt-2">توفير: ₪7 (13%)</div>
+                        </div>
+
+                        <!-- Availability -->
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-3 h-3 bg-binnaGreen rounded-full animate-pulse"></span>
+                            <span class="font-bold text-charcoal">متوفر (50 وحدة في المخزن)</span>
+                        </div>
+
+                        <!-- Quantity Selector -->
+                        <div class="mb-4">
+                            <label class="text-sm font-bold text-charcoal mb-2 block">الكمية</label>
+                            <div class="quantity-selector cut-card-sm">
+                                <button onclick="decreaseQty()">−</button>
+                                <input type="number" id="quantity" value="1" min="1" readonly>
+                                <button onclick="increaseQty()">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex gap-3 flex-wrap">
+                            <button class="btn-green flex-1 text-sm">+ أضف للسلة</button>
+                            <button class="btn-orange flex-1 text-sm">اشتري الآن</button>
+                        </div>
+                    </div>
+
+                    <!-- Supplier Info -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-catYellow">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-12 h-12 bg-paleGreen flex items-center justify-center text-2xl cut-card-sm border-2 border-binnaGreen">
+                                    🏪
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-charcoal">شركة القدس للتوريدات الخرسانية</h4>
+                                    <p class="text-xs text-steel">📍 رام الله</p>
+                                </div>
+                            </div>
+                            <button class="btn-dark text-xs">زيارة المتجر</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- TABS SECTION -->
+            <section class="reveal">
+                <!-- Tab Buttons -->
+                <div class="flex gap-3 mb-6 flex-wrap">
+                    <button onclick="switchTab('specifications')" id="tab-specifications"
+                        class="tab-button active cut-card-sm px-4 py-2 font-bold text-sm">
+                        📋 المواصفات
+                    </button>
+                    <button onclick="switchTab('description')" id="tab-description"
+                        class="tab-button cut-card-sm px-4 py-2 font-bold text-sm">
+                        📝 الوصف
+                    </button>
+                    <button onclick="switchTab('reviews')" id="tab-reviews"
+                        class="tab-button cut-card-sm px-4 py-2 font-bold text-sm">
+                        ⭐ التقييمات (234)
+                    </button>
+                    <button onclick="switchTab('shipping')" id="tab-shipping"
+                        class="tab-button cut-card-sm px-4 py-2 font-bold text-sm">
+                        🚚 الشحن والتوصيل
+                    </button>
+                </div>
+
+                <!-- SPECIFICATIONS TAB -->
+                <div id="content-specifications" class="bg-white p-6 cut-card shadow-soft space-y-4">
+                    <h3 class="text-lg font-black text-charcoal mb-4">المواصفات التقنية</h3>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">الوزن</span>
+                        <span class="text-steel font-semibold">50 كغ</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">النوع</span>
+                        <span class="text-steel font-semibold">أسمنت بورتلاندي أبيض</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">الدرجة</span>
+                        <span class="text-steel font-semibold">درجة أولى (Grade 1)</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">معايير الجودة</span>
+                        <span class="text-steel font-semibold">ISO 9001:2015</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">الاستخدام</span>
+                        <span class="text-steel font-semibold">البناء العام والتشطيبات</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">مدة الصلاحية</span>
+                        <span class="text-steel font-semibold">6 أشهر من تاريخ الإنتاج</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">التخزين</span>
+                        <span class="text-steel font-semibold">مكان جاف وبارد</span>
+                    </div>
+
+                    <div class="spec-item">
+                        <span class="font-bold text-charcoal">بلد الصنع</span>
+                        <span class="text-steel font-semibold">فلسطين</span>
+                    </div>
+                </div>
+
+                <!-- DESCRIPTION TAB -->
+                <div id="content-description" class="hidden bg-white p-6 cut-card shadow-soft space-y-4">
+                    <h3 class="text-lg font-black text-charcoal mb-4">وصف المنتج</h3>
+
+                    <p class="text-steel leading-relaxed">
+                        أسمنت بورتلاندي أبيض عالي الجودة من إنتاج شركة القدس للتوريدات الخرسانية. يتميز هذا الأسمنت
+                        بنقاء عالي وقوة ربط ممتازة، مما يجعله الخيار الأمثل للمشاريع الإنشائية الحديثة والتشطيبات
+                        الفاخرة.
+                    </p>
+
+                    <h4 class="font-bold text-charcoal mt-4">المميزات الرئيسية:</h4>
+                    <ul class="space-y-2 text-steel">
+                        <li class="flex items-start gap-2">
+                            <span class="text-binnaGreen font-bold">✓</span>
+                            <span>نقاء عالي جداً مع نسبة أبيض تصل إلى 99%</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-binnaGreen font-bold">✓</span>
+                            <span>قوة ربط عالية تضمن متانة البناء</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-binnaGreen font-bold">✓</span>
+                            <span>مطابق للمعايير الدولية ISO 9001</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-binnaGreen font-bold">✓</span>
+                            <span>سهل الاستخدام والخلط</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-binnaGreen font-bold">✓</span>
+                            <span>سعر منافس وجودة مضمونة</span>
+                        </li>
+                    </ul>
+
+                    <h4 class="font-bold text-charcoal mt-4">الاستخدامات:</h4>
+                    <p class="text-steel">
+                        يستخدم هذا الأسمنت في البناء العام، الخرسانة الظاهرة، التشطيبات الفاخرة، الأرضيات، والديكورات
+                        الداخلية والخارجية.
+                    </p>
+                </div>
+
+                <!-- REVIEWS TAB -->
+                <div id="content-reviews" class="hidden space-y-4">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-binnaGreen">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">محمود أحمد</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★★</span>
+                                    <span>منذ أسبوع</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            أسمنت ممتاز جداً، جودة عالية وسعر مناسب. استخدمته في مشروع البناء الخاص بي والنتائج رائعة.
+                            أنصح به بشدة.
+                        </p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-catYellow">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">فاطمة علي</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★☆</span>
+                                    <span>منذ أسبوعين</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            المنتج جيد لكن كان هناك تأخير بسيط في التوصيل. الجودة ممتازة والسعر مناسب جداً.
+                        </p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-safetyOrange">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">عمر خليل</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★★</span>
+                                    <span>منذ شهر</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            أفضل أسمنت استخدمته. الجودة عالية جداً والتوصيل سريع. شركة القدس تستحق التقدير.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SHIPPING TAB -->
+                <div id="content-shipping" class="hidden bg-white p-6 cut-card shadow-soft space-y-4">
+                    <h3 class="text-lg font-black text-charcoal mb-4">معلومات الشحن والتوصيل</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-paleGreen/30 cut-card-sm border-l-4 border-binnaGreen">
+                            <h4 class="font-bold text-charcoal mb-2">مناطق التوصيل</h4>
+                            <p class="text-sm text-steel">جميع محافظات الضفة الغربية</p>
+                        </div>
+
+                        <div class="p-4 bg-paleYellow/30 cut-card-sm border-l-4 border-catYellow">
+                            <h4 class="font-bold text-charcoal mb-2">وقت التوصيل</h4>
+                            <p class="text-sm text-steel">1-2 يوم عمل</p>
+                        </div>
+
+                        <div class="p-4 bg-paleOrange/30 cut-card-sm border-l-4 border-safetyOrange">
+                            <h4 class="font-bold text-charcoal mb-2">رسوم التوصيل</h4>
+                            <p class="text-sm text-steel">مجاني فوق ₪500 • ₪25 أقل من ذلك</p>
+                        </div>
+
+                        <div class="p-4 bg-concrete/50 cut-card-sm border-l-4 border-steel">
+                            <h4 class="font-bold text-charcoal mb-2">طرق الدفع</h4>
+                            <p class="text-sm text-steel">نقداً عند الاستلام أو تحويل بنكي</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-paleGreen/20 p-4 cut-card-sm border-r-4 border-binnaGreen">
+                        <h4 class="font-bold text-charcoal mb-2">سياسة الإرجاع</h4>
+                        <p class="text-sm text-steel">
+                            يمكن إرجاع المنتج خلال 7 أيام من الاستلام إذا كان هناك عيب في الجودة. يجب أن يكون المنتج في
+                            حالته الأصلية.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RELATED PRODUCTS -->
+            <section class="mt-12 reveal">
+                <div class="section-divider"></div>
+                <h2 class="text-2xl font-black text-charcoal font-grotesk mb-6">منتجات ذات صلة</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Related Product 1 -->
+                    <div
+                        class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                        <div class="product-gallery h-40 w-full text-3xl">🔩</div>
+                        <div class="p-4">
+                            <h4 class="font-black text-sm text-charcoal mb-1">حديد تسليح 12 ملم</h4>
+                            <p class="text-xs text-steel mb-2">شركة القدس</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-black text-safetyOrange font-grotesk">₪285</span>
+                                <button class="btn-green text-xs py-1 px-2">أضف</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Product 2 -->
+                    <div
+                        class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                        <div class="product-gallery h-40 w-full text-3xl">🪨</div>
+                        <div class="p-4">
+                            <h4 class="font-black text-sm text-charcoal mb-1">رمل بناء درجة أولى</h4>
+                            <p class="text-xs text-steel mb-2">شركة القدس</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-black text-safetyOrange font-grotesk">₪65</span>
+                                <button class="btn-green text-xs py-1 px-2">أضف</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Product 3 -->
+                    <div
+                        class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                        <div class="product-gallery h-40 w-full text-3xl">🏗️</div>
+                        <div class="p-4">
+                            <h4 class="font-black text-sm text-charcoal mb-1">خرسانة جاهزة C30</h4>
+                            <p class="text-xs text-steel mb-2">شركة القدس</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-black text-safetyOrange font-grotesk">₪420</span>
+                                <button class="btn-green text-xs py-1 px-2">أضف</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Product 4 -->
+                    <div
+                        class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                        <div class="product-gallery h-40 w-full text-3xl">⛏️</div>
+                        <div class="p-4">
+                            <h4 class="font-black text-sm text-charcoal mb-1">حصى بناء 20-40 ملم</h4>
+                            <p class="text-xs text-steel mb-2">شركة القدس</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-black text-safetyOrange font-grotesk">₪55</span>
+                                <button class="btn-green text-xs py-1 px-2">أضف</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-white py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="logo-shield w-9 h-10 bg-binnaGreen flex items-center justify-center">
+                    <span class="text-charcoal font-black text-sm font-grotesk">ب</span>
+                </div>
+                <div>
+                    <div class="font-grotesk font-black text-sm text-binnaGreen">BINNA</div>
+                    <div class="text-white/50 text-xs">© 2026 جميع الحقوق محفوظة</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-xs text-white/60">
+                <a href="#" class="hover:text-binnaGreen transition">من نحن</a>
+                <a href="#" class="hover:text-binnaGreen transition">الشروط والأحكام</a>
+                <a href="#" class="hover:text-binnaGreen transition">سياسة الخصوصية</a>
+                <a href="#" class="hover:text-binnaGreen transition">تواصل معنا</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all content
+            document.getElementById('content-specifications').classList.add('hidden');
+            document.getElementById('content-description').classList.add('hidden');
+            document.getElementById('content-reviews').classList.add('hidden');
+            document.getElementById('content-shipping').classList.add('hidden');
+
+            // Remove active class from all buttons
+            document.getElementById('tab-specifications').classList.remove('active');
+            document.getElementById('tab-description').classList.remove('active');
+            document.getElementById('tab-reviews').classList.remove('active');
+            document.getElementById('tab-shipping').classList.remove('active');
+
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        // Gallery Image Selection
+        function selectImage(element) {
+            document.querySelectorAll('.gallery-thumbnail').forEach(el => {
+                el.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Quantity Selector
+        function increaseQty() {
+            const qty = document.getElementById('quantity');
+            qty.value = parseInt(qty.value) + 1;
+        }
+
+        function decreaseQty() {
+            const qty = document.getElementById('quantity');
+            if (parseInt(qty.value) > 1) {
+                qty.value = parseInt(qty.value) - 1;
+            }
+        }
+
+        // Reveal animations on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealItems = document.querySelectorAll(".reveal");
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealItems.forEach((item) => revealObserver.observe(item));
+        });
+    </script>
+<script defer src="../script.js"></script>
+</body>
+
+</html>

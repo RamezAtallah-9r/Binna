@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تفاصيل الطلب | BINNA Supplier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#b0dc00;--yellow:#FFCD11;--charcoal:#1A1A1A;--orange:#FF6B00}
+    *{box-sizing:border-box} body{font-family:'IBM Plex Arabic',sans-serif;background:linear-gradient(135deg,#F3FFD1 0%,#FFF5CC 50%,#FFE7D2 100%);color:var(--charcoal);overflow-x:hidden}
+    .navbar{position:sticky;top:0;z-index:50;background:rgba(26,26,26,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(176,220,0,.2)}
+    .cut-card{clip-path:polygon(18px 0%,100% 0%,100% calc(100% - 18px),calc(100% - 18px) 100%,0% 100%,0% 18px)}
+    .cut-card-sm{clip-path:polygon(10px 0%,100% 0%,100% calc(100% - 10px),calc(100% - 10px) 100%,0% 100%,0% 10px)}
+    .section-divider{width:72px;height:5px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--orange));margin-bottom:24px}
+    .btn-orange,.btn-green,.btn-dark{font-weight:800;padding:12px 22px;transition:all .28s ease;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);display:inline-block;text-align:center}
+    .btn-orange{background:var(--orange);color:#fff}.btn-green{background:var(--green);color:var(--charcoal)}.btn-dark{background:var(--charcoal);color:var(--green)}
+    .btn-orange:hover,.btn-green:hover,.btn-dark:hover{transform:translateY(-3px)}.btn-dark:hover{background:var(--green);color:var(--charcoal)}.btn-green:hover{background:var(--yellow)}
+    .nav-link{padding:.65rem .9rem;border:1px solid rgba(255,255,255,.1);font-weight:800;color:rgba(255,255,255,.7)}.nav-link:hover,.nav-link.active{background:#b0dc00;color:#1A1A1A}
+    .input{width:100%;background:white;border:2px solid rgba(26,26,26,.2);padding:.75rem;outline:none}.input:focus{border-color:#b0dc00}
+    .status{font-size:.72rem;font-weight:900;padding:.25rem .55rem;border-radius:999px;white-space:nowrap}.table th{color:#6B7280;font-size:.78rem;padding:.75rem;text-align:right}.table td{padding:.85rem;border-top:1px solid rgba(26,26,26,.07);vertical-align:top}
+    .binna-logo-img-sm{width:54px;height:54px;object-fit:contain;border-radius:16px;filter:drop-shadow(0 0 12px rgba(176,220,0,.32))}
+  </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+<body>
+  <header class="navbar text-white px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col xl:flex-row gap-4 xl:items-center justify-between">
+      <a href="supplier-overview.html" class="flex items-center gap-3">
+        <img src="../assets/binna-logo.png" alt="BINNA Logo" class="binna-logo-img-sm">
+        <div><div class="font-grotesk text-xl font-black text-binnaGreen">BINNA SUPPLIER</div><div class="text-white/50 text-xs font-bold">لوحة المورد — متجر الشمال لمواد البناء</div></div>
+      </a>
+      <nav class="flex flex-wrap gap-2 text-xs">
+        <a class="nav-link" href="supplier-overview.html">النظرة العامة</a>
+        <a class="nav-link active" href="supplier-orders.html">الطلبات الواردة والصادرة</a>
+        <a class="nav-link" href="supplier-products-inventory.html">المنتجات والمخزون</a>
+        <a class="nav-link" href="supplier-payments-profits.html">المدفوعات والأرباح</a>
+        <a class="nav-link" href="supplier-store-settings.html">إعدادات المتجر</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+    <section class="bg-white p-8 cut-card shadow-soft border-r-4 border-binnaGreen">
+      <div class="section-divider"></div>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-black mb-3">تفاصيل الطلب #IN-2041</h1>
+          <p class="text-steel font-semibold">مراجعة بيانات الطلب، المواد، الربح، النقص، ومتابعة حالة التحضير والتوصيل.</p>
+        </div>
+        <div class="bg-charcoal text-white p-5 cut-card min-w-[250px]">
+          <div class="text-white/50 text-xs font-bold">حالة الطلب</div>
+          <div class="text-2xl font-black text-catYellow mt-1">قيد التحضير</div>
+          <div class="text-white/60 text-sm mt-2">آخر تحديث: اليوم 10:35 AM</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 bg-white p-6 cut-card shadow-soft overflow-x-auto">
+        <h2 class="text-2xl font-black mb-4">المواد المطلوبة</h2>
+        <table class="table w-full text-sm">
+          <thead><tr><th>المادة</th><th>الكمية</th><th>سعر البيع</th><th>التكلفة</th><th>الربح</th><th>المخزون</th></tr></thead>
+          <tbody>
+            <tr><td class="font-black">أسمنت بورتلاندي 50 كغم</td><td>50 كيس</td><td class="font-grotesk font-black">₪ 38</td><td>₪ 31</td><td class="text-green-700 font-black">₪ 350</td><td><span class="status bg-green-100 text-green-700">متوفر</span></td></tr>
+            <tr><td class="font-black">حديد تسليح 12 ملم</td><td>2 طن</td><td class="font-grotesk font-black">₪ 2,850</td><td>₪ 2,500</td><td class="text-green-700 font-black">₪ 700</td><td><span class="status bg-yellow-100 text-yellow-800">متوفر جزئياً</span></td></tr>
+            <tr><td class="font-black">رمل مغسول</td><td>8 متر</td><td class="font-grotesk font-black">₪ 95</td><td>₪ 78</td><td class="text-green-700 font-black">₪ 136</td><td><span class="status bg-green-100 text-green-700">متوفر</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="space-y-6">
+        <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-catYellow">
+          <h2 class="text-2xl font-black mb-4">بيانات الزبون</h2>
+          <div class="space-y-3 text-sm font-bold">
+            <p><span class="text-steel">الاسم:</span> أحمد الخليل</p>
+            <p><span class="text-steel">الهاتف:</span> 0599123456</p>
+            <p><span class="text-steel">المدينة:</span> رام الله</p>
+            <p><span class="text-steel">العنوان:</span> الطيرة، قرب دوار الساعة</p>
+          </div>
+        </div>
+        <div class="bg-charcoal text-white p-6 cut-card shadow-soft">
+          <h2 class="text-2xl font-black text-binnaGreen mb-4">ملخص مالي</h2>
+          <div class="space-y-3 text-sm font-bold">
+            <div class="flex justify-between"><span class="text-white/60">قيمة الطلب</span><span class="font-grotesk">₪ 12,900</span></div>
+            <div class="flex justify-between"><span class="text-white/60">تكلفة البضاعة</span><span class="font-grotesk">₪ 10,850</span></div>
+            <div class="flex justify-between border-t border-white/10 pt-3"><span class="text-binnaGreen">صافي الربح</span><span class="font-grotesk text-binnaGreen">₪ 2,050</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid lg:grid-cols-3 gap-6">
+      <form class="lg:col-span-2 bg-white p-6 cut-card shadow-soft space-y-4" onsubmit="event.preventDefault()">
+        <h2 class="text-2xl font-black">تحديث الطلب</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="font-bold">حالة الطلب</label><select class="input"><option>قيد المراجعة</option><option selected>قيد التحضير</option><option>جاهز للتوصيل</option><option>تم التسليم</option><option>مرفوض</option></select></div>
+          <div><label class="font-bold">موعد التسليم المتوقع</label><input class="input" type="datetime-local" value="2026-06-13T10:00"></div>
+        </div>
+        <div><label class="font-bold">ملاحظات المورد</label><textarea class="input" rows="4">يوجد نقص مؤقت في الحديد، سيتم توفير الكمية المتبقية خلال 24 ساعة.</textarea></div>
+        <div class="flex flex-wrap gap-3"><button class="btn-green">حفظ التحديث</button><button class="btn-dark">طباعة الطلب</button><button class="btn-orange">رفض الطلب</button></div>
+      </form>
+      <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-safetyOrange">
+        <h2 class="text-2xl font-black mb-4">سجل الحالة</h2>
+        <div class="space-y-4 text-sm font-bold">
+          <div class="border-r-4 border-binnaGreen pr-3"><p>تم استلام الطلب</p><p class="text-steel text-xs">10:35 AM</p></div>
+          <div class="border-r-4 border-catYellow pr-3"><p>تمت مراجعة المخزون</p><p class="text-steel text-xs">10:50 AM</p></div>
+          <div class="border-r-4 border-safetyOrange pr-3"><p>الطلب قيد التحضير</p><p class="text-steel text-xs">11:10 AM</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex gap-3"><a href="supplier-orders.html" class="btn-dark">رجوع للطلبات</a><a href="supplier-products-inventory.html" class="btn-green">فحص المخزون</a></div>
+  </main>
+<script defer src="../script.js"></script>
+</body>
+</html>
