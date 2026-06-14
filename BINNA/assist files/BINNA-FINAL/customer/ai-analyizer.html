@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تحليل المخططات بالذكاء الاصطناعي | بناء - BINNA</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            min-height: 100vh;
+        }
+
+        /* BINNA Architectural Sharp Cut Elements */
+        .cut-card {
+            clip-path: polygon(24px 0%, 100% 0%, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0% 100%, 0% 24px);
+        }
+
+        .cut-card-sm {
+            clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+        }
+
+        .badge-angled {
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+        }
+
+        /* Specialized Slanted Action Buttons */
+        .btn-action-orange {
+            font-weight: 800;
+            transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+            clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+            background: var(--orange);
+            color: #fff;
+        }
+
+        .btn-action-orange:hover {
+            background: #e65c00;
+            transform: translateY(-2px);
+            box-shadow: var(--orangeGlow);
+        }
+
+        .btn-action-dark {
+            font-weight: 800;
+            transition: all .25s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            background: var(--charcoal);
+            color: #fff;
+        }
+
+        .btn-action-dark:hover {
+            background: var(--green);
+            color: var(--charcoal);
+        }
+
+        /* Custom dash layout border matrix to represent blueprint grids */
+        .blueprint-zone {
+            background-image: radial-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+        .section-divider {
+            width: 72px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--orange));
+            border-radius: 2px;
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body class="flex flex-col items-center justify-center p-4 sm:p-8 antialiased">
+
+    <!-- Main Dynamic Application Window Module -->
+    <main class="w-full max-w-2xl bg-white cut-card shadow-soft border border-charcoal/5 flex flex-col overflow-hidden">
+
+        <!-- HEADER PANEL WITH AI EMBLEM -->
+        <div class="bg-charcoal text-white p-6 sm:p-8 relative border-b-4 border-binnaGreen">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="badge-angled bg-binnaGreen text-charcoal px-3 py-0.5 text-xs font-black uppercase tracking-widest font-grotesk">Engine
+                            v2.1</span>
+                        <span class="text-xs text-binnaGreen font-black">● متصل بالمنظومة الإنشائية</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight pt-1">تحليل المخططات الهندسية (AI)</h1>
+                    <p class="text-xs sm:text-sm text-white/60 font-medium">ارفع المخطط الإنشائي أو المعماري لتقوم
+                        خوارزميات الذكاء الاصطناعي بحساب كميات المواد فوراً.</p>
+                </div>
+
+                <!-- Hex Shield Core Tech Badge Icon -->
+                <div
+                    class="w-14 h-14 bg-binnaGreen/10 border border-binnaGreen/40 text-binnaGreen rounded-xl flex items-center justify-center shrink-0 shadow-greenGlow">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-7 h-7">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.813 15.904L9 21l8.944-8.944M18 10V4.5A2.5 2.5 0 0015.5 2h-7A2.5 2.5 0 006 4.5V14a2.5 2.5 0 002.5 2.5H14" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPLOAD INTERACTIVE BOX CONTENT -->
+        <div class="p-6 sm:p-8 space-y-6">
+
+            <!-- STEPPING ROADMAP BARS -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="h-1.5 bg-binnaGreen cut-card-sm"></div>
+                <div class="h-1.5 bg-charcoal/10 cut-card-sm"></div>
+                <div class="h-1.5 bg-charcoal/10 cut-card-sm"></div>
+            </div>
+            <div class="flex justify-between items-center text-[11px] text-steel font-black -mt-3 px-1">
+                <span class="text-charcoal">1. رفع الملفات المرجعية</span>
+                <span>2. معالجة وحساب المكعبات</span>
+                <span>3. تسعير وتوليد السلة</span>
+            </div>
+
+            <!-- DRAG AND DROP AREA CONTEXT -->
+            <div
+                class="blueprint-zone border-2 border-dashed border-charcoal/20 hover:border-binnaGreen/80 transition-all p-8 sm:p-12 cut-card-sm text-center space-y-4 group cursor-pointer bg-concrete/30 relative">
+                <input type="file" id="file-uploader"
+                    class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" accept=".pdf,.dwg,.png,.jpg"
+                    onchange="handleFileSelected(this)">
+
+                <div
+                    class="w-14 h-14 bg-white border border-charcoal/10 text-charcoal group-hover:text-safetyOrange group-hover:border-safetyOrange/30 rounded-full mx-auto flex items-center justify-center shadow-sm transition-all transform group-hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                    </svg>
+                </div>
+
+                <div class="space-y-1">
+                    <h3 class="text-sm font-black text-charcoal">اسحب ملف المخطط الهندسي هنا أو <span
+                            class="text-safetyOrange underline">تصفح ملفاتك</span></h3>
+                    <p class="text-xs text-steel font-medium">يدعم الصيغ التالية: CAD (DWG), PDF العالي الدقة, أو الصور
+                        الإنشائية (PNG, JPG)</p>
+                </div>
+
+                <div
+                    class="text-[10px] bg-charcoal text-white font-grotesk px-2 py-0.5 rounded w-fit mx-auto font-bold tracking-wider">
+                    الحجم الأقصى المسموح به: 50MB
+                </div>
+            </div>
+
+            <!-- FILE STATUS DRAWER (HIDDEN BY DEFAULT - VISIBLE ON SELECTION) -->
+            <div id="file-status"
+                class="hidden bg-slate-900 text-white p-4 cut-card-sm flex items-center justify-between gap-4 animate-fadeIn">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="text-xl shrink-0">📄</div>
+                    <div class="min-w-0">
+                        <div id="file-name" class="text-xs font-bold truncate text-binnaGreen">
+                            blueprint_main_structure.pdf</div>
+                        <div id="file-size" class="text-[10px] text-white/50 font-grotesk font-semibold">18.4 MB</div>
+                    </div>
+                </div>
+                <button onclick="clearSelectedFile()" class="text-white/40 hover:text-white font-bold text-xs p-1">✕
+                    إلغاء</button>
+            </div>
+
+            <!-- PARAMETERS ADJUSTMENT INTERFACE FORM -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="section-divider"></div>
+                    <h2 class="text-xs font-black uppercase tracking-wider text-charcoal">تحديد خيارات الاستخلاص الذكي
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-charcoal">نوع العنصر المطلوب تحليله</label>
+                        <select
+                            class="w-full bg-concrete p-3 border-2 border-transparent text-xs font-black focus:border-binnaGreen focus:outline-none transition-colors cut-card-sm appearance-none cursor-pointer">
+                            <option>تحليل إنشائي كامل (خرسانة، حديد تسليح، طوب)</option>
+                            <option>تحليل التشطيبات (بلاط، دهان، قصارة)</option>
+                            <option>حساب العناصر التأسيسية والقواعد فقط</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-charcoal">قوة التدقيق وخوارزمية الفرز</label>
+                        <select
+                            class="w-full bg-concrete p-3 border-2 border-transparent text-xs font-black focus:border-binnaGreen focus:outline-none transition-colors cut-card-sm appearance-none cursor-pointer">
+                            <option>تدقيق قياسي معتمد للمشاريع السكنية</option>
+                            <option>تدقيق مكثف للمشاريع التجارية والضخمة</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFO METRIC TIP BAR -->
+            <div
+                class="bg-warmYellow/10 border border-warmYellow/30 p-4 cut-card-sm text-xs text-charcoal flex items-start gap-2.5">
+                <span class="text-base mt-0.5">💡</span>
+                <p class="font-medium leading-relaxed">
+                    يقوم نظام <span class="font-bold">بناء المدعوم بالذكاء الاصطناعي</span> بقراءة الجداول الهندسية،
+                    الأقطار، وسمك الصبة لربطها تلقائياً بأسعار السوق الحالية في منطقتك لتوفير الوقت والمال.
+                </p>
+            </div>
+
+            <!-- CORE SUBMISSION EXECUTION BUTTONS -->
+            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button type="button" onclick="startAIAnalysis()"
+                    class="btn-action-orange flex-1 py-3.5 px-6 flex items-center justify-center gap-2 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                        stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.813 15.904L9 21l8.944-8.944M18 10V4.5A2.5 2.5 0 0015.5 2h-7A2.5 2.5 0 006 4.5V14a2.5 2.5 0 002.5 2.5H14" />
+                    </svg>
+                    <span>ابدأ معالجة واستخلاص المواد فوراً</span>
+                </button>
+
+                <button type="button"
+                    class="btn-action-dark py-3.5 px-6 flex items-center justify-center gap-2 text-sm">
+                    <span>إلغاء الأمر</span>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- SIMPLE INTERACTION SCRIPT UX -->
+    <script>
+        function handleFileSelected(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                document.getElementById('file-name').innerText = file.name;
+                document.getElementById('file-size').innerText = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+                document.getElementById('file-status').classList.remove('hidden');
+            }
+        }
+
+        function clearSelectedFile() {
+            document.getElementById('file-uploader').value = "";
+            document.getElementById('file-status').classList.add('hidden');
+        }
+
+        function startAIAnalysis() {
+            alert('جاري إرسال المخطط لخوادم المعالجة السحابية لبناء... سيتم توجيهك لجدول الكميات المستخلصة فور انتهاء الحساب.');
+        }
+    </script>
+<script defer src="../script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>إنشاء حساب | بناء - BINNA</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet">
+
+        <style>
+        :root {
+            --green: #b0dc00;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(26, 26, 26, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(176, 220, 0, 0.18);
+        }
+
+        .brand-logo {
+            height: 64px;
+            width: auto;
+            display: block;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(42px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+            font-weight: 800;
+            padding: 15px 34px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .custom-checkbox:checked {
+            background-color: #b0dc00;
+            border-color: #b0dc00;
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%231A1A1A' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+    <body class="min-h-screen flex flex-col">
+
+        <nav class="navbar px-6 py-4 text-white">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+                <a href="landing.html" class="flex items-center">
+                    <img src="../assets/binna-logo.png" alt="BINNA Logo"
+                        class="brand-logo">
+                </a>
+
+                <a href="login.html"
+                    class="text-sm font-bold text-white/70 hover:text-binnaGreen transition">
+                    تسجيل الدخول
+                </a>
+
+            </div>
+        </nav>
+
+        <main class="flex-1 flex items-center justify-center p-6 py-12">
+
+            <div
+                class="w-full max-w-md bg-white/90 backdrop-blur-xl p-8 md:p-10 cut-card shadow-soft border border-white/50 reveal">
+
+                <div class="text-center mb-8">
+                    <img src="../assets/binna-logo.png" alt="BINNA Logo"
+                        class="w-44 mx-auto mb-4">
+
+                    <h1
+                        class="text-3xl font-black text-charcoal mb-3 leading-tight">
+                        إنشاء حساب جديد 🚀
+                    </h1>
+
+                    <p class="text-steel font-semibold leading-relaxed text-sm">
+                        انضم إلى منصة بناء وابدأ مشروعك بذكاء.
+                    </p>
+                </div>
+
+                <form class="space-y-5" onsubmit="event.preventDefault();">
+
+                    <div>
+                        <label for="fullname"
+                            class="block text-charcoal font-bold text-sm mb-2">
+                            الاسم الكامل
+                        </label>
+                        <input type="text" id="fullname" placeholder="محمد أحمد"
+                            class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="phone"
+                            class="block text-charcoal font-bold text-sm mb-2">
+                            رقم الهاتف (واتساب)
+                        </label>
+                        <input type="tel" id="phone" placeholder="0599 123 456"
+                            class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="email"
+                            class="block text-charcoal font-bold text-sm mb-2">
+                            البريد الإلكتروني
+                        </label>
+                        <input type="email" id="email"
+                            placeholder="example@binna.com"
+                            class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="password"
+                            class="block text-charcoal font-bold text-sm mb-2">
+                            كلمة المرور
+                        </label>
+                        <input type="password" id="password"
+                            placeholder="••••••••"
+                            class="w-full bg-white border-2 border-charcoal/20 p-3 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300"
+                            required>
+                    </div>
+
+                    <div class="flex items-start gap-3 pt-2">
+                        <input type="checkbox" id="terms"
+                            class="custom-checkbox w-5 h-5 mt-0.5 rounded border-2 border-charcoal/20 bg-white cursor-pointer transition-all duration-200 appearance-none"
+                            required>
+
+                        <label for="terms"
+                            class="text-sm font-bold text-charcoal/70 cursor-pointer select-none leading-relaxed">
+                            أوافق على
+                            <a href="#"
+                                class="text-binnaGreen hover:underline">شروط
+                                الاستخدام</a>
+                            و
+                            <a href="#"
+                                class="text-binnaGreen hover:underline">سياسة
+                                الخصوصية</a>.
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                        class="btn-orange w-full flex items-center justify-center gap-2 group text-lg mt-4">
+                        <span>إنشاء الحساب</span>
+
+                        <svg
+                            class="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </button>
+
+                </form>
+
+                <p class="text-center mt-8 text-steel font-semibold text-sm">
+                    لديك حساب بالفعل؟
+                    <a href="login.html"
+                        class="text-binnaGreen font-black hover:text-charcoal transition-colors underline decoration-2 underline-offset-4">
+                        سجل الدخول هنا
+                    </a>
+                </p>
+
+            </div>
+
+        </main>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealItems = document.querySelectorAll(".reveal");
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealItems.forEach((item) => revealObserver.observe(item));
+        });
+    </script>
+
+    <script defer src="../script.js"></script>
+</body>
+
+</html>

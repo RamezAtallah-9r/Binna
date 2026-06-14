@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الطلبات الواردة والصادرة | BINNA Supplier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#b0dc00;--yellow:#FFCD11;--charcoal:#1A1A1A;--orange:#FF6B00}
+    *{box-sizing:border-box} body{font-family:'IBM Plex Arabic',sans-serif;background:linear-gradient(135deg,#F3FFD1 0%,#FFF5CC 50%,#FFE7D2 100%);color:var(--charcoal);overflow-x:hidden}
+    .navbar{position:sticky;top:0;z-index:50;background:rgba(26,26,26,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(176,220,0,.2)}
+    .cut-card{clip-path:polygon(18px 0%,100% 0%,100% calc(100% - 18px),calc(100% - 18px) 100%,0% 100%,0% 18px)}
+    .logo-shield{clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)}
+    .section-divider{width:72px;height:5px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--orange));margin-bottom:24px}
+    .btn-orange,.btn-green,.btn-dark{font-weight:800;padding:12px 22px;transition:all .28s ease;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);display:inline-block;text-align:center}
+    .btn-orange{background:var(--orange);color:#fff} .btn-green{background:var(--green);color:var(--charcoal)} .btn-dark{background:var(--charcoal);color:var(--green)}
+    .btn-orange:hover,.btn-green:hover,.btn-dark:hover{transform:translateY(-3px)} .btn-dark:hover{background:var(--green);color:var(--charcoal)} .btn-green:hover{background:var(--yellow)}
+    .input{width:100%;background:white;border:2px solid rgba(26,26,26,.2);padding:.75rem;outline:none} .input:focus{border-color:#b0dc00}
+    .nav-link{padding:.65rem .9rem;border:1px solid rgba(255,255,255,.1);font-weight:800;color:rgba(255,255,255,.7)} .nav-link:hover,.nav-link.active{background:#b0dc00;color:#1A1A1A}
+    .status{font-size:.72rem;font-weight:900;padding:.25rem .55rem;border-radius:999px;white-space:nowrap}
+    .table th{color:#6B7280;font-size:.78rem;padding:.75rem;text-align:right} .table td{padding:.85rem;border-top:1px solid rgba(26,26,26,.07);vertical-align:top}
+  
+    .binna-logo-img{width:58px;height:58px;object-fit:contain;border-radius:16px;filter:drop-shadow(0 0 14px rgba(176,220,0,.35));}
+    .binna-logo-img-sm{width:46px;height:46px;object-fit:contain;border-radius:14px;filter:drop-shadow(0 0 10px rgba(176,220,0,.30));}
+    .binna-logo-img-hero{width:min(360px,38vw);height:auto;object-fit:contain;border-radius:28px;filter:drop-shadow(0 28px 80px rgba(176,220,0,.38));}
+  </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+<body>
+  <header class="navbar text-white px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col xl:flex-row gap-4 xl:items-center justify-between">
+      <a href="supplier-overview.html" class="flex items-center gap-3">
+        <img src="../assets/binna-logo.png" alt="BINNA Logo" class="binna-logo-img-sm">
+        <div><div class="font-grotesk text-xl font-black text-binnaGreen">BINNA SUPPLIER</div><div class="text-white/50 text-xs font-bold">لوحة المورد — متجر الشمال لمواد البناء</div></div>
+      </a>
+      <nav class="flex flex-wrap gap-2 text-xs">
+        <a class="nav-link " href="supplier-overview.html">النظرة العامة</a>
+        <a class="nav-link active" href="supplier-orders.html">الطلبات الواردة والصادرة</a>
+        <a class="nav-link " href="supplier-products-inventory.html">المنتجات والمخزون</a>
+        <a class="nav-link " href="supplier-payments-profits.html">المدفوعات والأرباح</a>
+        <a class="nav-link " href="supplier-store-settings.html">إعدادات المتجر</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+    
+<section class="bg-white p-8 cut-card shadow-soft border-r-4 border-binnaGreen"><div class="section-divider"></div><h1 class="text-4xl md:text-5xl font-black mb-3">الطلبات الواردة والصادرة</h1><p class="text-steel font-semibold">كل طلبية فيها القيمة، الكمية، التاريخ والوقت، نقص البضاعة، التكلفة والربح، مع قبول/رفض/تعديل.</p></section>
+<section class="bg-white p-6 cut-card shadow-soft overflow-x-auto"><h2 class="text-2xl font-black mb-4">الطلبات الواردة</h2><table class="table w-full text-sm"><thead><tr><th>رقم الطلب</th><th>الزبون</th><th>المواد والكمية</th><th>القيمة</th><th>تكلفتي</th><th>الربح</th><th>التاريخ والوقت</th><th>النقص</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>
+<tr><td class="font-grotesk font-black">#IN-2041</td><td>أحمد الخليل</td><td>أسمنت 50 كيس، حديد 2 طن</td><td class="font-grotesk font-black">₪ 12,900</td><td>₪ 10,850</td><td class="text-green-700 font-black">₪ 2,050</td><td>2026-06-12<br>10:35 AM</td><td><span class="status bg-green-100 text-green-700">متوفر</span></td><td><span class="status bg-yellow-100 text-yellow-800">قيد التحضير</span></td><td class="space-x-1 space-x-reverse"><a class="btn-dark text-xs" href="supplier-order-details.html">تفاصيل</a><button class="btn-green text-xs">قبول</button><button class="btn-dark text-xs">تعديل الكمية</button><button class="btn-orange text-xs">رفض</button></td></tr>
+<tr><td class="font-grotesk font-black">#IN-2042</td><td>شركة الإعمار</td><td>بلوك 1200 حبة، رمل 8 كوب</td><td class="font-grotesk font-black">₪ 7,450</td><td>₪ 6,330</td><td class="text-green-700 font-black">₪ 1,120</td><td>2026-06-12<br>12:10 PM</td><td><span class="status bg-red-100 text-red-700">ناقص 300 بلوك</span></td><td><span class="status bg-red-100 text-red-700">واقفة: ما في كمية</span></td><td><button class="btn-dark text-xs">تعديل الطلبية</button><button class="btn-orange text-xs">رفض</button></td></tr>
+<tr><td class="font-grotesk font-black">#IN-2043</td><td>م. رنا عواد</td><td>دهان 24 جالون، معجون 18 كيس</td><td class="font-grotesk font-black">₪ 3,280</td><td>₪ 2,460</td><td class="text-green-700 font-black">₪ 820</td><td>2026-06-11<br>04:45 PM</td><td><span class="status bg-green-100 text-green-700">متوفر</span></td><td><span class="status bg-blue-100 text-blue-700">طلعت للتوصيل</span></td><td><button class="btn-green text-xs">تأكيد التسليم</button></td></tr>
+</tbody></table></section>
+<section class="bg-white p-6 cut-card shadow-soft overflow-x-auto"><h2 class="text-2xl font-black mb-4">الطلبات الصادرة للموردين/المصانع</h2><table class="table w-full text-sm"><thead><tr><th>رقم الطلب</th><th>إلى</th><th>البضاعة</th><th>القيمة</th><th>الكمية</th><th>التاريخ والوقت</th><th>الحالة</th><th>سبب الوقف</th></tr></thead><tbody><tr><td class="font-grotesk font-black">#OUT-991</td><td>مصنع الطوب الوطني</td><td>بلوك 20 سم</td><td>₪ 4,200</td><td>1,500 حبة</td><td>2026-06-13<br>09:00 AM</td><td><span class="status bg-yellow-100 text-yellow-800">لسا بدها تطلع</span></td><td>-</td></tr><tr><td class="font-grotesk font-black">#OUT-992</td><td>مستودع الحديد المركزي</td><td>حديد 12 ملم</td><td>₪ 18,000</td><td>5 طن</td><td>2026-06-12<br>01:30 PM</td><td><span class="status bg-red-100 text-red-700">واقفة</span></td><td>المصنع مشغول</td></tr></tbody></table></section>
+
+  </main>
+  <script>
+    function previewImage(fileId,urlId,imgId){const f=document.getElementById(fileId),u=document.getElementById(urlId),img=document.getElementById(imgId); if(f)f.addEventListener('change',e=>{const file=e.target.files[0]; if(file) img.src=URL.createObjectURL(file)}); if(u)u.addEventListener('input',e=>{if(e.target.value.trim()) img.src=e.target.value.trim()})}
+    previewImage('productFile','productUrl','productPreview'); previewImage('logoFile','logoUrl','logoPreview');
+  </script>
+<script defer src="../script.js"></script>
+</body>
+</html>

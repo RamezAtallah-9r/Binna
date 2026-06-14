@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>النظرة العامة | BINNA Supplier</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #b0dc00;
+      --yellow: #FFCD11;
+      --charcoal: #1A1A1A;
+      --orange: #FF6B00;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Arabic', sans-serif;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(176, 220, 0, .22), transparent 28%),
+        radial-gradient(circle at 92% 20%, rgba(255, 205, 17, .25), transparent 30%),
+        linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(26, 26, 26, .92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(176, 220, 0, .2);
+    }
+
+    .cut-card {
+      clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+    }
+
+    .section-divider {
+      width: 72px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+      margin-bottom: 24px;
+    }
+
+    .btn-orange,
+    .btn-green,
+    .btn-dark {
+      font-weight: 800;
+      padding: 12px 22px;
+      transition: all .28s ease;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: var(--charcoal);
+    }
+
+    .btn-dark {
+      background: var(--charcoal);
+      color: var(--green);
+    }
+
+    .btn-orange:hover,
+    .btn-green:hover,
+    .btn-dark:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-dark:hover {
+      background: var(--green);
+      color: var(--charcoal);
+    }
+
+    .btn-green:hover {
+      background: var(--yellow);
+    }
+
+    .nav-link {
+      padding: .65rem .9rem;
+      border: 1px solid rgba(255, 255, 255, .1);
+      font-weight: 800;
+      color: rgba(255, 255, 255, .7);
+      transition: .25s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #b0dc00;
+      color: #1A1A1A;
+    }
+
+    .status {
+      font-size: .72rem;
+      font-weight: 900;
+      padding: .25rem .55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .table th {
+      color: #6B7280;
+      font-size: .78rem;
+      padding: .75rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .table td {
+      padding: .85rem;
+      border-top: 1px solid rgba(26,26,26,.07);
+      vertical-align: top;
+    }
+
+    .binna-logo-img-sm {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 16px;
+      filter: drop-shadow(0 0 12px rgba(176,220,0,.32));
+    }
+
+    .quick-card {
+      transition: .25s ease;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-6px);
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar text-white px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col xl:flex-row gap-4 xl:items-center justify-between">
+
+      <a href="supplier-overview.html" class="flex items-center gap-3">
+        <img src="../assets/binna-logo.png" alt="BINNA Logo" class="binna-logo-img-sm">
+        <div>
+          <div class="font-grotesk text-xl font-black text-binnaGreen">BINNA SUPPLIER</div>
+          <div class="text-white/50 text-xs font-bold">لوحة المورد — متجر الشمال لمواد البناء</div>
+        </div>
+      </a>
+
+      <nav class="flex flex-wrap gap-2 text-xs">
+        <a class="nav-link active" href="supplier-overview.html">النظرة العامة</a>
+        <a class="nav-link" href="supplier-orders.html">الطلبات الواردة والصادرة</a>
+        <a class="nav-link" href="supplier-products-inventory.html">المنتجات والمخزون</a>
+        <a class="nav-link" href="supplier-payments-profits.html">المدفوعات والأرباح</a>
+        <a class="nav-link" href="supplier-store-settings.html">إعدادات المتجر</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+
+    <!-- PAGE TITLE -->
+    <section class="bg-white p-8 cut-card shadow-soft border-r-4 border-binnaGreen">
+      <div class="section-divider"></div>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-black mb-3">النظرة العامة</h1>
+          <p class="text-steel font-semibold">
+            ملخص سريع مأخوذ من الطلبات، المنتجات والمخزون، المدفوعات والأرباح، وإعدادات المتجر.
+          </p>
+        </div>
+
+        <div class="bg-charcoal text-white p-5 cut-card min-w-[260px]">
+          <div class="text-white/50 text-xs font-bold">حالة المتجر الآن</div>
+          <div class="text-2xl font-black text-binnaGreen mt-1">فاتح</div>
+          <div class="text-white/65 text-sm mt-2">
+            ساعات العمل:
+            <span class="font-grotesk text-binnaGreen">08:00 AM</span>
+            -
+            <span class="font-grotesk text-safetyOrange">06:00 PM</span>
+          </div>
+          <a href="supplier-store-settings.html" class="btn-green text-xs mt-4">تعديل إعدادات المتجر</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN STATS -->
+    <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <article class="bg-white p-6 cut-card shadow-soft border-r-4 border-binnaGreen">
+        <div class="text-4xl mb-3">💰</div>
+        <p class="text-steel font-bold text-sm">مبيعات هذا الشهر</p>
+        <p class="font-grotesk text-4xl font-black text-charcoal mt-2">₪ 39,630</p>
+        <p class="text-green-700 font-bold text-xs mt-2">+12% عن الشهر الماضي</p>
+      </article>
+
+      <article class="bg-white p-6 cut-card shadow-soft border-r-4 border-catYellow">
+        <div class="text-4xl mb-3">👥</div>
+        <p class="text-steel font-bold text-sm">عدد الزبائن</p>
+        <p class="font-grotesk text-4xl font-black text-charcoal mt-2">174</p>
+        <p class="text-steel font-bold text-xs mt-2">28 زبون جديد هذا الشهر</p>
+      </article>
+
+      <article class="bg-white p-6 cut-card shadow-soft border-r-4 border-safetyOrange">
+        <div class="text-4xl mb-3">📦</div>
+        <p class="text-steel font-bold text-sm">طلبات تحتاج متابعة</p>
+        <p class="font-grotesk text-4xl font-black text-safetyOrange mt-2">3</p>
+        <p class="text-safetyOrange font-bold text-xs mt-2">طلبية ناقصة + طلبية واقفة</p>
+      </article>
+
+      <article class="bg-charcoal text-white p-6 cut-card shadow-soft">
+        <div class="text-4xl mb-3">📈</div>
+        <p class="text-white/50 font-bold text-sm">إجمالي الربح</p>
+        <p class="font-grotesk text-4xl font-black text-binnaGreen mt-2">₪ 8,930</p>
+        <p class="text-white/55 font-bold text-xs mt-2">من الطلبات المدفوعة وقيد التحصيل</p>
+      </article>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <a href="supplier-orders.html" class="quick-card bg-white p-6 cut-card shadow-soft border-r-4 border-binnaGreen block">
+        <div class="text-4xl mb-3">📦</div>
+        <h2 class="text-xl font-black mb-2">الطلبات</h2>
+        <p class="text-steel text-sm font-semibold">راجع الواردة والصادرة، القبول، الرفض، تعديل الكمية، وحالات التحضير والتوصيل.</p>
+      </a>
+
+      <a href="supplier-products-inventory.html" class="quick-card bg-white p-6 cut-card shadow-soft border-r-4 border-catYellow block">
+        <div class="text-4xl mb-3">🧱</div>
+        <h2 class="text-xl font-black mb-2">المنتجات والمخزون</h2>
+        <p class="text-steel text-sm font-semibold">إدارة الأصناف، الصور، الأسعار، الخصومات، الكمية الحالية والقادمة.</p>
+      </a>
+
+      <a href="supplier-payments-profits.html" class="quick-card bg-white p-6 cut-card shadow-soft border-r-4 border-safetyOrange block">
+        <div class="text-4xl mb-3">💵</div>
+        <h2 class="text-xl font-black mb-2">المدفوعات والأرباح</h2>
+        <p class="text-steel text-sm font-semibold">اعرف قيمة البضاعة المسحوبة، الربح، وحالة الدفع لكل طلبية.</p>
+      </a>
+
+      <a href="supplier-store-settings.html" class="quick-card bg-charcoal text-white p-6 cut-card shadow-soft block">
+        <div class="text-4xl mb-3">⚙️</div>
+        <h2 class="text-xl font-black text-binnaGreen mb-2">إعدادات المتجر</h2>
+        <p class="text-white/60 text-sm font-semibold">لوجو المتجر، حالة المتجر، وساعات الفتح والإغلاق التلقائية.</p>
+      </a>
+    </section>
+
+    <!-- ORDERS OVERVIEW -->
+    <section class="grid xl:grid-cols-2 gap-6">
+      <div class="bg-white p-6 cut-card shadow-soft overflow-x-auto">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h2 class="text-2xl font-black">ملخص الطلبات الواردة</h2>
+          <a href="supplier-orders.html" class="btn-dark text-xs">فتح صفحة الطلبات</a>
+        </div>
+
+        <table class="table w-full text-sm">
+          <thead>
+            <tr>
+              <th>الطلب</th>
+              <th>الزبون</th>
+              <th>القيمة</th>
+              <th>الربح</th>
+              <th>النقص</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-grotesk font-black">#IN-2041</td>
+              <td>أحمد الخليل</td>
+              <td class="font-grotesk font-black">₪ 12,900</td>
+              <td class="text-green-700 font-black">₪ 2,050</td>
+              <td><span class="status bg-green-100 text-green-700">متوفر</span></td>
+              <td><span class="status bg-yellow-100 text-yellow-800">قيد التحضير</span></td>
+            </tr>
+
+            <tr>
+              <td class="font-grotesk font-black">#IN-2042</td>
+              <td>شركة الإعمار</td>
+              <td class="font-grotesk font-black">₪ 7,450</td>
+              <td class="text-green-700 font-black">₪ 1,120</td>
+              <td><span class="status bg-red-100 text-red-700">ناقص 300 بلوك</span></td>
+              <td><span class="status bg-red-100 text-red-700">واقفة: ما في كمية</span></td>
+            </tr>
+
+            <tr>
+              <td class="font-grotesk font-black">#IN-2043</td>
+              <td>م. رنا عواد</td>
+              <td class="font-grotesk font-black">₪ 3,280</td>
+              <td class="text-green-700 font-black">₪ 820</td>
+              <td><span class="status bg-green-100 text-green-700">متوفر</span></td>
+              <td><span class="status bg-blue-100 text-blue-700">طلعت للتوصيل</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-white p-6 cut-card shadow-soft overflow-x-auto">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h2 class="text-2xl font-black">ملخص الطلبات الصادرة</h2>
+          <a href="supplier-orders.html" class="btn-dark text-xs">عرض التفاصيل</a>
+        </div>
+
+        <table class="table w-full text-sm">
+          <thead>
+            <tr>
+              <th>الطلب</th>
+              <th>إلى</th>
+              <th>البضاعة</th>
+              <th>القيمة</th>
+              <th>الحالة</th>
+              <th>سبب الوقف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-grotesk font-black">#OUT-991</td>
+              <td>مصنع الطوب الوطني</td>
+              <td>بلوك 20 سم</td>
+              <td class="font-grotesk font-black">₪ 4,200</td>
+              <td><span class="status bg-yellow-100 text-yellow-800">لسا بدها تطلع</span></td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td class="font-grotesk font-black">#OUT-992</td>
+              <td>مستودع الحديد المركزي</td>
+              <td>حديد 12 ملم</td>
+              <td class="font-grotesk font-black">₪ 18,000</td>
+              <td><span class="status bg-red-100 text-red-700">واقفة</span></td>
+              <td>المصنع مشغول</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INVENTORY + PAYMENTS OVERVIEW -->
+    <section class="grid xl:grid-cols-3 gap-6">
+
+      <div class="xl:col-span-2 bg-white p-6 cut-card shadow-soft overflow-x-auto">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h2 class="text-2xl font-black">ملخص المنتجات والمخزون</h2>
+          <a href="supplier-products-inventory.html" class="btn-dark text-xs">إدارة المنتجات</a>
+        </div>
+
+        <table class="table w-full text-sm">
+          <thead>
+            <tr>
+              <th>الصورة</th>
+              <th>المنتج</th>
+              <th>الفئة</th>
+              <th>سعره علي</th>
+              <th>سعر البيع</th>
+              <th>الموجود/القادم</th>
+              <th>ظهور المتجر</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img class="w-16 h-16 object-cover rounded-lg" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=200&q=80" alt="أسمنت">
+              </td>
+              <td class="font-black">أسمنت بورتلاندي 50 كغم<br><span class="text-steel text-xs">درجة أولى</span></td>
+              <td>إسمنت</td>
+              <td>₪31</td>
+              <td>₪38</td>
+              <td>420 موجود<br>700 قادم</td>
+              <td><span class="status bg-green-100 text-green-700">ظاهر</span></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img class="w-16 h-16 object-cover rounded-lg" src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=200&q=80" alt="بلوك">
+              </td>
+              <td class="font-black">بلوك 20 سم<br><span class="text-red-600 text-xs">ناقص قريباً</span></td>
+              <td>بلوك</td>
+              <td>₪2.4</td>
+              <td>₪3.5</td>
+              <td>180 موجود<br>1500 قادم</td>
+              <td><span class="status bg-red-100 text-red-700">مخفي</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="space-y-6">
+        <article class="bg-charcoal text-white p-6 cut-card shadow-soft">
+          <h2 class="text-2xl font-black text-binnaGreen mb-5">ملخص الأرباح</h2>
+
+          <div class="space-y-4">
+            <div>
+              <div class="text-white/50 text-sm">قيمة البضاعة المسحوبة</div>
+              <div class="font-grotesk text-3xl font-black text-catYellow">₪ 31,420</div>
+            </div>
+
+            <div>
+              <div class="text-white/50 text-sm">إجمالي الربح</div>
+              <div class="font-grotesk text-3xl font-black text-binnaGreen">₪ 8,930</div>
+            </div>
+
+            <div>
+              <div class="text-white/50 text-sm">قيد التحصيل</div>
+              <div class="font-grotesk text-3xl font-black text-safetyOrange">₪ 12,200</div>
+            </div>
+
+            <a href="supplier-payments-profits.html" class="btn-green text-xs mt-2">عرض المدفوعات</a>
+          </div>
+        </article>
+
+        <article class="bg-paleOrange p-6 cut-card shadow-soft border-r-4 border-safetyOrange">
+          <h3 class="text-xl font-black text-safetyOrange mb-2">تنبيهات مهمة</h3>
+          <ul class="space-y-3 text-sm font-bold text-charcoal/75">
+            <li>⚠️ طلبية #IN-2042 واقفة بسبب نقص 300 بلوك.</li>
+            <li>⚠️ بلوك 20 سم مخفي من المتجر بسبب نقص قريب.</li>
+            <li>💰 يوجد ₪12,200 قيد التحصيل.</li>
+          </ul>
+        </article>
+      </aside>
+
+    </section>
+
+    <!-- STORE OVERVIEW -->
+    <section class="bg-white p-6 cut-card shadow-soft">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div>
+          <h2 class="text-2xl font-black mb-2">ملخص إعدادات المتجر</h2>
+          <p class="text-steel font-semibold">
+            المتجر ظاهر للعملاء، الحالة الحالية فاتح، والتحكم تلقائي حسب ساعات العمل.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <span class="status bg-green-100 text-green-700">فاتح</span>
+          <span class="status bg-binnaGreen/20 text-charcoal">تحكم تلقائي</span>
+          <span class="status bg-orange-100 text-safetyOrange">08:00 AM - 06:00 PM</span>
+        </div>
+
+        <a href="supplier-store-settings.html" class="btn-dark text-xs">فتح إعدادات المتجر</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function showProfit(orderNumber, profit) {
+      alert('ربح الطلبية ' + orderNumber + ': ₪' + profit);
+    }
+  </script>
+
+<script defer src="../script.js"></script>
+</body>
+</html>

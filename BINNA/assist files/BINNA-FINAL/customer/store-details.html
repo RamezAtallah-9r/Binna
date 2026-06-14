@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة القدس للتوريدات الخرسانية | بناء - BINNA</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --warm-yellow: #F7B928;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .cut-card-sm {
+            clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+        }
+
+        .logo-shield {
+            clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+        }
+
+        .btn-orange,
+        .btn-green,
+        .btn-dark {
+            font-weight: 800;
+            padding: 12px 24px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: var(--charcoal);
+        }
+
+        .btn-green:hover {
+            background: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .btn-dark {
+            background: var(--charcoal);
+            color: var(--green);
+        }
+
+        .btn-dark:hover {
+            background: var(--green);
+            color: var(--charcoal);
+            transform: translateY(-3px);
+        }
+
+        .section-divider {
+            width: 72px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+            margin-bottom: 16px;
+            border-radius: 2px;
+        }
+
+        .glow-underline {
+            position: relative;
+            display: inline-block;
+            color: var(--charcoal);
+        }
+
+        .glow-underline::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            left: 0;
+            height: 6px;
+            background: var(--green);
+            box-shadow: 0 0 22px rgba(176, 220, 0, .85), 0 0 44px rgba(176, 220, 0, .35);
+            border-radius: 999px;
+        }
+
+        .store-avatar {
+            background: linear-gradient(135deg, rgba(176, 220, 0, 0.3), rgba(255, 205, 17, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--charcoal);
+            font-size: 3rem;
+        }
+
+        .product-img-placeholder {
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(176, 220, 0, 0.1), rgba(255, 205, 17, 0.1));
+            border: 2px solid rgba(176, 220, 0, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .tab-button.active {
+            background: var(--green);
+            color: var(--charcoal);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .tab-button {
+            background: white;
+            color: var(--charcoal);
+            border: 2px solid rgba(176, 220, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            border-color: var(--green);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #E0E7FF 0%, #F0E7FF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--orange);
+            border-radius: 50%;
+            top: 40%;
+            right: 45%;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- TOP HEADER / NAVBAR -->
+    <header
+        class="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-binnaGreen/20">
+        <div class="flex items-center gap-3">
+            <div class="logo-shield w-10 h-11 bg-binnaGreen flex items-center justify-center">
+                <span class="text-charcoal font-black text-lg font-grotesk">ب</span>
+            </div>
+            <div>
+                <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA</div>
+                <div class="text-white/40 text-xs font-bold">تفاصيل المتجر</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="relative p-2 text-white/70 hover:text-binnaGreen transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span
+                    class="absolute top-1 right-1 w-2.5 h-2.5 bg-safetyOrange rounded-full border-2 border-charcoal"></span>
+            </button>
+            <div class="text-right hidden sm:block">
+                <div class="text-sm font-bold">أحمد الخليل</div>
+                <div class="text-xs text-binnaGreen/70">عميل / مقاول</div>
+            </div>
+            <div
+                class="w-10 h-10 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-sm font-bold text-binnaGreen">
+                أخ
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 sm:p-8 overflow-y-auto space-y-8">
+        <div class="max-w-7xl mx-auto w-full">
+
+            <!-- BREADCRUMB -->
+            <div class="mb-6 reveal">
+                <a href="stors-product.html" class="text-binnaGreen font-bold text-sm hover:underline">← العودة للمتاجر</a>
+            </div>
+
+            <!-- STORE HEADER SECTION -->
+            <section class="bg-white p-6 md:p-8 cut-card shadow-soft border-r-4 border-binnaGreen mb-8 reveal">
+                <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                    <!-- Store Avatar -->
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 md:w-32 md:h-32 store-avatar cut-card-sm border-2 border-binnaGreen">
+                            🏪
+                        </div>
+                    </div>
+
+                    <!-- Store Info -->
+                    <div class="flex-1">
+                        <div class="section-divider"></div>
+                        <h1 class="text-2xl md:text-3xl font-black text-charcoal font-grotesk mb-2">
+                            شركة <span class="glow-underline">القدس</span> للتوريدات الخرسانية
+                        </h1>
+                        <div
+                            class="flex flex-wrap items-center gap-4 text-sm md:text-base font-semibold text-steel mb-4">
+                            <span class="flex items-center gap-1">📍 رام الله، فلسطين</span>
+                            <span class="flex items-center gap-1 text-catYellow">★★★★★ 4.9</span>
+                            <span class="flex items-center gap-1">📦 342 طلب</span>
+                        </div>
+                        <p class="text-steel text-sm md:text-base leading-relaxed mb-4">
+                            متخصصون في توريد الأسمنت بأنواعه، الخرسانة الجاهزة، والمواد الإنشائية الأساسية. خدمة توصيل
+                            لجميع محافظات الضفة الغربية مع ضمان الجودة والسعر المنافس.
+                        </p>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <div class="stat-box">
+                                <div class="text-2xl font-black text-binnaGreen font-grotesk">24</div>
+                                <div class="text-xs font-bold text-steel mt-1">ساعة عمل</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="text-2xl font-black text-catYellow font-grotesk">15 د</div>
+                                <div class="text-xs font-bold text-steel mt-1">وقت الرد</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="text-2xl font-black text-safetyOrange font-grotesk">98%</div>
+                                <div class="text-xs font-bold text-steel mt-1">رضا العملاء</div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap gap-3">
+                            <button class="btn-green text-sm">تواصل عبر الواتساب</button>
+                            <button class="btn-orange text-sm">اتصل الآن</button>
+                            <button class="btn-dark text-sm">أضف للمفضلة ❤️</button>
+                        </div>
+                    </div>
+
+                    <!-- Status Badge -->
+                    <div class="flex flex-col items-end gap-2">
+                        <span
+                            class="px-3 py-1.5 bg-paleGreen text-charcoal text-xs font-black cut-card-sm border border-binnaGreen/30">
+                            ✓ مورد معتمد
+                        </span>
+                        <span class="flex items-center gap-2 text-xs font-bold text-binnaGreen">
+                            <span class="w-2.5 h-2.5 bg-binnaGreen rounded-full animate-pulse"></span>
+                            متصل الآن
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STORE DETAILS GRID -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 reveal">
+                <!-- Contact Info -->
+                <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-binnaGreen">
+                    <div class="section-divider"></div>
+                    <h3 class="text-lg font-black text-charcoal mb-4">معلومات الاتصال</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">رقم الهاتف</p>
+                            <p class="text-sm font-bold text-charcoal">+970 2 295 1234</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">البريد الإلكتروني</p>
+                            <p class="text-sm font-bold text-charcoal">info@alquds.ps</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">ساعات العمل</p>
+                            <p class="text-sm font-bold text-charcoal">السبت - الخميس: 8:00 - 18:00</p>
+                            <p class="text-xs text-steel">الجمعة: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialties -->
+                <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-catYellow">
+                    <div class="section-divider"></div>
+                    <h3 class="text-lg font-black text-charcoal mb-4">التخصصات</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-paleGreen text-charcoal text-xs font-black px-3 py-1.5 cut-card-sm">أسمنت</span>
+                        <span class="bg-paleYellow text-charcoal text-xs font-black px-3 py-1.5 cut-card-sm">خرسانة
+                            جاهزة</span>
+                        <span class="bg-paleOrange text-charcoal text-xs font-black px-3 py-1.5 cut-card-sm">حديد
+                            تسليح</span>
+                        <span class="bg-concrete text-charcoal text-xs font-black px-3 py-1.5 cut-card-sm">رمل
+                            وحصى</span>
+                        <span class="bg-concrete text-charcoal text-xs font-black px-3 py-1.5 cut-card-sm">مواد
+                            إضافية</span>
+                    </div>
+                </div>
+
+                <!-- Delivery Info -->
+                <div class="bg-white p-6 cut-card shadow-soft border-r-4 border-safetyOrange">
+                    <div class="section-divider"></div>
+                    <h3 class="text-lg font-black text-charcoal mb-4">التوصيل والشحن</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">مناطق التوصيل</p>
+                            <p class="text-sm font-bold text-charcoal">جميع محافظات الضفة الغربية</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">رسوم التوصيل</p>
+                            <p class="text-sm font-bold text-charcoal">مجاني فوق ₪500</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-steel mb-1">وقت التوصيل</p>
+                            <p class="text-sm font-bold text-charcoal">1-2 يوم عمل</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TABS SECTION -->
+            <section class="reveal">
+                <!-- Tab Buttons -->
+                <div class="flex gap-3 mb-6 flex-wrap">
+                    <button onclick="switchTab('products')" id="tab-products"
+                        class="tab-button active cut-card-sm px-4 py-2 font-bold text-sm">
+                        🛍️ المنتجات (24)
+                    </button>
+                    <button onclick="switchTab('reviews')" id="tab-reviews"
+                        class="tab-button cut-card-sm px-4 py-2 font-bold text-sm">
+                        ⭐ التقييمات (156)
+                    </button>
+                    <button onclick="switchTab('location')" id="tab-location"
+                        class="tab-button cut-card-sm px-4 py-2 font-bold text-sm">
+                        📍 الموقع
+                    </button>
+                </div>
+
+                <!-- PRODUCTS TAB -->
+                <div id="content-products" class="space-y-6">
+                    <!-- Products Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+
+                        <!-- Product 1 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">🧱</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 50 وحدة</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">أسمنت بورتلاندي 50 كغ</h3>
+                                <p class="text-xs text-steel mb-3">الأسمنت الأبيض عالي الجودة</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★★ <span class="text-steel mr-1">(234)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪45</div>
+                                        <div class="text-xs text-steel">/ كيس</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">🔩</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 100 طن</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">حديد تسليح 12 ملم</h3>
+                                <p class="text-xs text-steel mb-3">حديد تركي عالي المقاومة</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★★ <span class="text-steel mr-1">(189)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪285</div>
+                                        <div class="text-xs text-steel">/ طن</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">🪨</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 200 م³</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">رمل بناء درجة أولى</h3>
+                                <p class="text-xs text-steel mb-3">رمل نظيف خالي من الشوائب</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★☆ <span class="text-steel mr-1">(145)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪65</div>
+                                        <div class="text-xs text-steel">/ م³</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">🏗️</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 300 م³</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">خرسانة جاهزة C30</h3>
+                                <p class="text-xs text-steel mb-3">خرسانة عالية الجودة جاهزة للصب</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★★ <span class="text-steel mr-1">(267)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪420</div>
+                                        <div class="text-xs text-steel">/ م³</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 5 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">⛏️</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 150 طن</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">حصى بناء 20-40 ملم</h3>
+                                <p class="text-xs text-steel mb-3">حصى مغسول درجة أولى</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★★ <span class="text-steel mr-1">(198)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪55</div>
+                                        <div class="text-xs text-steel">/ م³</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+                            <div class="product-img-placeholder h-40 w-full">🧪</div>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span
+                                        class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">متوفر</span>
+                                    <span class="text-xs text-steel">📦 50 لتر</span>
+                                </div>
+                                <h3 class="font-black text-base text-charcoal mb-1">مادة لاصقة للخرسانة</h3>
+                                <p class="text-xs text-steel mb-3">مادة لاصقة عالية الجودة</p>
+                                <div class="flex items-center gap-1 text-catYellow text-xs mb-3">
+                                    ★★★★☆ <span class="text-steel mr-1">(87)</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">₪150</div>
+                                        <div class="text-xs text-steel">/ لتر</div>
+                                    </div>
+                                </div>
+                                <button class="btn-green w-full text-xs py-2">+ أضف للسلة</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- View More -->
+                    <div class="flex justify-center mt-8">
+                        <button class="btn-dark text-sm">عرض جميع المنتجات (24) →</button>
+                    </div>
+                </div>
+
+                <!-- REVIEWS TAB -->
+                <div id="content-reviews" class="hidden space-y-4 reveal">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-binnaGreen">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">محمود أحمد</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★★</span>
+                                    <span>منذ أسبوع</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            جودة ممتازة والتوصيل سريع جداً. التعامل احترافي والأسعار منافسة. سأطلب منهم مرة أخرى بكل
+                            تأكيد.
+                        </p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-catYellow">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">فاطمة علي</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★☆</span>
+                                    <span>منذ أسبوعين</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            المنتج جيد لكن كان هناك تأخير بسيط في التوصيل. لكن الفريق تعامل معي بشكل احترافي وحل المشكلة
+                            بسرعة.
+                        </p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-safetyOrange">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-black text-charcoal">عمر خليل</h4>
+                                <div class="flex items-center gap-2 text-xs text-steel mt-1">
+                                    <span class="text-catYellow">★★★★★</span>
+                                    <span>منذ شهر</span>
+                                </div>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-binnaGreen bg-paleGreen px-2 py-1 cut-card-sm">موثق</span>
+                        </div>
+                        <p class="text-sm text-steel leading-relaxed">
+                            أفضل مورد للخرسانة الجاهزة في رام الله. الجودة عالية والسعر مناسب. أنصح به بشدة.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- LOCATION TAB -->
+                <div id="content-location" class="hidden reveal">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Map -->
+                        <div class="lg:col-span-2">
+                            <div class="map-placeholder h-96 border-4 border-binnaGreen/20">
+                                📍
+                            </div>
+                            <p class="text-xs text-steel mt-3 text-center">
+                                خريطة تفاعلية - يمكن النقر لفتح الموقع الكامل
+                            </p>
+                        </div>
+
+                        <!-- Location Details -->
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-binnaGreen">
+                                <h4 class="font-black text-charcoal mb-3">العنوان الكامل</h4>
+                                <p class="text-sm text-steel leading-relaxed">
+                                    شارع الملك عبدالله، بجوار مستشفى الهلال الأحمر
+                                    <br>
+                                    رام الله، فلسطين
+                                    <br>
+                                    الرمز البريدي: 90210
+                                </p>
+                            </div>
+
+                            <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-catYellow">
+                                <h4 class="font-black text-charcoal mb-3">الإحداثيات</h4>
+                                <p class="text-sm text-steel font-mono">
+                                    31.9454° N
+                                    <br>
+                                    35.2034° E
+                                </p>
+                                <button class="btn-green text-xs w-full mt-3">فتح في الخريطة</button>
+                            </div>
+
+                            <div class="bg-white p-5 cut-card shadow-soft border-r-4 border-safetyOrange">
+                                <h4 class="font-black text-charcoal mb-3">المسافة</h4>
+                                <p class="text-sm text-steel">
+                                    على بعد <span class="font-bold text-charcoal">2.3 كم</span> من موقعك الحالي
+                                </p>
+                                <button class="btn-orange text-xs w-full mt-3">احسب المسار</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-white py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="logo-shield w-9 h-10 bg-binnaGreen flex items-center justify-center">
+                    <span class="text-charcoal font-black text-sm font-grotesk">ب</span>
+                </div>
+                <div>
+                    <div class="font-grotesk font-black text-sm text-binnaGreen">BINNA</div>
+                    <div class="text-white/50 text-xs">© 2026 جميع الحقوق محفوظة</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-xs text-white/60">
+                <a href="#" class="hover:text-binnaGreen transition">من نحن</a>
+                <a href="#" class="hover:text-binnaGreen transition">الشروط والأحكام</a>
+                <a href="#" class="hover:text-binnaGreen transition">سياسة الخصوصية</a>
+                <a href="#" class="hover:text-binnaGreen transition">تواصل معنا</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all content
+            document.getElementById('content-products').classList.add('hidden');
+            document.getElementById('content-reviews').classList.add('hidden');
+            document.getElementById('content-location').classList.add('hidden');
+
+            // Remove active class from all buttons
+            document.getElementById('tab-products').classList.remove('active');
+            document.getElementById('tab-reviews').classList.remove('active');
+            document.getElementById('tab-location').classList.remove('active');
+
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Trigger reveal animations
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 50);
+        }
+
+        // Reveal animations on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealItems = document.querySelectorAll(".reveal");
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealItems.forEach((item) => revealObserver.observe(item));
+        });
+    </script>
+<script defer src="../script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سلة المشتريات | بناء - BINNA</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <style>
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background-color: #F8F9FA;
+        }
+
+        .cut-card {
+            clip-path: polygon(16px 0%, 100% 0%, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0% 100%, 0% 16px);
+        }
+
+        .logo-shield {
+            clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+        }
+
+        .btn-green {
+            background: #b0dc00;
+            color: #1A1A1A;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .btn-green:hover {
+            background: #FFCD11;
+        }
+
+        .btn-orange {
+            background: #FF6B00;
+            color: #fff;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .btn-orange:hover {
+            opacity: 0.9;
+        }
+
+        .btn-dark {
+            background: #1A1A1A;
+            color: #b0dc00;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .btn-dark:hover {
+            background: #b0dc00;
+            color: #1A1A1A;
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col text-charcoal antialiased">
+
+    <!-- TOP APP BAR -->
+    <header class="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="logo-shield w-10 h-11 bg-binnaGreen flex items-center justify-center">
+                <span class="text-charcoal font-black text-lg font-grotesk">ب</span>
+            </div>
+            <div>
+                <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA MARKETPLACE</div>
+                <div class="text-white/40 text-xs font-bold">منصة التوريد والإنشاءات الرقمية الأولى</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="text-right hidden sm:block">
+                <div class="text-sm font-bold">م. أحمد المقاول</div>
+                <div class="text-xs text-binnaGreen/70">حساب شركاء الإعمار</div>
+            </div>
+            <div
+                class="w-10 h-10 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-sm font-bold text-binnaGreen">
+                AM
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-6">
+
+        <!-- BREADCRUMB & TITLE -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-charcoal/5 pb-4">
+            <div>
+                <h1 class="text-2xl font-black tracking-tight">سلة المشتريات الإنشائية</h1>
+                <p class="text-steel text-sm mt-0.5">مراجعة وتأكيد المواد المطلوبة وموزعة حسب الموردين المعتمدين.</p>
+            </div>
+            <div
+                class="flex items-center gap-2 text-xs font-bold bg-paleGreen text-charcoal px-3 py-1.5 rounded-full border border-binnaGreen/20">
+                <span>🛒</span> <span class="font-grotesk">3</span> مواد مضافة بالسلة
+            </div>
+        </div>
+
+        <!-- CART CONTENT GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+
+            <!-- RIGHT SIDE: SUPPLIER SEPARATED PRODUCTS -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- SUPPLIER GROUP 1 -->
+                <div class="bg-white border border-charcoal/5 cut-card shadow-soft p-6 space-y-4">
+                    <!-- Supplier Header -->
+                    <div class="flex items-center justify-between border-b border-charcoal/5 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">🏪</span>
+                            <div>
+                                <h3 class="font-bold text-base text-charcoal">شركة القدس للتوريدات الخرسانية</h3>
+                                <p class="text-xs text-steel">توصيل متوقع: خلال 48 ساعة إلى موقع رام الله</p>
+                            </div>
+                        </div>
+                        <span class="text-[11px] font-bold bg-concrete px-2 py-1 rounded text-steel">مورد معتمد ✓</span>
+                    </div>
+
+                    <!-- Supplier Products List -->
+                    <div class="divide-y divide-charcoal/5">
+
+                        <!-- Product Item 1 -->
+                        <div class="py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-12 h-12 bg-concrete rounded-lg flex items-center justify-center text-xl shrink-0">
+                                    🧱</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-charcoal">أسمنت بورتلاندي عادي 50 كجم</h4>
+                                    <p class="text-xs text-steel mt-0.5">التصنيف: أسمنت ومواد رابطة</p>
+                                    <div class="text-xs font-bold text-charcoal mt-1 font-grotesk">₪ 42.00 / كيس</div>
+                                </div>
+                            </div>
+
+                            <!-- Quantity & Action -->
+                            <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+                                <div
+                                    class="flex items-center border border-charcoal/10 rounded-lg overflow-hidden bg-concrete">
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">-</button>
+                                    <span class="px-4 py-1 bg-white font-grotesk text-sm font-bold">50</span>
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">+</button>
+                                </div>
+                                <div class="text-right min-w-[80px]">
+                                    <div class="text-sm font-black font-grotesk text-charcoal">₪ 2,100</div>
+                                    <button
+                                        class="text-xs text-red-600 hover:underline mt-0.5 block mr-auto">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SUPPLIER GROUP 2 -->
+                <div class="bg-white border border-charcoal/5 cut-card shadow-soft p-6 space-y-4">
+                    <!-- Supplier Header -->
+                    <div class="flex items-center justify-between border-b border-charcoal/5 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">🏭</span>
+                            <div>
+                                <h3 class="font-bold text-base text-charcoal">شركة الحديد والصلب الفلسطينية</h3>
+                                <p class="text-xs text-steel">توصيل متوقع: خلال 3 أيام عمل بالرافعة</p>
+                            </div>
+                        </div>
+                        <span class="text-[11px] font-bold bg-concrete px-2 py-1 rounded text-steel">مورد معتمد ✓</span>
+                    </div>
+
+                    <!-- Supplier Products List -->
+                    <div class="divide-y divide-charcoal/5">
+
+                        <!-- Product Item 2 -->
+                        <div class="py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-12 h-12 bg-concrete rounded-lg flex items-center justify-center text-xl shrink-0">
+                                    🏗️</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-charcoal">حديد تسليح مجدول 12 ملم - تركي ممتاز
+                                    </h4>
+                                    <p class="text-xs text-steel mt-0.5">التصنيف: حديد وفولاذ إنشائي</p>
+                                    <div class="text-xs font-bold text-charcoal mt-1 font-grotesk">₪ 2,850 / طن</div>
+                                </div>
+                            </div>
+
+                            <!-- Quantity & Action -->
+                            <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+                                <div
+                                    class="flex items-center border border-charcoal/10 rounded-lg overflow-hidden bg-concrete">
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">-</button>
+                                    <span class="px-4 py-1 bg-white font-grotesk text-sm font-bold">2</span>
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">+</button>
+                                </div>
+                                <div class="text-right min-w-[80px]">
+                                    <div class="text-sm font-black font-grotesk text-charcoal">₪ 5,700</div>
+                                    <button
+                                        class="text-xs text-red-600 hover:underline mt-0.5 block mr-auto">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Item 3 -->
+                        <div class="py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-12 h-12 bg-concrete rounded-lg flex items-center justify-center text-xl shrink-0">
+                                    ⛓️</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-charcoal">سلك ربط حديد مبروم سميك</h4>
+                                    <p class="text-xs text-steel mt-0.5">التصنيف: ملحقات إنشائية</p>
+                                    <div class="text-xs font-bold text-charcoal mt-1 font-grotesk">₪ 85.00 / لفة</div>
+                                </div>
+                            </div>
+
+                            <!-- Quantity & Action -->
+                            <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+                                <div
+                                    class="flex items-center border border-charcoal/10 rounded-lg overflow-hidden bg-concrete">
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">-</button>
+                                    <span class="px-4 py-1 bg-white font-grotesk text-sm font-bold">5</span>
+                                    <button class="px-3 py-1 hover:bg-charcoal/5 font-bold">+</button>
+                                </div>
+                                <div class="text-right min-w-[80px]">
+                                    <div class="text-sm font-black font-grotesk text-charcoal">₪ 425</div>
+                                    <button
+                                        class="text-xs text-red-600 hover:underline mt-0.5 block mr-auto">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LEFT SIDE: ORDER SUMMARY & CHECKOUT -->
+            <div class="space-y-6">
+
+                <!-- SUMMARY CARD -->
+                <div class="bg-charcoal text-white p-6 cut-card space-y-4 shadow-orangeGlow">
+                    <h3 class="font-bold text-lg border-b border-white/10 pb-3 text-binnaGreen">ملخص أمر التوريد</h3>
+
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between text-white/70">
+                            <span>عدد الموردين المشحون منهم:</span>
+                            <span class="font-grotesk">2 موردين</span>
+                        </div>
+                        <div class="flex justify-between text-white/70">
+                            <span>إجمالي قيمة المواد:</span>
+                            <span class="font-grotesk">₪ 8,225</span>
+                        </div>
+                        <div class="flex justify-between text-white/70">
+                            <span>تكاليف الشحن والرافعة التقديرية:</span>
+                            <span class="font-grotesk">₪ 350</span>
+                        </div>
+                        <div class="flex justify-between text-white/70">
+                            <span>ضريبة القيمة المضافة الإنشائية:</span>
+                            <span class="font-grotesk">مشمولة</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-3 flex justify-between items-center">
+                        <span class="font-bold text-base text-binnaGreen">المبلغ الإجمالي الكلي:</span>
+                        <span class="text-2xl font-black font-grotesk text-binnaGreen">₪ 8,575</span>
+                    </div>
+
+                    <button
+                        class="btn-green w-full text-center py-3.5 rounded-lg text-sm tracking-wide block mt-2 shadow-md">
+                        الاستمرار لتأكيد الدفع والتوصيل
+                    </button>
+                </div>
+
+                <!-- AI ESTIMATOR RECOMMENDATION NOTE -->
+                <div class="bg-paleYellow border-r-4 border-warmYellow p-5 cut-card space-y-2">
+                    <div class="flex items-center gap-2 text-charcoal font-bold text-sm">
+                        <span>🧠</span> توصية مساعد الذكاء الاصطناعي (AI BOQ)
+                    </div>
+                    <p class="text-xs text-charcoal/80 leading-relaxed font-medium">
+                        بناءً على كميات الحديد والأشكال المدرجة، لاحظ نموذجنا الرقمي نقصاً بتقدير <strong>لفات سلك
+                            التربيط</strong> لتكفي صب السقف المتوقع. نقترح إضافة لفتين إضافيتين لتجنب نقص المواد
+                        بالموقع.
+                    </p>
+                    <button class="text-xs text-safetyOrange font-bold hover:underline block pt-1">
+                        + إضافة لفتين مقترحتين تلقائياً للسلة
+                    </button>
+                </div>
+
+                <!-- BACK TO MARKET BUTTON -->
+                <a href="#" class="w-full btn-dark text-center py-3 rounded-lg text-xs block">
+                    ← العودة وتصفح شجرة المواد الإنشائية
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER SYSTEM INFO -->
+    <footer
+        class="w-full bg-charcoal text-white/30 text-center py-4 text-xs font-semibold border-t border-white/5 mt-auto">
+        بناء BINNA Ecosystem v1.4.2 © 2026 | أمان وامتثال رقمي مضمون
+    </footer>
+
+<script defer src="../script.js"></script>
+</body>
+
+</html>

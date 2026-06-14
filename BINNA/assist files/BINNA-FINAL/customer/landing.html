@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>بناء | BINNA - مساعدك الذكي للبناء</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet">
+        <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --warm-yellow: #F7B928;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+    .navbar {
+    width: 100%;
+    height: 180px;
+    background: #1A1A1A;
+    border-bottom: 1px solid rgba(176, 220, 0, 0.18);
+    }
+        .main-logo {
+            width: 190px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .hero-bg {
+            background:
+                radial-gradient(circle at 15% 38%, rgba(176, 220, 0, 0.42), transparent 35%),
+                radial-gradient(circle at 83% 18%, rgba(255, 205, 17, 0.48), transparent 34%),
+                radial-gradient(circle at 72% 80%, rgba(255, 107, 0, 0.20), transparent 28%),
+                linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 52%, #FFE7D2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::after,
+        .grid-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(26, 26, 26, 0.075) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 26, 26, 0.075) 1px, transparent 1px);
+            background-size: 58px 58px;
+        }
+
+        .hero-logo-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-logo {
+            width: 360px;
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 50px rgba(176, 220, 0, 0.35));
+        }
+
+        .reveal,
+        .reveal-left,
+        .reveal-right {
+            opacity: 0;
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+
+        .reveal {
+            transform: translateY(42px);
+        }
+
+        .reveal-left {
+            transform: translateX(-48px);
+        }
+
+        .reveal-right {
+            transform: translateX(48px);
+        }
+
+        .reveal.visible,
+        .reveal-left.visible,
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .glow-underline {
+            position: relative;
+            display: inline-block;
+            color: var(--charcoal);
+        }
+
+        .glow-underline::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            left: 0;
+            height: 6px;
+            background: var(--green);
+            box-shadow: 0 0 22px rgba(176, 220, 0, .85), 0 0 44px rgba(176, 220, 0, .35);
+            border-radius: 999px;
+        }
+
+        .btn-orange,
+        .btn-green,
+        .btn-dark {
+            font-weight: 800;
+            padding: 15px 34px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: var(--charcoal);
+        }
+
+        .btn-green:hover {
+            background: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .btn-dark {
+            background: var(--charcoal);
+            color: var(--green);
+        }
+
+        .btn-dark:hover {
+            background: var(--green);
+            color: var(--charcoal);
+            transform: translateY(-3px);
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .section-divider {
+            width: 72px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+            margin-bottom: 24px;
+        }
+
+        .construction-tape {
+            background: repeating-linear-gradient(-45deg,
+                    var(--yellow) 0px,
+                    var(--yellow) 12px,
+                    var(--charcoal) 12px,
+                    var(--charcoal) 24px);
+            height: 10px;
+        }
+
+        .scene-character {
+            position: absolute;
+            z-index: 4;
+            filter: drop-shadow(0 18px 30px rgba(26, 26, 26, .18));
+            animation: characterFloat 5s ease-in-out infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes characterFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(-2deg);
+            }
+        }
+
+        .focus-ring:focus-visible {
+            outline: 3px solid var(--green);
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-logo-box {
+                margin-top: 50px;
+            }
+
+            .hero-logo {
+                width: 260px;
+            }
+
+            .main-logo {
+                width: 140px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .scene-character {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar px-6 py-4 text-white">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+                <a href="#home" class="flex items-center gap-3 focus-ring">
+                    <img src="../assets/binna-logo.png" alt="BINNA Logo"
+                        class="main-logo">
+                </a>
+
+                <div
+                    class="hidden md:flex items-center gap-8 text-sm font-bold text-white/70">
+                    <a href="#why" class="hover:text-binnaGreen transition">ليش
+                        بناء؟</a>
+                    <a href="#choose"
+                        class="hover:text-binnaGreen transition">اختار طريقك</a>
+                    <a href="#contact" class="btn-orange text-sm">ابدأ الآن</a>
+                </div>
+
+                <button id="hamburger"
+                    class="md:hidden flex flex-col gap-1.5 p-2"
+                    aria-label="فتح القائمة">
+                    <span class="block w-7 h-0.5 bg-binnaGreen"></span>
+                    <span class="block w-4 h-0.5 bg-catYellow"></span>
+                    <span class="block w-7 h-0.5 bg-binnaGreen"></span>
+                </button>
+            </div>
+
+            <div id="mobile-menu"
+                class="hidden md:hidden max-w-7xl mx-auto px-2 pt-5 pb-2 border-t border-binnaGreen/20 mt-4">
+                <div class="flex flex-col gap-4 font-bold text-white/75">
+                    <a href="#why" class="hover:text-binnaGreen transition">ليش
+                        بناء؟</a>
+                    <a href="#choose"
+                        class="hover:text-binnaGreen transition">اختار طريقك</a>
+                    <a href="#contact" class="btn-orange text-center">ابدأ
+                        الآن</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home"
+            class="hero-bg min-h-screen flex items-center pt-24 relative">
+
+            <div
+                class="scene-character hidden lg:block text-7xl top-[10%] right-[10%]">👷‍♂️</div>
+            <div
+                class="scene-character hidden lg:block text-7xl bottom-[80%] left-[10%]"
+                style="animation-delay:1s;">🌿</div>
+            <div
+                class="scene-character hidden lg:block text-6xl top-[10%] left-[50%]"
+                style="animation-delay:1.8s;">🏗️</div>
+
+            <div class="max-w-7xl mx-auto px-6 w-full py-20 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                    <div class="reveal-right">
+                        <h1
+                            class="text-5xl md:text-7xl font-black leading-[1.05] mb-7 tracking-tight">
+                            بناء يساعدك
+                            <span class="glow-underline my-4 pb-1" >تطوّر المكان</span>
+
+
+                            <br>
+
+                            اللي حولك
+                        </h1>
+
+                        <p
+                            class="text-charcoal/70 text-lg md:text-xl leading-[1.9] max-w-2xl mb-8 font-semibold">
+                            منصة تجمع بين متاجر مواد البناء ومساعد ذكاء اصطناعي
+                            يفهم مشروعك، يحسب احتياجاتك،
+                            يقارن الأسعار، ويحوّل النتيجة لطلبية جاهزة.
+                        </p>
+
+                        <div
+                            class="bg-white/60 border border-charcoal/10 p-5 mb-10 cut-card shadow-soft max-w-2xl">
+                            <p class="text-safetyOrange font-black mb-2">ليش هذا
+                                أفضل خيار إلك؟</p>
+                            <p
+                                class="text-charcoal/70 font-semibold leading-relaxed">
+                                لأننا بنوفر عليك المشاوير، الاتصالات، التردد،
+                                ومفاجآت التكلفة. إذا عارف شو بدك روح للمتاجر،
+                                وإذا محتار خلي بناء يرشدك خطوة بخطوة.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#choose" class="btn-orange">خليني أختار
+                                طريقي</a>
+                            <a href="#choose" class="btn-dark">بدي مساعدة</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-logo-box reveal-left">
+                        <img src="../assets/binna-logo.png" alt="BINNA Hero Logo"
+                            class="hero-logo">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="construction-tape"></div>
+
+        <!-- Why BINNA Section -->
+        <section id="why" class="py-20 px-6 bg-white/70">
+            <div class="max-w-7xl mx-auto">
+                <div class="reveal mb-12">
+                    <div class="section-divider"></div>
+                    <p
+                        class="text-charcoal/50 font-grotesk text-xs tracking-[0.25em] font-black mb-3">WHY
+                        BINNA</p>
+                    <h2
+                        class="text-4xl md:text-6xl font-black leading-tight mb-5">ليش
+                        بناء؟</h2>
+                    <p
+                        class="text-steel max-w-2xl text-lg font-semibold leading-relaxed">
+                        إحنا هدفنا نريح الزبون، نوفر عليه، ونخليه يبدأ مشروعه
+                        بوضوح وثقة.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article
+                        class="bg-white p-7 cut-card shadow-soft border-r-4 border-binnaGreen reveal hover:-translate-y-2 transition duration-300">
+                        <div class="text-5xl mb-5">⏱️</div>
+                        <h3 class="text-2xl font-black mb-3">نوفر وقتك</h3>
+                        <p class="text-steel font-semibold leading-relaxed">بدل
+                            ما تلف وتسأل، تقدر تبدأ من مكان واحد.</p>
+                    </article>
+
+                    <article
+                        class="bg-white p-7 cut-card shadow-soft border-r-4 border-catYellow reveal hover:-translate-y-2 transition duration-300">
+                        <div class="text-5xl mb-5">💰</div>
+                        <h3 class="text-2xl font-black mb-3">نوفر عليك</h3>
+                        <p
+                            class="text-steel font-semibold leading-relaxed">نساعدك
+                            تقارن وتختار الأنسب لميزانيتك.</p>
+                    </article>
+
+                    <article
+                        class="bg-white p-7 cut-card shadow-soft border-r-4 border-safetyOrange reveal hover:-translate-y-2 transition duration-300">
+                        <div class="text-5xl mb-5">🧠</div>
+                        <h3 class="text-2xl font-black mb-3">نوضح القرار</h3>
+                        <p class="text-steel font-semibold leading-relaxed">تعرف
+                            شو تحتاج قبل ما تشتري أو تبدأ.</p>
+                    </article>
+
+                    <article
+                        class="bg-charcoal text-white p-7 cut-card shadow-soft border-r-4 border-binnaGreen reveal hover:-translate-y-2 transition duration-300">
+                        <div class="text-5xl mb-5">🤝</div>
+                        <h3
+                            class="text-2xl font-black mb-3 text-binnaGreen">نوصلك
+                            بالموردين</h3>
+                        <p
+                            class="text-white/65 font-semibold leading-relaxed">المواد
+                            والطلبية تصير أوضح وأسهل.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Choose Your Path Section -->
+        <section id="choose" class="py-24 px-6 bg-paleYellow relative grid-bg">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-center max-w-4xl mx-auto mb-14 reveal">
+                    <div class="section-divider mx-auto"></div>
+                    <p
+                        class="text-charcoal/50 font-grotesk text-xs tracking-[0.25em] font-black mb-3">CHOOSE
+                        YOUR PATH</p>
+                    <h2
+                        class="text-4xl md:text-6xl font-black leading-tight mb-5">أنت
+                        عارف شو بدك؟ ولا بدك نساعدك؟</h2>
+                    <p
+                        class="text-charcoal/65 text-lg leading-relaxed font-semibold">
+                        الصفحة معمولة عشان تعطي الزبون قرار واضح وسريع.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <article
+                        class="bg-white p-8 md:p-10 cut-card shadow-soft reveal-right hover:-translate-y-2 transition duration-300 border-r-4 border-binnaGreen">
+                        <div class="text-6xl mb-6">🛒</div>
+                        <h3 class="text-4xl font-black mb-4">أنا عارف شو
+                            بدي</h3>
+                        <p
+                            class="text-steel text-lg font-semibold leading-relaxed mb-7">
+                            انتقل مباشرة إلى المتاجر، قارن الأسعار، واطلب المواد
+                            التي تحتاجها.
+                        </p>
+                        <div class="bg-paleGreen p-5 mb-7 cut-card">
+                            <p class="font-black mb-2">اختار هذا الطريق إذا:</p>
+                            <p class="text-steel font-semibold">عندك قائمة مواد
+                                أو تعرف المنتج المطلوب.</p>
+                        </div>
+                        <a href="#" class="btn-green inline-block">افتح
+                            المتاجر</a>
+                    </article>
+
+                    <article
+                        class="bg-charcoal text-white p-8 md:p-10 cut-card shadow-soft reveal-left hover:-translate-y-2 transition duration-300 border-r-4 border-catYellow">
+                        <div class="text-6xl mb-6">🤖</div>
+                        <h3 class="text-4xl font-black mb-4 text-catYellow">بدي
+                            بناء يساعدني</h3>
+                        <p
+                            class="text-white/65 text-lg font-semibold leading-relaxed mb-7">
+                            ارفع صورة أو مخطط ودع مساعد الذكاء الاصطناعي يرشدك
+                            لما تحتاجه.
+                        </p>
+                        <div
+                            class="bg-white/10 border border-white/10 p-5 mb-7 cut-card">
+                            <p class="font-black text-binnaGreen mb-2">اختار هذا
+                                الطريق إذا:</p>
+                            <p class="text-white/60 font-semibold">مش متأكد من
+                                المواد أو التكلفة أو الخطوة الأولى.</p>
+                        </div>
+                        <a href="#" class="btn-orange inline-block">ابدأ مع
+                            مساعد AI</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="construction-tape"></div>
+
+        <!-- Footer -->
+        <footer
+            class="bg-charcoal border-t border-binnaGreen/20 py-5 px-6 text-white">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Top Section -->
+                <div
+                    class="relative flex items-center justify-center min-h-[80px]">
+
+                    <!-- Logo Right -->
+                    <div class="absolute right-0">
+                        <img src="../assets/binna-logo.png"
+                            alt="BINNA Logo"
+                            class="h-14 md:h-16 w-auto object-contain">
+                    </div>
+
+                    <!-- Navigation Center -->
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-8 md:gap-16
+                        text-sm md:text-base font-bold text-white/70">
+
+                        <a href="#home"
+                            class="hover:text-binnaGreen transition duration-300">
+                            الرئيسية
+                        </a>
+
+                        <a href="#why"
+                            class="hover:text-binnaGreen transition duration-300">
+                            ليش بناء؟
+                        </a>
+
+                        <a href="#choose"
+                            class="hover:text-binnaGreen transition duration-300">
+                            اختار طريقك
+                        </a>
+
+                        <a href="#contact"
+                            class="hover:text-binnaGreen transition duration-300">
+                            ابدأ الآن
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Description -->
+                <div class="text-center mt-4 pt-4 border-t border-white/10">
+
+                    <p class="text-sm md:text-lg font-semibold text-white/70
+                        max-w-3xl mx-auto leading-relaxed">
+                        مساعدك الذكي لحلول البناء، الحدائق، الديكور،
+                        المواد، المتاجر، والتوصيل.
+                    </p>
+
+                </div>
+
+            </div>
+        </footer>
+        <script>
+        const menuButton = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const revealItems = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+    </script>
+
+    <script defer src="../script.js"></script>
+</body>
+
+</html>
