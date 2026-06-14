@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول | بناء - BINNA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        binnaGreen: "#b0dc00",
+                        catYellow: "#FFCD11",
+                        warmYellow: "#F7B928",
+                        charcoal: "#1A1A1A",
+                        concrete: "#F3F4F6",
+                        steel: "#6B7280",
+                        safetyOrange: "#FF6B00",
+                        paleGreen: "#F3FFD1",
+                        paleYellow: "#FFF5CC",
+                        paleOrange: "#FFE7D2",
+                    },
+                    fontFamily: {
+                        arabic: ['"IBM Plex Arabic"', "sans-serif"],
+                        grotesk: ['"Space Grotesk"', "sans-serif"],
+                    },
+                    boxShadow: {
+                        soft: "0 24px 70px rgba(26,26,26,0.14)",
+                        greenGlow: "0 0 35px rgba(176,220,0,0.36)",
+                        orangeGlow: "0 10px 30px rgba(255,107,0,0.35)",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        /* ── BINNA signature shapes ─────────────────────────────── */
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .btn-parallelogram {
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+
+        .dot-grid {
+            background-image: linear-gradient(#b0dc00 1px, transparent 1px),
+                linear-gradient(90deg, #b0dc00 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /*
+     * CONSTRUCTION TAPE — page signature element
+     * The diagonal hazard stripe seen on Palestinian construction sites.
+     * Used as the top accent bar on the form card — no generic login has this.
+     */
+        .construction-tape {
+            background: repeating-linear-gradient(-45deg,
+                    #FFCD11 0px, #FFCD11 14px,
+                    #1A1A1A 14px, #1A1A1A 28px);
+        }
+
+        /* Custom checkbox */
+        input[type="checkbox"]:checked {
+            background-color: #b0dc00;
+            border-color: #b0dc00;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%231A1A1A' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+            background-size: 100%;
+        }
+
+        input:focus-visible {
+            outline: 2px solid #b0dc00;
+            outline-offset: 2px;
+        }
+        
+    </style>
+</head>
+
+<!--
+  STRUCTURE (new)
+  ───────────────
+  Full-page dark charcoal background — form is the only thing on screen.
+  No side-by-side split. Layout: header → centered card → testimonial.
+  The card carries all content: tape accent → form body → feature strip.
+  Mobile + desktop: single column, always centered, always visible.
+-->
+
+<body class="font-arabic text-charcoal min-h-screen flex flex-col" style="background:
+        radial-gradient(circle at 15% 38%, rgba(176,220,0,0.42), transparent 35%),
+        radial-gradient(circle at 83% 18%, rgba(255,205,17,0.48), transparent 34%),
+        radial-gradient(circle at 72% 80%, rgba(255,107,0,0.20), transparent 28%),
+        linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 52%, #FFE7D2 100%)">
+
+    <!-- Dot-grid background atmosphere -->
+    <div class="fixed inset-0 dot-grid opacity-[0.3] pointer-events-none" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════════════════════════════ -->
+    <header class="relative z-10 w-full border-b border-binnaGreen/20 py-4" style="background:#1a1a1a">
+        <div class="px-6 py-4 max-w-screen-xl mx-auto flex items-center justify-between">
+
+            <!-- Brand -->
+            <a href="/" aria-label="BINNA — الصفحة الرئيسية" class="flex items-center gap-3 mt-4">
+                <img class="absolute h-24 w-auto object-contain" src="{% static 'img/binna-logo.png' %}" alt="Binna Logo">
+            </a>
+
+            <!-- Home link -->
+            <nav aria-label="التنقل الرئيسي">
+                <a href="/"
+                    class="flex items-center gap-2 text-xs font-bold text-white/50 hover:text-binnaGreen transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    الرئيسية
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+       MAIN — centered card
+  ════════════════════════════════════════════════════════════════ -->
+    <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-10 sm:py-16">
+        <div class="w-full max-w-lg">
+
+            <!-- Eyebrow label -->
+            <div class="flex items-center gap-3 mb-5 px-1">
+                <span class="w-2 h-2 bg-binnaGreen rounded-full animate-pulse" aria-hidden="true"></span>
+                <p class="text-xs font-grotesk font-bold tracking-widest text-binnaGreen uppercase">
+                    منصة البناء الذكية · تسجيل الدخول
+                </p>
+            </div>
+
+            <!-- ── FORM CARD ─────────────────────────────────────────── -->
+            <article class="cut-card shadow-soft overflow-hidden bg-white" aria-labelledby="login-heading">
+
+                <!-- Construction tape — the signature accent -->
+                <div class="construction-tape h-3 w-full" aria-hidden="true"></div>
+
+                <!-- Card body -->
+                <div class="p-8 md:p-10">
+                    <div class="w-full my-10 flex items-center justify-center">
+                        <img class="absolute h-36 w-auto object-contain" src="{% static 'img/binna-logo.png' %}" alt="Binna Logo">
+                    </div>
+
+
+                    <!-- Section divider + heading -->
+                    <div class="mb-8">
+                        <div class="w-[72px] h-[5px] bg-gradient-to-l from-safetyOrange via-catYellow to-binnaGreen
+                        rounded-sm mb-4" aria-hidden="true"></div>
+                        <h1 id="login-heading" class="text-3xl font-black text-charcoal mb-2 leading-tight">
+                            أهلاً بعودتك 👋
+                        </h1>
+                        <p class="text-steel font-semibold text-sm leading-relaxed">
+                            سجل دخولك لمتابعة مشاريعك وإدارة طلباتك.
+                        </p>
+                    </div>
+
+
+                    <!-- Form -->
+                    <form method="POST" action="#" class="space-y-5" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div role="alert"
+                            class="bg-red-50 border-r-4 border-red-500 p-3 text-xs text-red-700 font-bold rounded">
+                            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Username -->
+                        <div class="space-y-1.5">
+                            <label for="id_username" class="block text-charcoal font-bold text-sm">
+                                البريد الإلكتروني أو رقم الهاتف
+                            </label>
+                            <input type="text" id="id_username" name="username" placeholder="example@binna.com"
+                                autocomplete="username" required class="w-full bg-white border-2 border-charcoal/20 p-3 text-sm
+                            focus:border-binnaGreen focus:outline-none transition-colors duration-200
+                            {% if form.username.errors %}border-red-400{% endif %}">
+                            {% if form.username.errors %}
+                            <p class="text-xs text-red-600 font-bold">{{ form.username.errors|join:", " }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password -->
+                        <div class="space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <label for="id_password" class="block text-charcoal font-bold text-sm">كلمة
+                                    المرور</label>
+                                <a href="#"
+                                    class="text-xs font-bold text-safetyOrange hover:text-warmYellow transition-colors">
+                                    نسيت كلمة المرور؟
+                                </a>
+                            </div>
+                            <div class="flex items-center border-2 border-charcoal/20 bg-white
+                          focus-within:border-binnaGreen transition-colors duration-200
+                          {% if form.password.errors %}border-red-400{% endif %}">
+                                <input type="password" id="id_password" name="password" placeholder="••••••••"
+                                    autocomplete="current-password" required
+                                    class="flex-1 bg-transparent p-3 text-sm focus:outline-none min-w-0">
+                                <button type="button" id="toggle-password" aria-label="إظهار أو إخفاء كلمة المرور"
+                                    aria-pressed="false"
+                                    class="px-3 text-steel hover:text-charcoal transition-colors shrink-0 text-base">
+                                    👁️
+                                </button>
+                            </div>
+                            {% if form.password.errors %}
+                            <p class="text-xs text-red-600 font-bold">{{ form.password.errors|join:", " }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Remember me -->
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" id="remember" name="remember"
+                                class="w-5 h-5 rounded border-2 border-charcoal/20 bg-white cursor-pointer appearance-none shrink-0">
+                            <label for="remember" class="text-sm font-bold text-charcoal/70 cursor-pointer select-none">
+                                تذكرني على هذا الجهاز
+                            </label>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn-parallelogram w-full bg-safetyOrange text-white font-black
+                           py-4 px-6 flex items-center justify-center gap-2 text-sm
+                           hover:bg-orange-700 hover:-translate-y-0.5 hover:shadow-orangeGlow
+                           transition-all duration-200">
+                            <span>تسجيل الدخول</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </button>
+                    </form>
+
+                    <!-- Register link -->
+                    <p class="text-center mt-7 text-steel text-sm font-semibold border-t border-charcoal/10 pt-7">
+                        ليس لديك حساب؟
+                        <a href="{% url 'binnaSign:register' %}"
+                            class="text-binnaGreen font-black hover:text-charcoal transition-colors underline decoration-2 underline-offset-4">
+                            سجل الآن مجاناً
+                        </a>
+                    </p>
+
+                </div>
+
+                <!-- Card footer — feature strip on dark bg -->
+                <div class="bg-charcoal border-t-4 border-binnaGreen px-8 py-5 grid grid-cols-2 gap-x-6 gap-y-0">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl shrink-0" aria-hidden="true">📐</span>
+                        <div>
+                            <p class="text-white text-xs font-black">حساب كميات ذكي</p>
+                            <p class="text-white/35 text-[10px] font-semibold">تحليل المخططات فوراً</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl shrink-0" aria-hidden="true">🏪</span>
+                        <div>
+                            <p class="text-white text-xs font-black">مقارنة أسعار</p>
+                            <p class="text-white/35 text-[10px] font-semibold">+150 مورد معتمد</p>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+            <!-- end card -->
+
+            <!-- Testimonial under the card -->
+            <figure class="mt-6 px-2 flex items-start gap-3">
+                <span class="text-catYellow text-sm shrink-0 mt-0.5" aria-hidden="true">★★★★★</span>
+                <blockquote class="text-white/35 text-xs font-semibold italic leading-relaxed">
+                    "وفرت عليّ أكثر من 30% من ميزانية التشطيب، والذكاء الاصطناعي حدد لي نواقص لم أكن أنتبه لها."
+                    <cite class="block not-italic font-grotesk font-bold text-white/20 mt-1 text-[10px]">
+                        — م. أحمد، مقاول مستقل
+                    </cite>
+                </blockquote>
+            </figure>
+
+        </div>
+    </main>
+
+    <!-- Minimal JS — password toggle only -->
+    <script>
+        const toggle = document.getElementById("toggle-password");
+        const pwInput = document.getElementById("id_password");
+        if (toggle && pwInput) {
+            toggle.addEventListener("click", () => {
+                const isHidden = pwInput.type === "password";
+                pwInput.type = isHidden ? "text" : "password";
+                toggle.textContent = isHidden ? "🙈" : "👁️";
+                toggle.setAttribute("aria-pressed", String(isHidden));
+            });
+        }
+    </script>
+
+</body>
+
+</html>

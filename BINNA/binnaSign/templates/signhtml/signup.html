@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إنشاء حساب | بناء - BINNA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        binnaGreen: "#b0dc00",
+                        charcoal: "#1A1A1A",
+                        steel: "#6B7280",
+                        safetyOrange: "#FF6B00",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 52%, #FFE7D2 100%);
+        }
+
+        .btn-orange {
+            background: #FF6B00;
+            color: white;
+            padding: 15px 34px;
+            transition: .28s;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+
+        .construction-tape {
+            height: 16px;
+            background: repeating-linear-gradient(-45deg, #FFCD11 0px, #FFCD11 14px, #1A1A1A 14px, #1A1A1A 28px);
+        }
+
+        .panel-container {
+            clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <nav class="px-6 py-4 bg-charcoal text-white">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="{% url 'binnaSign:index' %}">
+                <img src="{% static 'img/binna-logo.png' %}" alt="BINNA Logo" class="h-16 w-auto">
+            </a>
+            <a href="{% url 'binnaSign:login' %}"
+                class="text-sm font-bold text-white/70 hover:text-binnaGreen transition">تسجيل الدخول</a>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex items-center justify-center p-6 py-12">
+        <div class="w-full max-w-md panel-container shadow-soft bg-white">
+            <div class="construction-tape"></div>
+
+            <div class="p-8 md:p-10">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-black text-charcoal mb-3">إنشاء حساب جديد 🚀</h1>
+                </div>
+
+                {% if messages %}
+                <div class="space-y-2 mb-6">
+                    {% for message in messages %}
+                    <div class="p-3 bg-red-100 text-red-700 text-sm font-bold border-r-4 border-red-500">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form action="{% url 'binnaSign:register_process' %}" method="POST" class="space-y-5">
+                    {% csrf_token %}
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">اسمك الاول</label>
+                        <input type="text" name="first_name" required
+                            class="w-full border-2 border-charcoal/20 p-3 focus:border-binnaGreen outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">اسم العائلة</label>
+                        <input type="text" name="last_name" required
+                            class="w-full border-2 border-charcoal/20 p-3 focus:border-binnaGreen outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">المدينة</label>
+                        <select name="city" required class="w-full border-2 border-charcoal/20 p-3 outline-none">
+                            <option value="" disabled selected>اختر المدينة...</option>
+                            <option value="القدس">القدس</option>
+                            <option value="رام الله">رام الله</option>
+                            <option value="نابلس">نابلس</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">رقم الهاتف</label>
+                        <input type="tel" name="phone" required
+                            class="w-full border-2 border-charcoal/20 p-3 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">البريد الإلكتروني</label>
+                        <input type="email" name="email" required
+                            class="w-full border-2 border-charcoal/20 p-3 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-charcoal font-bold text-sm mb-2">كلمة المرور</label>
+                        <input type="password" name="password" required
+                            class="w-full border-2 border-charcoal/20 p-3 outline-none">
+                    </div>
+                    <button type="submit" class="btn-orange w-full text-lg">إنشاء الحساب</button>
+                </form>
+
+                <p class="text-center mt-8 text-steel text-sm">
+                    لديك حساب بالفعل؟ <a href="{% url 'binnaSign:login' %}"
+                        class="text-binnaGreen font-black underline">سجل الدخول</a>
+                </p>
+            </div>
+            <div class="construction-tape"></div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رفع وتحليل المخططات | بناء - BINNA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@400;600;700;800&family=Space+Grotesk:wght@700;800&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        binnaGreen: "#b0dc00",
+                        catYellow: "#FFCD11",
+                        warmYellow: "#F7B928",
+                        charcoal: "#1A1A1A",
+                        concrete: "#F3F4F6",
+                        steel: "#6B7280",
+                        safetyOrange: "#FF6B00",
+                        paleGreen: "#F3FFD1",
+                        paleYellow: "#FFF5CC",
+                        paleOrange: "#FFE7D2",
+                    },
+                    fontFamily: {
+                        arabic: ['"IBM Plex Arabic"', "sans-serif"],
+                        grotesk: ['"Space Grotesk"', "sans-serif"],
+                    },
+                    boxShadow: {
+                        greenGlow: "0 0 35px rgba(176,220,0,0.36)",
+                        yellowGlow: "0 0 35px rgba(255,205,17,0.32)",
+                        orangeGlow: "0 18px 55px rgba(255,107,0,0.35)",
+                        soft: "0 24px 70px rgba(26,26,26,0.14)",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        /* Default: show idle state, hide selected state */
+        .drop-idle {
+            display: flex;
+        }
+
+        .drop-selected {
+            display: none;
+        }
+
+        /* When the file input is valid (file chosen) */
+        #blueprint-file:valid~.drop-idle {
+            display: none;
+        }
+
+        #blueprint-file:valid~.drop-selected {
+            display: flex;
+        }
+
+        /* Submit button: disabled visually when input is NOT yet valid */
+        form:not(:has(#blueprint-file:valid)) .submit-btn {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        form:has(#blueprint-file:valid) .submit-btn {
+            opacity: 1;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen font-arabic bg-gradient-to-br from-paleGreen via-paleYellow to-paleOrange text-charcoal antialiased flex flex-col">
+
+    <header class="sticky top-0 z-50 bg-charcoal text-white border-b border-binnaGreen/20">
+        <div class="px-6 py-4 flex items-center justify-between">
+
+            <a href="/" aria-label="BINNA — الصفحة الرئيسية" class="flex items-center gap-3">
+                <div style="clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)"
+                    class="w-10 h-11 bg-binnaGreen flex items-center justify-center shrink-0">
+                    <span class="text-charcoal font-black text-lg font-grotesk" aria-hidden="true">ب</span>
+                </div>
+                <div>
+                    <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA</div>
+                    <div class="text-white/50 text-[10px] -mt-1 font-bold">المنصة الإنشائية الذكية</div>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold hidden sm:block">م. رامز عطالله</span>
+                <div aria-hidden="true"
+                    class="w-8 h-8 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-xs font-bold text-binnaGreen">
+                    RA
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="flex flex-col md:flex-row flex-1">
+
+        <aside
+            class="w-full md:w-64 bg-charcoal text-white/80 p-4 border-t border-white/5 md:border-t-0 flex flex-col justify-between shrink-0">
+
+            <nav aria-label="القائمة الرئيسية">
+                <p class="text-white/30 text-[10px] font-bold uppercase tracking-wider px-3 mb-2">القائمة الرئيسية</p>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#"
+                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
+                            <span aria-hidden="true">🏪</span> سوق المواد الإنشائية
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-current="page"
+                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-black bg-binnaGreen text-charcoal rounded">
+                            <span aria-hidden="true">🧠</span> تحليل المخططات (AI)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
+                            <span aria-hidden="true">📋</span> طلباتي السابقة
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
+                            <span aria-hidden="true">📊</span> لوحة التحكم والتقارير
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <footer class="pt-4 border-t border-white/5 mt-4 hidden md:block">
+                <p class="text-[10px] text-white/20 px-3 font-semibold">تحديث المنظومة: 2026</p>
+            </footer>
+
+        </aside>
+
+        <main class="flex-1 p-6 lg:p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start max-w-6xl mx-auto w-full">
+
+                <div class="lg:col-span-2">
+
+                    <article aria-labelledby="analyzer-heading"
+                        class="bg-white shadow-2xl border border-charcoal/5 overflow-hidden
+                          [clip-path:polygon(24px_0%,100%_0%,100%_calc(100%-24px),calc(100%-24px)_100%,0%_100%,0%_24px)]">
+
+                        <div
+                            class="bg-charcoal text-white p-6 border-b-4 border-binnaGreen flex justify-between items-center gap-4">
+                            <div>
+                                <h1 id="analyzer-heading" class="text-xl font-bold">معالجة واستخلاص الكميات الذكي</h1>
+                                <p class="text-xs text-white/60 mt-1">ارفع المخطط الإنشائي للبدء بحساب مكعبات الخرسانة
+                                    وأوزان الحديد.</p>
+                            </div>
+                            <span
+                                class="bg-binnaGreen/10 border border-binnaGreen/30 text-binnaGreen font-grotesk text-[10px] px-2 py-0.5 rounded font-bold tracking-wider shrink-0"
+                                aria-label="محرك الذكاء الاصطناعي الإصدار الثاني">
+                                AI ENGINE v2.0
+                            </span>
+                        </div>
+
+                        <form action="{% url 'binnaCustomer:upload_blueprint' %}" method="POST"
+                            enctype="multipart/form-data">
+
+
+                            {% csrf_token %}
+
+                            <label for="blueprint-file"
+                                aria-label="منطقة رفع ملف المخطط الهندسي — اسحب وأفلت أو اضغط للتصفح"
+                                class="group relative block cursor-pointer border-2 border-dashed border-charcoal/20
+                            hover:border-binnaGreen transition-colors duration-200
+                            [clip-path:polygon(12px_0%,100%_0%,100%_calc(100%-12px),calc(100%-12px)_100%,0%_100%,0%_12px)]"
+                                style="background-image:radial-gradient(rgba(26,26,26,0.08) 1px,transparent 1px);background-size:16px 16px;background-color:rgba(243,244,246,0.2)">
+
+                                <input type="file" id="blueprint-file" name="blueprint_image" accept="image/*" required
+                                    aria-describedby="file-hint" class="opacity-0 absolute w-0 h-0" />
+
+                                <div class="drop-idle flex-col items-center text-center py-14 px-8">
+                                    <div aria-hidden="true"
+                                        class="w-14 h-14 bg-white border border-charcoal/10 rounded-full mx-auto flex items-center justify-center shadow-md mb-4
+                              text-charcoal transition-transform duration-200 group-hover:scale-105 group-hover:text-safetyOrange">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-sm font-bold text-charcoal">
+                                        اسحب ملف المخطط الهندسي هنا وأفلته أو
+                                        <span class="text-safetyOrange underline">تصفح ملفات الجهاز</span>
+                                    </p>
+                                    <p id="file-hint" class="text-xs text-steel mt-1 max-w-xs mx-auto">
+                                        يدعم صيغ الصور المتنوعة — الحد الأقصى 50MB
+                                    </p>
+                                </div>
+
+                                <div class="drop-selected items-center gap-4 py-10 px-8" role="status"
+                                    aria-live="polite">
+                                    <div aria-hidden="true"
+                                        class="w-14 h-14 bg-binnaGreen/20 border border-binnaGreen/40 rounded-full flex items-center justify-center text-2xl shrink-0">
+                                        📄
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-charcoal text-sm">تم اختيار الملف بنجاح ✓</p>
+                                        <p class="text-xs text-steel mt-1">اضغط على زر الإرسال أدناه لبدء التحليل، أو
+                                            اضغط هنا لتغيير الملف.</p>
+                                    </div>
+                                </div>
+
+                            </label>
+
+                            {% if error %}
+                            <div
+                                class="bg-red-50 border-r-4 border-red-500 p-3 text-xs text-red-700 font-bold [clip-path:polygon(8px_0%,100%_0%,100%_100%,0%_100%)]">
+                                ⚠️ حدث خطأ أثناء المعالجة: {{ error }}
+                            </div>
+                            {% endif %}
+
+                            <button type="submit" class="submit-btn w-full bg-safetyOrange text-white py-4 px-6 text-sm font-black
+                             flex items-center justify-center gap-3
+                             hover:bg-orange-700 hover:-translate-y-0.5 hover:shadow-orangeGlow
+                             transition-all duration-200
+                             [clip-path:polygon(14px_0%,100%_0%,calc(100%-14px)_100%,0%_100%)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2.5" stroke="currentColor" class="w-4 h-4 shrink-0"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9.813 15.904L9 21l8.944-8.944M18 10V4.5A2.5 2.5 0 0015.5 2h-7A2.5 2.5 0 006 4.5V14a2.5 2.5 0 002.5 2.5H14" />
+                                </svg>
+                                <span>إرسال الملف وتشغيل خوارزمية الحساب الكمي</span>
+                            </button>
+
+                        </form>
+                    </article>
+                </div>
+
+                <div class="space-y-4 w-full">
+
+                    <aside aria-labelledby="tips-heading"
+                        class="bg-charcoal text-white p-5 shadow-lg border-r-4 border-binnaGreen space-y-3
+                        [clip-path:polygon(12px_0%,100%_0%,100%_calc(100%-12px),calc(100%-12px)_100%,0%_100%,0%_12px)]">
+                        <div class="flex items-center gap-2 border-b border-white/10 pb-2">
+                            <span aria-hidden="true" class="text-binnaGreen text-sm">💡</span>
+                            <h2 id="tips-heading" class="text-xs font-bold tracking-wide uppercase text-binnaGreen">
+                                إرشادات الرفع والمطابقة
+                            </h2>
+                        </div>
+                        <ul
+                            class="space-y-2.5 text-[11px] text-white/80 list-disc list-inside font-medium leading-relaxed">
+                            <li>تأكد من وضوح جداول التسليح، الأقطار، وسمك العقدات داخل الملف.</li>
+                            <li>يُفضل استخدام مستندات أصلية عالية الجودة لضمان مطابقة 100%.</li>
+                            <li>يتكفل الذكاء الاصطناعي بربط النتائج بأسعار الموردين المحليين فوراً.</li>
+                        </ul>
+                    </aside>
+
+                    <section aria-labelledby="stats-heading"
+                        class="bg-white p-5 shadow-md border border-charcoal/5 space-y-4
+                          [clip-path:polygon(12px_0%,100%_0%,100%_calc(100%-12px),calc(100%-12px)_100%,0%_100%,0%_12px)]">
+                        <h2 id="stats-heading"
+                            class="text-xs font-bold text-charcoal/40 uppercase tracking-wider pb-2 border-b border-charcoal/5">
+                            تحليلات المنظومة السريعة
+                        </h2>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <article
+                                class="bg-concrete/60 p-3
+                              [clip-path:polygon(10px_0%,100%_0%,100%_calc(100%-10px),calc(100%-10px)_100%,0%_100%,0%_10px)]">
+                                <p class="text-[10px] text-steel font-bold">المخططات المعالجة</p>
+                                <p class="text-lg font-black font-grotesk text-charcoal tracking-tight">14</p>
+                            </article>
+                            <article
+                                class="bg-concrete/60 p-3
+                              [clip-path:polygon(10px_0%,100%_0%,100%_calc(100%-10px),calc(100%-10px)_100%,0%_100%,0%_12px)]">
+                                <p class="text-[10px] text-steel font-bold">المواد المستخلصة</p>
+                                <p class="text-lg font-black font-grotesk text-safetyOrange tracking-tight">184 طن</p>
+                            </article>
+                        </div>
+
+                        <p
+                            class="text-[10px] text-steel bg-paleYellow/40 p-2 rounded border border-warmYellow/20 font-medium leading-relaxed">
+                            ⏳ متوسط وقت معالجة وتحليل المخطط الواحد يستغرق أقل من
+                            <strong class="text-charcoal">45 ثانية</strong> فقط.
+                        </p>
+                    </section>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+BINNA/
+│
+├── templates
+│   ├── landing.html
+│   ├── login.html
+│   ├── signup.html
+├── urls.py
+├── views.py
+├── models.py
+│
+├── 👤 Customer templates
+│   │
+│   │
+│   ├── Marketplace
+│   │   ├── stors-product.html
+│   │   ├── store-details.html
+│   │   ├── product-details.html
+│   │   ├── cart.html                 
+│   │   ├── checkout.html             
+│   │   └── order-success.html
+│   │
+│   ├── AI Assistant
+│   │   ├── ai-analyizer.html
+│   │   └── ai-report.html
+│   │   └── ai-report.html            
+│   │
+│   ├── Orders
+│   │   ├── customer-orders.html      
+│   │   └── order-details.html        
+│   │
+│   └── Settings
+│       └── customer-settings.html    
+├── urls.py
+├── views.py
+├── models.py<-
+
+│
+├── 🏪 Supplier Portal
+│   │
+│   ├── supplier-overview.html
+│   ├── supplier-orders.html
+│   ├── supplier-products-inventory.html
+│   ├── supplier-payments-profits.html
+│   ├── supplier-store-settings.html
+│   │
+│   ├── supplier-order-details.html   
+│   ├── supplier-notifications.html   
+│   └── supplier-profile.html         
+│
+├── 🛡️ Admin Portal
+│   │
+│   ├── index.html
+│   ├── users.html
+│   ├── suppliers.html
+│   ├── create-supplier.html
+│   ├── categories.html
+│   ├── orders.html
+│   ├── disputes.html
+│   ├── analytics.html
+│   ├── ai.html
+│   │
+│   ├── admin-order-details.html      
+│   ├── category-details.html         
+│   ├── supplier-details.html         
+│   ├── user-details.html             
+│   └── admin-settings.html           
+│

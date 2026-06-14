@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تأكيد البريد الإلكتروني | بناء - BINNA</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        binnaGreen: "#b0dc00",
+                        charcoal: "#1A1A1A",
+                        steel: "#6B7280",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 52%, #FFE7D2 100%);
+        }
+
+        .btn-orange {
+            background: #FF6B00;
+            color: white;
+            padding: 15px 34px;
+            transition: .28s;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+
+        .construction-tape {
+            height: 16px;
+            background: repeating-linear-gradient(-45deg, #FFCD11 0px, #FFCD11 14px, #1A1A1A 14px, #1A1A1A 28px);
+        }
+
+        .panel-container {
+            clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <nav class="px-6 py-4 bg-charcoal text-white">
+        <div class="max-w-7xl mx-auto">
+            <img src="{% static 'img/binna-logo.png' %}" alt="BINNA Logo" class="h-16 w-auto">
+        </div>
+    </nav>
+
+    <main class="flex-1 flex items-center justify-center p-6">
+        <div class="w-full max-w-sm panel-container shadow-soft bg-white">
+            <div class="construction-tape"></div>
+
+            <div class="p-8 md:p-10">
+                <div class="text-center mb-6">
+                    <h1 class="text-2xl font-black text-charcoal mb-2">تأكيد البريد الإلكتروني 📧</h1>
+                    <p class="text-steel text-sm">تم إرسال رمز التحقق إلى بريدك الإلكتروني، يرجى إدخاله للمتابعة.</p>
+                </div>
+
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class="p-3 bg-red-100 text-red-700 text-sm font-bold border-r-4 border-red-500">{{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form action="{% url 'binnaSign:verify_code' %}" method="POST" class="space-y-4">
+                    {% csrf_token %}
+                    <input type="text" name="code" placeholder="000000" maxlength="6" required
+                        class="w-full text-center text-2xl tracking-[0.5em] border-2 border-charcoal/20 p-3 focus:border-binnaGreen outline-none">
+
+                    <button type="submit" class="btn-orange w-full text-lg font-bold">تأكيد الرمز</button>
+                </form>
+            </div>
+            <div class="construction-tape"></div>
+        </div>
+    </main>
+
+    <footer class="p-6 text-center text-steel text-sm font-semibold">
+        <p>&copy; 2026 BINNA. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+
+</html>
