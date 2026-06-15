@@ -1,0 +1,146 @@
+{% load static %}
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الإعدادات | بناء - BINNA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            binnaGreen: "#b0dc00",
+            catYellow: "#FFCD11",
+            warmYellow: "#F7B928",
+            charcoal: "#1A1A1A",
+            concrete: "#F3F4F6",
+            steel: "#6B7280",
+            safetyOrange: "#FF6B00",
+            paleGreen: "#F3FFD1",
+            paleYellow: "#FFF5CC",
+            paleOrange: "#FFE7D2",
+          },
+          fontFamily: {
+            arabic: ["IBM Plex Arabic", "sans-serif"],
+            grotesk: ["Space Grotesk", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 24px 70px rgba(26,26,26,0.14)",
+            greenGlow: "0 0 35px rgba(176,220,0,0.35)",
+          },
+          backgroundImage: {
+            'main-gradient': 'radial-gradient(circle at 8% 12%, rgba(176, 220, 0, 0.23), transparent 28%), radial-gradient(circle at 92% 20%, rgba(255, 205, 17, 0.25), transparent 30%), linear-gradient(135deg, #f3ffd1 0%, #fff5cc 50%, #ffe7d2 100%)',
+          }
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="min-h-screen font-arabic bg-main-gradient text-charcoal overflow-x-hidden">
+  <header class="sticky top-0 z-50 w-full bg-charcoal text-white px-6 py-4 border-b border-binnaGreen/20">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:items-center justify-between">
+      <a href="{% url 'binnaCustomer:customer_dashboard' %}" class="flex items-center gap-3">
+        <img class="relative h-24 w-auto object-contain" src="{% static 'img/binna-logo.png' %}" alt="Binna Logo">
+        <div>
+          <div class="font-grotesk font-black text-xl text-binnaGreen">{{ customer.first_name }} {{customer.last_name }}
+          </div>
+          <div class="text-white/50 text-xs font-bold">منصة العميل</div>
+        </div>
+      </a>
+      <nav class="flex flex-wrap gap-2 text-xs font-black">
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="{% url 'binnaCustomer:customer_dashboard' %}">الرئيسية</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="stors-product.html">المتاجر والمواد</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="{% url 'binnaCustomer:ai_assistans' %}">تحليل AI</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="saved-ai-reports.html">نتائج التحليل</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="cart.html">السلة <span id="cartCount" class="bg-safetyOrange text-white rounded-full px-2">0</span></a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="customer-orders.html">طلباتي</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-charcoal font-[900] text-[0.78rem] transition-colors bg-binnaGreen"
+          href="customer-settings.html">الإعدادات</a>
+        <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+          href="landing.html">خروج</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+    <section
+      class="bg-white p-8 shadow-soft border-r-4 border-binnaGreen [clip-path:polygon(18px_0%,100%_0%,100%_calc(100%-18px),calc(100%-18px)_100%,0%_100%,0%_18px)]">
+      <div
+        class="w-[72px] h-[5px] bg-gradient-to-r from-binnaGreen via-catYellow to-safetyOrange mb-[18px] rounded-[2px]">
+      </div>
+      <h1 class="text-4xl md:text-5xl font-black mb-3">إعدادات الحساب</h1>
+      <p class="text-steel font-semibold">
+        تعديل بيانات العميل وكلمة المرور.
+      </p>
+    </section>
+    <section class="flex justify-center w-full md:w-1/2 mx-auto">
+      <form method="POST" action="{% url 'binnaCustomer:update_customer' %}"
+        class="w-full lg:col-span-2 bg-white p-6 shadow-soft space-y-4 [clip-path:polygon(18px_0%,100%_0%,100%_calc(100%-18px),calc(100%-18px)_100%,0%_100%,0%_18px)]">
+        {% csrf_token %}
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">اسمك الاول</label>
+          <input type="text" name="first_name" value="{{ customer.first_name }}" required
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+        </div>
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">اسم العائلة</label>
+          <input type="text" name="last_name" value="{{ customer.last_name }}" required
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+        </div>
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">المدينة</label>
+          <select name="city" required
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+            <option value="القدس" {% if customer.city=='القدس' %}selected{% endif %}>القدس</option>
+            <option value="رام الله" {% if customer.city=='رام الله' %}selected{% endif %}>رام الله</option>
+            <option value="نابلس" {% if customer.city=='نابلس' %}selected{% endif %}>نابلس</option>
+          </select>
+        </div>
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">رقم الهاتف</label>
+          <input type="tel" name="phone" value="{{ customer.phone }}" required
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+        </div>
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">البريد الإلكتروني</label>
+          <input type="email" value="{{ customer.email }}" name="email" required
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+        </div>
+      
+        <div>
+          <label class="block text-charcoal font-bold text-sm mb-2">كلمة المرور (اتركها فارغة إذا لم ترد التغيير)</label>
+          <input type="password" name="password"
+            class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
+        </div>
+      
+        <button type="submit"
+          class="font-[900] px-[22px] py-3 transition-all duration-250 [clip-path:polygon(10px_0%,100%_0%,calc(100%-10px)_100%,0%_100%)] inline-flex items-center justify-center gap-[0.35rem] text-center cursor-pointer bg-safetyOrange text-white hover:-translate-y-[3px]">
+          حفظ التغييرات
+        </button>
+      </form>
+
+    </section>
+  </main>
+
+</body>
+
+</html>

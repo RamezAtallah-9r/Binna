@@ -4,8 +4,8 @@ import threading
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
-from django.contrib import messages  # 👈 إضافة مكتبة الرسائل لإخطار المستخدمين
-from .models import Blueprint
+from django.contrib import messages  
+from .models import *
 
 from google import genai
 from PIL import Image
@@ -14,9 +14,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ── Gemini settings ────────────────────────────────────────────────────────
-GEMINI_MODEL       = "gemini-2.5-flash"
-GEMINI_MAX_RETRIES = 4    # attempts total before giving up
-GEMINI_RETRY_DELAY = 6    # seconds between retries on 503
+# binnaCustomer/views.py في الأعلى تماماً
+GEMINI_MODEL = "gemini-3.5-flash"
+GEMINI_MAX_RETRIES = 6                 # زيادة المحاولات لمنع قيود 503 اللحظية
+GEMINI_RETRY_DELAY = 8                 # وقت الانتظار بالثواني بين المحاولات
 
 GEMINI_PROMPT = """
 You are a Senior Civil Engineer based in Palestine.
@@ -63,8 +64,7 @@ Example:
 
 def _parse_result(analysis_text):
     """
-    Parse raw Gemini text into structured data.
-    Returns (material_rows, sections) — both lists of dicts.
+    تحليل النص الخام القادم من Gemini وتحويله إلى بيانات مهيكلة لمصفوفات الواجهة.
     """
     material_rows = []
     for line in analysis_text.splitlines():
@@ -94,53 +94,80 @@ def _parse_result(analysis_text):
 
 def _run_gemini(blueprint):
     """
-    Run Gemini in a background thread with retry logic.
+    تشغيل عملية التحليل في دالة منفصلة (Thread) بالخلفية لضمان استقرار استجابة السيرفر.
     """
+    import os  
+
     def _save_error(msg):
         blueprint.analysis_result = f"ERROR:{msg}"
         blueprint.save()
 
     try:
         pil_image = Image.open(blueprint.image.path)
-        client    = genai.Client()
+        
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("🚨 لم يتم العثور على GEMINI_API_KEY داخل ملف الـ .env")
+            
+        client = genai.Client(api_key=api_key)
+        
     except Exception as e:
-        _save_error(str(e))
+        print("================ GEMINI INIT ERROR ================")
+        print(str(e))
+        print("===================================================")
+        _save_error(f"فشل تهيئة المحرك: {str(e)}")
         return
 
     for attempt in range(1, GEMINI_MAX_RETRIES + 1):
         try:
+            print(f"🔄 محاولة جلب التحليل من Gemini (المحاولة {attempt} من {GEMINI_MAX_RETRIES})...")
+            
             response = client.models.generate_content(
                 model=GEMINI_MODEL,
                 contents=[pil_image, GEMINI_PROMPT]
             )
-            blueprint.analysis_result = response.text or "لم يتم إرجاع نتيجة."
-            blueprint.save()
-            return   # success
+            
+            if response.text:
+                blueprint.analysis_result = response.text
+                blueprint.save()
+                print("✅ تم تحليل المخطط بنجاح واستلام البيانات من Gemini!")
+                return   # خروج بنجاح عند استلام الحسابات الإنشائية
+            else:
+                raise ValueError("أرجع المحرك استجابة فارغة.")
 
         except Exception as e:
             error_str = str(e)
-            is_503    = "503" in error_str or "UNAVAILABLE" in error_str
+            print(f"⚠️ خطأ أثناء المحاولة {attempt}: {error_str}")
+            
+            is_503 = "503" in error_str or "UNAVAILABLE" in error_str or "ResourceExhausted" in error_str
 
             if is_503 and attempt < GEMINI_MAX_RETRIES:
+                print(f"⏱️ السيرفر مشغول (503). جاري إيقاف الـ Thread مؤقتاً لـ {GEMINI_RETRY_DELAY} ثوانٍ...")
                 time.sleep(GEMINI_RETRY_DELAY)
                 continue
 
+            print("================ GEMINI RUNTIME ERROR ================")
+            print(error_str)
+            print("======================================================")
             _save_error(error_str)
             return
 
-    _save_error("فشلت جميع المحاولات.")
+    _save_error("فشلت جميع محاولات الاتصال بسبب انشغال خوادم قوقل.")
 
 
 # ── Views ──────────────────────────────────────────────────────────────────
 
 def customer_dashboard(request):
-    """لوحة التحكم للعميل الحالية محمية من أي متسلل"""
-    # 🛡️ الحماية الأمنية الموحدة لبِنَاءْ
+    """لوحة التحكم لعملاء منصة بناء"""
     if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
         messages.error(request, "منطقة محظورة! يرجى تسجيل الدخول كعميل أولاً.")
         return redirect('binnaSign:login')
-        
-    return render(request, "binnaCustomer/customer_dashboard.html")
+    
+    customer_id = request.session.get('customer_id')
+    customer = Customer.objects.get(id=customer_id)
+    context = {'customer': customer}
+    return render(request, "binnaCustomer/customer_dashboard.html", context)
+
 
 def ai_assistans(request):
     return render(request, "binnaCustomer/ai_assistans.html")
@@ -148,9 +175,8 @@ def ai_assistans(request):
 
 def upload_blueprint(request):
     """
-    POST: Validate + save image → redirect to result page immediately.
+    التحقق من صحة الصورة وحفظ المخطط الإنشائي ثم إطلاق خيط المعالجة بالخلفية
     """
-    # 🛡️ حماية المسار لضمان أن العميل فقط من يمكنه الرفع والاستهلاك من الـ API
     if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
         messages.error(request, "يرجى تسجيل الدخول للوصول إلى المساعد الذكي.")
         return redirect('binnaSign:login')
@@ -167,7 +193,7 @@ def upload_blueprint(request):
 
         try:
             Image.open(uploaded_file).verify()
-            uploaded_file.seek(0)   # verify() exhausts the stream
+            uploaded_file.seek(0)  
         except Exception as e:
             return render(
                 request,
@@ -177,7 +203,6 @@ def upload_blueprint(request):
 
         blueprint = Blueprint.objects.create(image=uploaded_file)
 
-        # إطلاق الـ Thread في الخلفية دون تعطيل استجابة المتصفح
         thread = threading.Thread(target=_run_gemini, args=(blueprint,), daemon=True)
         thread.start()
 
@@ -187,7 +212,7 @@ def upload_blueprint(request):
 
 
 def blueprint_detail(request, pk):
-    """عرض هيكل صفحة النتائج فوراً، بينما يتولى الـ JS عمل Polling للبيانات"""
+    """عرض صفحة النتائج فوراً، بينما يتولى كود الـ JavaScript الاستعلام التكراري"""
     if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
         messages.error(request, "يرجى تسجيل الدخول أولاً لعرض نتائج المخطط.")
         return redirect('binnaSign:login')
@@ -203,9 +228,8 @@ def blueprint_detail(request, pk):
 @require_GET
 def analyze_blueprint_ajax(request, pk):
     """
-    AJAX Polling Endpoint: يتم استدعاؤه بشكل متكرر عبر الـ JS حتى اكتمال التجهيز.
+    نقطة استعلام الـ AJAX: تقوم الواجهة بالاتصال بها باستمرار حتى اكتمال التجهيز والتفكيك بنجاح
     """
-    # 🛡️ حماية الـ Endpoint لمنع سحب البيانات الخارجي من غير المسجلين
     if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
         return JsonResponse({"status": "error", "message": "Unauthorized access"}, status=403)
 
@@ -220,6 +244,7 @@ def analyze_blueprint_ajax(request, pk):
             "message": blueprint.analysis_result[6:].strip(),
         })
 
+    # دالة الـ Parser المضافة الآن ستقوم بفك النص دون أي NameError
     material_rows, sections = _parse_result(blueprint.analysis_result)
 
     return JsonResponse({
@@ -228,3 +253,28 @@ def analyze_blueprint_ajax(request, pk):
         "sections":      sections,
         "image_url":     blueprint.image.url if blueprint.image else None,
     })
+
+def customer_settings(request):
+    # جلب بيانات العميل الحالي من الجلسة
+    customer = get_object_or_404(Customer, id=request.session.get('customer_id'))
+    return render(request, "binnaCustomer/customer_settings.html", {'customer': customer})
+
+def update_customer(request):
+    if request.method == 'POST':
+        # جلب العميل باستخدام الـ Manager الذي قمت بإنشائه
+        customer = Customer.objects.get(id=request.session.get('customer_id'))
+        
+        # استخدام الدالة التي عرفتها أنت في الموديل!
+        customer.update_customer_info(request.POST)
+        
+        # معالجة كلمة المرور منفصلة لأنها تحتاج تشفير (bcrypt)
+        new_password = request.POST.get('password')
+        if new_password:
+            # التحقق من القوة (اختياري، يمكنك استخدام الـ validator الموجود في الـ Manager)
+            customer.password = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt()).decode('utf-8')
+            customer.save()
+            
+        messages.success(request, "تم تحديث بياناتك بنجاح!")
+        return redirect('binnaCustomer:customer_settings')
+    
+    return redirect('binnaCustomer:customer_settings')
