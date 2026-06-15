@@ -61,7 +61,8 @@
                 <img class="relative h-24 w-auto object-contain" src="{% static 'img/binna-logo.png' %}"
                     alt="Binna Logo">
                 <div>
-                    <div class="font-grotesk font-black text-xl text-binnaGreen">{{ customer.first_name }} {{customer.last_name }}</div>
+                    <div class="font-grotesk font-black text-xl text-binnaGreen">{{ customer.first_name }}
+                        {{customer.last_name }}</div>
                     <div class="text-white/50 text-xs font-bold">منصة العميل</div>
                 </div>
             </a>
@@ -80,9 +81,9 @@
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
                     href="customer-orders.html">طلباتي</a>
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
-                    href="customer-settings.html">الإعدادات</a>
+                    href="{% url 'binnaCustomer:customer_settings' %}">الإعدادات</a>
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
-                    href="landing.html">خروج</a>
+                    href="{% url 'binnaCustomer:logout' %}">خروج</a>
             </nav>
         </div>
     </header>
@@ -100,7 +101,7 @@
                     </div>
                     <h1 class="text-2xl md:text-3xl font-black text-charcoal font-grotesk mb-2">
                         أهلاً بك مجدداً، <span
-                            class="relative inline-block text-charcoal after:content-[''] after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-[6px] after:bg-binnaGreen after:shadow-[0_0_22px_rgba(176,220,0,0.85),0_0_44px_rgba(176,220,0,0.35)] after:rounded-full">{{customer.first_name }}</span> 👋
+                            class="relative inline-block text-charcoal after:content-[''] after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-[6px] after:bg-binnaGreen after:shadow-[0_0_22px_rgba(176,220,0,0.85),0_0_44px_rgba(176,220,0,0.35)] after:rounded-full">{{customer.first_name}}</span> 👋
                     </h1>
                     <p class="text-steel text-sm md:text-base font-semibold leading-relaxed">
                         تابع مشترياتك، تصفح المتاجر الفلسطينية، أو استخدم مقدر الذكاء الاصطناعي لتحليل مشروعك
