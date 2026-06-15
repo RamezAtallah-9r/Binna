@@ -6,10 +6,12 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from django.contrib import messages  
 from .models import *
-
+from django.db.models import Q
 from google import genai
 from PIL import Image
 from dotenv import load_dotenv
+from binnaProvider.models import Supplier, Inventory, SupplierCategory, InventoryCategory, City
+import bcrypt
 
 load_dotenv()
 
@@ -260,7 +262,100 @@ def stores_producs(request):
         messages.error(request, "يرجى تسجيل الدخول كعميل أولاً.")
         return redirect('binnaSign:login')
 
-    return render(request, "binnaCustomer/stors-product.html")
+    mode = request.GET.get('mode', 'suppliers')
+    search_query = request.GET.get('q', '').strip()
+
+    selected_city = request.GET.get('city', '')
+    selected_supplier_category = request.GET.get('supplier_category', '')
+    selected_inventory_category = request.GET.get('inventory_category', '')
+    min_price = request.GET.get('min_price', '')
+    max_price = request.GET.get('max_price', '')
+
+    suppliers = Supplier.objects.all().select_related('city', 'category')
+    products = Inventory.objects.all().select_related('supplier', 'category', 'supplier__city')
+
+    cities = City.objects.all()
+    supplier_categories = SupplierCategory.objects.all()
+    inventory_categories = InventoryCategory.objects.all()
+
+    if search_query:
+        suppliers = suppliers.filter(
+            Q(store_name__icontains=search_query) |
+            Q(owner_name__icontains=search_query) |
+            Q(description__icontains=search_query) |
+            Q(city__name__icontains=search_query) |
+            Q(category__name__icontains=search_query)
+        )
+
+        products = products.filter(
+            Q(name__icontains=search_query) |
+            Q(category__name__icontains=search_query) |
+            Q(supplier__store_name__icontains=search_query) |
+            Q(supplier__city__name__icontains=search_query)
+        )
+
+    if selected_city:
+        suppliers = suppliers.filter(city_id=selected_city)
+        products = products.filter(supplier__city_id=selected_city)
+
+    if selected_supplier_category:
+        suppliers = suppliers.filter(category_id=selected_supplier_category)
+
+    if selected_inventory_category:
+        products = products.filter(category_id=selected_inventory_category)
+
+    if min_price:
+        products = products.filter(sell_price__gte=min_price)
+
+    if max_price:
+        products = products.filter(sell_price__lte=max_price)
+
+    context = {
+        'suppliers': suppliers,
+        'products': products,
+        'cities': cities,
+        'supplier_categories': supplier_categories,
+        'inventory_categories': inventory_categories,
+        'mode': mode,
+        'search_query': search_query,
+        'selected_city': selected_city,
+        'selected_supplier_category': selected_supplier_category,
+        'selected_inventory_category': selected_inventory_category,
+        'min_price': min_price,
+        'max_price': max_price,
+    }
+
+    return render(request, "binnaCustomer/stors-product.html", context)
+
+def store_details(request, supplier_id):
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "يرجى تسجيل الدخول كعميل أولاً.")
+        return redirect('binnaSign:login')
+
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    inventory_items = Inventory.objects.filter(supplier=supplier).select_related('category')
+
+    context = {
+        'supplier': supplier,
+        'inventory_items': inventory_items,
+    }
+
+    return render(request, "binnaCustomer/store_details.html", context)
+
+def inventory_details(request, inventory_id):
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "يرجى تسجيل الدخول كعميل أولاً.")
+        return redirect('binnaSign:login')
+
+    item = get_object_or_404(Inventory, id=inventory_id)
+
+    context = {
+        'item': item,
+        'supplier': item.supplier,
+    }
+
+    return render(request, "binnaCustomer/inventory_details.html", context)
+
 def customer_settings(request):
     # جلب بيانات العميل الحالي من الجلسة
     customer = get_object_or_404(Customer, id=request.session.get('customer_id'))
