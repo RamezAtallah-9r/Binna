@@ -6,7 +6,7 @@ from . import views
 app_name = 'binnaCustomer'  
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('customer_dashboard/', views.customer_dashboard, name='customer_dashboard'),
     path('upload/', views.upload_blueprint, name='upload_blueprint'),
     path('result/<int:pk>/', views.blueprint_detail, name='blueprint_detail'),
     path("api/analyze/<int:pk>/", views.analyze_blueprint_ajax, name="analyze_blueprint_ajax"),

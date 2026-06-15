@@ -171,59 +171,47 @@
                     </div>
 
 
-                    <!-- Form -->
-                    <form method="POST" action="#" class="space-y-5" novalidate>
+                    <form method="POST" action="{% url 'binnaSign:login_process' %}" class="space-y-5" novalidate>
                         {% csrf_token %}
-
-                        {% if form.non_field_errors %}
-                        <div role="alert"
-                            class="bg-red-50 border-r-4 border-red-500 p-3 text-xs text-red-700 font-bold rounded">
-                            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                    
+                        {% if messages %}
+                        <div class="space-y-2">
+                            {% for message in messages %}
+                            <div role="alert" class="bg-red-50 border-r-4 border-red-500 p-3 text-xs text-red-700 font-bold rounded">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
                         </div>
                         {% endif %}
-
-                        <!-- Username -->
+                    
                         <div class="space-y-1.5">
                             <label for="id_username" class="block text-charcoal font-bold text-sm">
-                                البريد الإلكتروني أو رقم الهاتف
+                                البريد الإلكتروني المعتمد
                             </label>
-                            <input type="text" id="id_username" name="username" placeholder="example@binna.com"
-                                autocomplete="username" required class="w-full bg-white border-2 border-charcoal/20 p-3 text-sm
-                            focus:border-binnaGreen focus:outline-none transition-colors duration-200
-                            {% if form.username.errors %}border-red-400{% endif %}">
-                            {% if form.username.errors %}
-                            <p class="text-xs text-red-600 font-bold">{{ form.username.errors|join:", " }}</p>
-                            {% endif %}
+                            <input type="email" id="id_username" name="email" placeholder="example@binna.ps" autocomplete="email" required
+                                class="w-full bg-white border-2 border-charcoal/20 p-3 text-sm
+                                focus:border-binnaGreen focus:outline-none transition-colors duration-200">
                         </div>
-
-                        <!-- Password -->
+                    
                         <div class="space-y-1.5">
                             <div class="flex items-center justify-between">
-                                <label for="id_password" class="block text-charcoal font-bold text-sm">كلمة
-                                    المرور</label>
-                                <a href="#"
-                                    class="text-xs font-bold text-safetyOrange hover:text-warmYellow transition-colors">
+                                <label for="id_password" class="block text-charcoal font-bold text-sm">كلمة المرور</label>
+                                <a href="#" class="text-xs font-bold text-safetyOrange hover:text-warmYellow transition-colors">
                                     نسيت كلمة المرور؟
                                 </a>
                             </div>
                             <div class="flex items-center border-2 border-charcoal/20 bg-white
-                          focus-within:border-binnaGreen transition-colors duration-200
-                          {% if form.password.errors %}border-red-400{% endif %}">
+                                  focus-within:border-binnaGreen transition-colors duration-200">
                                 <input type="password" id="id_password" name="password" placeholder="••••••••"
                                     autocomplete="current-password" required
                                     class="flex-1 bg-transparent p-3 text-sm focus:outline-none min-w-0">
-                                <button type="button" id="toggle-password" aria-label="إظهار أو إخفاء كلمة المرور"
-                                    aria-pressed="false"
+                                <button type="button" id="toggle-password" aria-label="إظهار أو إخفاء كلمة المرور" aria-pressed="false"
                                     class="px-3 text-steel hover:text-charcoal transition-colors shrink-0 text-base">
                                     👁️
                                 </button>
                             </div>
-                            {% if form.password.errors %}
-                            <p class="text-xs text-red-600 font-bold">{{ form.password.errors|join:", " }}</p>
-                            {% endif %}
                         </div>
-
-                        <!-- Remember me -->
+                    
                         <div class="flex items-center gap-3">
                             <input type="checkbox" id="remember" name="remember"
                                 class="w-5 h-5 rounded border-2 border-charcoal/20 bg-white cursor-pointer appearance-none shrink-0">
@@ -231,17 +219,14 @@
                                 تذكرني على هذا الجهاز
                             </label>
                         </div>
-
-                        <!-- Submit -->
+                    
                         <button type="submit" class="btn-parallelogram w-full bg-safetyOrange text-white font-black
-                           py-4 px-6 flex items-center justify-center gap-2 text-sm
-                           hover:bg-orange-700 hover:-translate-y-0.5 hover:shadow-orangeGlow
-                           transition-all duration-200">
+                               py-4 px-6 flex items-center justify-center gap-2 text-sm
+                               hover:bg-orange-700 hover:-translate-y-0.5 hover:shadow-orangeGlow
+                               transition-all duration-200">
                             <span>تسجيل الدخول</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
                     </form>

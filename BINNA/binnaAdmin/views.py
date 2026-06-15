@@ -3,3 +3,6 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 from .models import *
+
+def admin_dashboard(request):
+    return render(request, 'adminhtml/admin_dashboard.html')

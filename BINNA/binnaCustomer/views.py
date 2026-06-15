@@ -139,10 +139,11 @@ def _run_gemini(blueprint):
 
 # ── Views ──────────────────────────────────────────────────────────────────
 
-def index(request):
-    """AI assistant upload page."""
-    return render(request, "binnaCustomer/ai_assistans.html")
-
+# def index(request):
+#     """AI assistant upload page."""
+#     return render(request, "binnaCustomer/ai_assistans.html")
+def customer_dashboard(request):
+    return render(request, "binnaCustomer/customer_dashboard.html")
 
 def upload_blueprint(request):
     """

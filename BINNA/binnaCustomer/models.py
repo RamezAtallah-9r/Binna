@@ -11,8 +11,10 @@ class Blueprint(models.Model):
     def __str__(self):
         return f"Blueprint uploaded on {self.uploaded_at.strftime('%Y-%m-%d %H:%M')}"
 
+
 # ── Customer Manager ───────────────────────────────────────────────────────
 class CustomerManager(models.Manager):
+    
     def registration_validator(self, post_data):
         errors = {}
         # 1. الأسماء
@@ -25,7 +27,8 @@ class CustomerManager(models.Manager):
         email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
         if not re.match(email_regex, post_data.get('email', '')):
             errors['email'] = 'Please enter a valid email address.'
-        elif Customer.objects.filter(email=post_data.get('email')).exists():
+        # استخدام self.filter بدلاً من الاستدعاء الخارجي المباشر منعاً للمشاكل الدائرية
+        elif self.filter(email=post_data.get('email')).exists():
             errors['email_taken'] = 'An account with this email already exists.'
 
         # 3. الهاتف
@@ -44,7 +47,7 @@ class CustomerManager(models.Manager):
         return errors
 
     def create_customer(self, post_data):
-        # تشفير كلمة المرور باستخدام bcrypt
+        # 🛠️ تم إصلاح المعامل بإضافة self في الأعلى
         hashed_pw = bcrypt.hashpw(post_data['password'].encode(), bcrypt.gensalt()).decode('utf-8')
         
         return self.create(
@@ -56,6 +59,29 @@ class CustomerManager(models.Manager):
             password=hashed_pw,
             active=True
         )
+
+    # ── نقل دوال المساعدة وتصحيحها لتتبع للمانجر بشكل احترافي ──
+    def get_all_customers(self):
+        return self.all()
+
+    def get_customer_by_id(self, customer_id):
+        return self.get(id=customer_id)
+
+    def get_customer_by_email(self, email):
+        return self.filter(email=email)
+
+    def activate_customer(self, customer_id):
+        customer = self.get(id=customer_id)
+        customer.active = True
+        customer.save()
+        return customer
+
+    def deactivate_customer(self, customer_id):
+        customer = self.get(id=customer_id)
+        customer.active = False
+        customer.save()
+        return customer
+
 
 # ── Customer Model ─────────────────────────────────────────────────────────
 class Customer(models.Model):
@@ -69,12 +95,13 @@ class Customer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # ربط المانجر بالموديل
     objects = CustomerManager()
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-    # دوال المساعدة (Utility Methods)
+    # دالة التحديث تخص كائن العميل نفسه (Instance Method) لذا تستقبل self
     def update_customer_info(self, post_data):
         self.first_name = post_data.get('first_name', self.first_name)
         self.last_name = post_data.get('last_name', self.last_name)
@@ -83,29 +110,5 @@ class Customer(models.Model):
         self.save()
         return self
 
-def delete_customer(self, customer_id):
-    customer = Customer.objects.get(id=customer_id)
-    customer.delete()
-
-def get_all_customers(self):
-    return Customer.objects.all()
-
-def get_customer_by_id(self, customer_id):
-    return Customer.objects.get(id=customer_id)
-
-def get_customer_by_email(self, email):
-    return Customer.objects.filter(email=email)
-
-def activate_customer(self, customer_id):
-    customer = Customer.objects.get(id=customer_id)
-    customer.active = True
-    customer.save()
-    return customer
-
-def deactivate_customer(self, customer_id):
-    customer = Customer.objects.get(id=customer_id)
-    customer.active = False
-    customer.save()
-    return customer
-
-
+    def delete_customer(self):
+        self.delete()

@@ -5,5 +5,5 @@ from . import views
 app_name = 'binnaAdmin'  
 
 urlpatterns = [
-    # path('', views.func, name='route_name'),
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]
