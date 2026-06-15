@@ -228,3 +228,10 @@ def analyze_blueprint_ajax(request, pk):
         "sections":      sections,
         "image_url":     blueprint.image.url if blueprint.image else None,
     })
+
+def stores_materials(request):
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "يرجى تسجيل الدخول كعميل أولاً.")
+        return redirect('binnaSign:login')
+
+    return render(request, "binnaCustomer/stores_materials.html")
