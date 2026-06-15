@@ -78,7 +78,7 @@
     <!-- ── HEADER ─────────────────────────────────────────────────────── -->
     <header class="sticky top-0 z-50 bg-charcoal text-white border-b border-binnaGreen/20 no-print">
         <div class="px-6 py-4 flex items-center justify-between">
-            <a href="{% url 'binnaCustomer:index' %}" aria-label="BINNA — الرئيسية" class="flex items-center gap-3">
+            <a href="{% url 'binnaCustomer:customer_dashboard' %}" aria-label="BINNA — الرئيسية" class="flex items-center gap-3">
                 <div style="clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)"
                     class="w-10 h-11 bg-binnaGreen flex items-center justify-center shrink-0">
                     <span class="text-charcoal font-black text-lg font-grotesk" aria-hidden="true">ب</span>
@@ -107,7 +107,7 @@
                 <p class="text-white/30 text-[10px] font-bold uppercase tracking-wider px-3 mb-2">القائمة الرئيسية</p>
                 <ul class="space-y-1">
                     <li>
-                        <a href="{% url 'binnaCustomer:index' %}"
+                        <a href="{% url 'binnaCustomer:customer_dashboard' %}"
                             class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
                             <span aria-hidden="true">🏪</span> لوحة التحكم الرئيسية
                         </a>

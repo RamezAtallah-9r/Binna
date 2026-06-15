@@ -145,7 +145,7 @@ def login_process(request):
             request.session['customer_id'] = customer_user.id
             request.session['user_role'] = 'customer'
             messages.success(request, f"أهلاً بك مجدداً، {customer_user.first_name}!")
-            return redirect('binnaCustomer:dashboard')
+            return redirect('binnaCustomer:customer_dashboard')
 
         # ── 🚛 الفحص الثالث: هل الحساب مخصّص للموردين (Supplier)؟ ──
         # ملاحظة: بمجرد تجهيز تطبيق وموديل الموردين، قم بفك التعليق لتفعيله تلقائياً:

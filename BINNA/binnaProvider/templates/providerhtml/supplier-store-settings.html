@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إعدادات المتجر | BINNA Supplier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+    <style>
+    :root {
+      --green: #b0dc00;
+      --yellow: #FFCD11;
+      --charcoal: #1A1A1A;
+      --orange: #FF6B00;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Arabic', sans-serif;
+      background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(26, 26, 26, .9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(176, 220, 0, .2);
+    }
+
+    .cut-card {
+      clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+    }
+
+    .logo-shield {
+      clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+    }
+
+    .section-divider {
+      width: 72px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+      margin-bottom: 24px;
+    }
+
+    .btn-orange,
+    .btn-green,
+    .btn-dark {
+      font-weight: 800;
+      padding: 12px 22px;
+      transition: all .28s ease;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: var(--charcoal);
+    }
+
+    .btn-dark {
+      background: var(--charcoal);
+      color: var(--green);
+    }
+
+    .btn-orange:hover,
+    .btn-green:hover,
+    .btn-dark:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-dark:hover {
+      background: var(--green);
+      color: var(--charcoal);
+    }
+
+    .btn-green:hover {
+      background: var(--yellow);
+    }
+
+    .input {
+      width: 100%;
+      background: white;
+      border: 2px solid rgba(26, 26, 26, .2);
+      padding: .75rem;
+      outline: none;
+    }
+
+    .input:focus {
+      border-color: #b0dc00;
+    }
+
+    .nav-link {
+      padding: .65rem .9rem;
+      border: 1px solid rgba(255, 255, 255, .1);
+      font-weight: 800;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #b0dc00;
+      color: #1A1A1A;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+</head>
+
+  <body>
+
+    <header class="navbar text-white px-6 py-4">
+      <div
+        class="max-w-7xl mx-auto flex flex-col xl:flex-row gap-4 xl:items-center justify-between">
+
+        <a href="supplier-overview.html" class="flex items-center gap-4">
+
+          <img
+            src="../assets/binna-logo.png"
+            alt="BINNA Logo"
+            class="h-16 w-auto object-contain">
+
+          <div>
+            <div class="font-grotesk text-xl font-black text-binnaGreen">
+              BINNA SUPPLIER
+            </div>
+
+            <div class="text-white/50 text-xs font-bold">
+              لوحة المورد
+            </div>
+          </div>
+
+        </a>
+
+        <nav class="flex flex-wrap gap-2 text-xs">
+          <a class="nav-link" href="supplier-overview.html">النظرة العامة</a>
+          <a class="nav-link" href="supplier-orders.html">الطلبات الواردة
+            والصادرة</a>
+          <a class="nav-link" href="supplier-products-inventory.html">المنتجات
+            والمخزون</a>
+          <a class="nav-link" href="supplier-payments-profits.html">المدفوعات
+            والأرباح</a>
+          <a class="nav-link active" href="supplier-store-settings.html">إعدادات
+            المتجر</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+
+      <section
+        class="bg-white p-8 cut-card shadow-soft border-r-4 border-binnaGreen">
+        <div class="section-divider"></div>
+        <h1 class="text-4xl md:text-5xl font-black mb-3">إعدادات المتجر</h1>
+        <p class="text-steel font-semibold">لوجو المتجر، حالة المتجر، وساعات فتح
+          وإغلاق تلقائية بصيغة AM / PM.</p>
+      </section>
+
+      <section class="grid lg:grid-cols-3 gap-6">
+
+        <form class="lg:col-span-2 bg-white p-6 cut-card shadow-soft space-y-5"
+          onsubmit="event.preventDefault()">
+
+          <h2 class="text-2xl font-black">معلومات المتجر</h2>
+
+          <div class="grid md:grid-cols-2 gap-4 bg-paleGreen/60 border border-binnaGreen/20 p-4 cut-card">
+            <div>
+              <label class="font-bold">اسم المورد المسؤول</label>
+              <input class="input" value="محمود صالح">
+            </div>
+            <div>
+              <label class="font-bold">رقم هوية / سجل المورد</label>
+              <input class="input" value="SUP-2026-1042">
+            </div>
+            <div>
+              <label class="font-bold">رقم الهاتف الإداري</label>
+              <input class="input" value="0599000001">
+            </div>
+            <div>
+              <label class="font-bold">البريد الإلكتروني الإداري</label>
+              <input class="input" value="supplier@binna.ps">
+            </div>
+          </div>
+
+          <div>
+            <label class="font-bold">اسم المتجر</label>
+            <input class="input" value="متجر الشمال لمواد البناء">
+          </div>
+
+          <div>
+            <label class="font-bold">صورة لوجو المتجر من الجهاز</label>
+            <input id="logoFile" type="file" accept="image/*" class="input">
+          </div>
+
+          <div>
+            <label class="font-bold">أو رابط اللوجو</label>
+            <input id="logoUrl" type="url" class="input"
+              placeholder="https://example.com/logo.png">
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <div>
+              <label class="font-bold">حالة المتجر الآن</label>
+              <select class="input">
+                <option>فاتح</option>
+                <option>مغلق</option>
+                <option>مشغول</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-bold">التحكم</label>
+              <select class="input">
+                <option>يدوي</option>
+                <option selected>تلقائي حسب الساعات</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+
+            <div>
+              <label class="font-bold block mb-2">يفتح الساعة</label>
+
+              <div class="flex gap-2">
+                <select id="openHour" class="input flex-1">
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option>06</option>
+                  <option>07</option>
+                  <option selected>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+
+                <select id="openMinute" class="input flex-1">
+                  <option selected>00</option>
+                  <option>15</option>
+                  <option>30</option>
+                  <option>45</option>
+                </select>
+
+                <select id="openPeriod" class="input w-24">
+                  <option selected>AM</option>
+                  <option>PM</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="font-bold block mb-2">يغلق الساعة</label>
+
+              <div class="flex gap-2">
+                <select id="closeHour" class="input flex-1">
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option selected>06</option>
+                  <option>07</option>
+                  <option>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+
+                <select id="closeMinute" class="input flex-1">
+                  <option selected>00</option>
+                  <option>15</option>
+                  <option>30</option>
+                  <option>45</option>
+                </select>
+
+                <select id="closePeriod" class="input w-24">
+                  <option>AM</option>
+                  <option selected>PM</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bg-paleGreen p-4 cut-card border-r-4 border-binnaGreen">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <div>
+                <p class="font-black text-lg">ساعات العمل الحالية</p>
+                <p class="text-steel text-sm mt-1">يتم إظهار هذه الأوقات للعملاء
+                  تلقائياً</p>
+              </div>
+
+              <div class="bg-white px-5 py-3 cut-card shadow-soft">
+                <span id="openPreview"
+                  class="font-grotesk font-black text-xl text-binnaGreen">08:00
+                  AM</span>
+                <span class="mx-2 text-steel font-bold">-</span>
+                <span id="closePreview"
+                  class="font-grotesk font-black text-xl text-safetyOrange">06:00
+                  PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-bold">رسالة عند الإغلاق أو الانشغال</label>
+            <textarea
+              class="input h-24">المتجر مشغول حالياً، سيتم تأكيد الطلبات خلال أقرب وقت.</textarea>
+          </div>
+
+          <button class="btn-green">حفظ إعدادات المتجر</button>
+
+        </form>
+
+        <section class="bg-white p-6 cut-card shadow-soft space-y-4 border-r-4 border-safetyOrange">
+          <h2 class="text-2xl font-black">بيانات الدفع والتحويل</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div><label class="font-bold">اسم البنك</label><input class="input" value="Bank of Palestine"></div>
+            <div><label class="font-bold">IBAN</label><input class="input" value="PS92 PALS 0000 0000 0000 0000 0"></div>
+            <div><label class="font-bold">طريقة الدفع المفضلة</label><select class="input"><option selected>تحويل بنكي</option><option>كاش عند الاستلام</option><option>محفظة إلكترونية</option></select></div>
+            <div><label class="font-bold">نسبة عمولة المنصة</label><input class="input" value="5%" readonly></div>
+          </div>
+        </section>
+
+        <aside class="bg-charcoal text-white p-6 cut-card shadow-soft">
+
+          <h3 class="text-xl font-black text-binnaGreen mb-4">معاينة اللوجو</h3>
+
+          <img
+            id="logoPreview"
+            src="https://placehold.co/300x220/1A1A1A/b0dc00?text=BINNA+STORE"
+            class="w-full h-52 object-cover cut-card border border-binnaGreen/30">
+
+          <div class="mt-5 p-4 bg-white/10 cut-card">
+            <div class="font-black">
+              الحالة الحالية:
+              <span class="text-binnaGreen">فاتح</span>
+            </div>
+
+            <p class="text-white/55 text-sm mt-2">
+              الفتح والإغلاق يعمل تلقائياً حسب الساعات المحددة.
+            </p>
+
+            <p class="text-white/70 text-sm mt-3">
+              ساعات العمل:
+              <span id="sideOpenPreview"
+                class="text-binnaGreen font-grotesk font-black">08:00 AM</span>
+              -
+              <span id="sideClosePreview"
+                class="text-safetyOrange font-grotesk font-black">06:00
+                PM</span>
+            </p>
+          </div>
+
+        </aside>
+
+      </section>
+
+    </main>
+
+    <script>
+    function previewImage(fileId, urlId, imgId) {
+      const fileInput = document.getElementById(fileId);
+      const urlInput = document.getElementById(urlId);
+      const img = document.getElementById(imgId);
+
+      if (fileInput) {
+        fileInput.addEventListener('change', function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            img.src = URL.createObjectURL(file);
+          }
+        });
+      }
+
+      if (urlInput) {
+        urlInput.addEventListener('input', function (e) {
+          if (e.target.value.trim()) {
+            img.src = e.target.value.trim();
+          }
+        });
+      }
+    }
+
+    function updateWorkingHoursPreview() {
+      const openHour = document.getElementById('openHour').value;
+      const openMinute = document.getElementById('openMinute').value;
+      const openPeriod = document.getElementById('openPeriod').value;
+
+      const closeHour = document.getElementById('closeHour').value;
+      const closeMinute = document.getElementById('closeMinute').value;
+      const closePeriod = document.getElementById('closePeriod').value;
+
+      const openTime = `${openHour}:${openMinute} ${openPeriod}`;
+      const closeTime = `${closeHour}:${closeMinute} ${closePeriod}`;
+
+      document.getElementById('openPreview').textContent = openTime;
+      document.getElementById('closePreview').textContent = closeTime;
+      document.getElementById('sideOpenPreview').textContent = openTime;
+      document.getElementById('sideClosePreview').textContent = closeTime;
+    }
+
+    previewImage('logoFile', 'logoUrl', 'logoPreview');
+
+    ['openHour', 'openMinute', 'openPeriod', 'closeHour', 'closeMinute', 'closePeriod'].forEach(function (id) {
+      document.getElementById(id).addEventListener('change', updateWorkingHoursPreview);
+    });
+
+    updateWorkingHoursPreview();
+  </script>
+
+  <script defer src="../script.js"></script>
+</body>
+</html>

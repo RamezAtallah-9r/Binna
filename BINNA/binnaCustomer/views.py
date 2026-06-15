@@ -4,6 +4,7 @@ import threading
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
+from django.contrib import messages  # 👈 إضافة مكتبة الرسائل لإخطار المستخدمين
 from .models import Blueprint
 
 from google import genai
@@ -65,7 +66,6 @@ def _parse_result(analysis_text):
     Parse raw Gemini text into structured data.
     Returns (material_rows, sections) — both lists of dicts.
     """
-    # ── Material rows ──────────────────────────────────────────────────
     material_rows = []
     for line in analysis_text.splitlines():
         if "MaterialRow:" in line and "||" in line:
@@ -79,8 +79,6 @@ def _parse_result(analysis_text):
                     "unit": parts[3],
                 })
 
-    # ── Calculation sections ───────────────────────────────────────────
-    # Strip the summary block so we only parse the calculations
     calc_text = re.split(r'Summary of Estimated', analysis_text, flags=re.IGNORECASE)[0].strip()
 
     sections = []
@@ -97,10 +95,6 @@ def _parse_result(analysis_text):
 def _run_gemini(blueprint):
     """
     Run Gemini in a background thread with retry logic.
-    Always saves something to blueprint.analysis_result so the AJAX
-    endpoint can detect completion:
-      - Normal result  → saved as-is
-      - Error          → saved with "ERROR:" prefix so AJAX can detect it
     """
     def _save_error(msg):
         blueprint.analysis_result = f"ERROR:{msg}"
@@ -139,17 +133,28 @@ def _run_gemini(blueprint):
 
 # ── Views ──────────────────────────────────────────────────────────────────
 
-# def index(request):
-#     """AI assistant upload page."""
-#     return render(request, "binnaCustomer/ai_assistans.html")
 def customer_dashboard(request):
+    """لوحة التحكم للعميل الحالية محمية من أي متسلل"""
+    # 🛡️ الحماية الأمنية الموحدة لبِنَاءْ
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "منطقة محظورة! يرجى تسجيل الدخول كعميل أولاً.")
+        return redirect('binnaSign:login')
+        
     return render(request, "binnaCustomer/customer_dashboard.html")
+
+def ai_assistans(request):
+    return render(request, "binnaCustomer/ai_assistans.html")
+
 
 def upload_blueprint(request):
     """
     POST: Validate + save image → redirect to result page immediately.
-    No Gemini call here — the result page fetches analysis via AJAX.
     """
+    # 🛡️ حماية المسار لضمان أن العميل فقط من يمكنه الرفع والاستهلاك من الـ API
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "يرجى تسجيل الدخول للوصول إلى المساعد الذكي.")
+        return redirect('binnaSign:login')
+
     if request.method == "POST":
         uploaded_file = request.FILES.get("blueprint_image")
 
@@ -167,27 +172,26 @@ def upload_blueprint(request):
             return render(
                 request,
                 "binnaCustomer/ai_assistans.html",
-                {"error": f"صورة غير صالحة: {e}"}
+                {"error": f"صورة غير صالحة أو امتداد غير مدعوم: {e}"}
             )
 
         blueprint = Blueprint.objects.create(image=uploaded_file)
 
-        # Kick off Gemini in a background thread so the redirect is instant.
-        # The AJAX endpoint checks blueprint.analysis_result to report status.
+        # إطلاق الـ Thread في الخلفية دون تعطيل استجابة المتصفح
         thread = threading.Thread(target=_run_gemini, args=(blueprint,), daemon=True)
         thread.start()
 
-        # Redirect immediately — result page will poll for the analysis
         return redirect("binnaCustomer:blueprint_detail", pk=blueprint.id)
 
     return render(request, "binnaCustomer/ai_assistans.html")
 
 
 def blueprint_detail(request, pk):
-    """
-    Render the result page shell instantly.
-    The page JS polls analyze_blueprint_ajax for the actual analysis.
-    """
+    """عرض هيكل صفحة النتائج فوراً، بينما يتولى الـ JS عمل Polling للبيانات"""
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        messages.error(request, "يرجى تسجيل الدخول أولاً لعرض نتائج المخطط.")
+        return redirect('binnaSign:login')
+
     blueprint = get_object_or_404(Blueprint, pk=pk)
     return render(
         request,
@@ -199,27 +203,23 @@ def blueprint_detail(request, pk):
 @require_GET
 def analyze_blueprint_ajax(request, pk):
     """
-    AJAX polling endpoint — called repeatedly by result.html until done.
-
-    Returns JSON with one of three statuses:
-      "pending"  — Gemini is still running (background thread not done)
-      "success"  — analysis done, returns parsed data
-      "error"    — something went wrong
+    AJAX Polling Endpoint: يتم استدعاؤه بشكل متكرر عبر الـ JS حتى اكتمال التجهيز.
     """
+    # 🛡️ حماية الـ Endpoint لمنع سحب البيانات الخارجي من غير المسجلين
+    if 'customer_id' not in request.session or request.session.get('user_role') != 'customer':
+        return JsonResponse({"status": "error", "message": "Unauthorized access"}, status=403)
+
     blueprint = get_object_or_404(Blueprint, pk=pk)
 
-    # Still waiting for the background thread
     if not blueprint.analysis_result:
         return JsonResponse({"status": "pending"})
 
-    # Check for a stored error marker (we prefix errors with "ERROR:")
     if blueprint.analysis_result.startswith("ERROR:"):
         return JsonResponse({
             "status":  "error",
             "message": blueprint.analysis_result[6:].strip(),
         })
 
-    # Parse and return structured data
     material_rows, sections = _parse_result(blueprint.analysis_result)
 
     return JsonResponse({
