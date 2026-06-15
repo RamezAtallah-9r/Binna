@@ -88,7 +88,7 @@ The platform serves three user types:
 🌐  Deployment       (in progress)
 ```
 
-### Directory Structure
+### Directory Structure:
 
 ```
 binna/
