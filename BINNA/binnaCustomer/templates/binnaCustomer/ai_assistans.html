@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="scroll-smooth">
 
@@ -81,71 +82,41 @@
 <body
     class="min-h-screen font-arabic bg-gradient-to-br from-paleGreen via-paleYellow to-paleOrange text-charcoal antialiased flex flex-col">
 
-    <header class="sticky top-0 z-50 bg-charcoal text-white border-b border-binnaGreen/20">
-        <div class="px-6 py-4 flex items-center justify-between">
-
-            <a href="/" aria-label="BINNA — الصفحة الرئيسية" class="flex items-center gap-3">
-                <div style="clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)"
-                    class="w-10 h-11 bg-binnaGreen flex items-center justify-center shrink-0">
-                    <span class="text-charcoal font-black text-lg font-grotesk" aria-hidden="true">ب</span>
-                </div>
-                <div>
-                    <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA</div>
-                    <div class="text-white/50 text-[10px] -mt-1 font-bold">المنصة الإنشائية الذكية</div>
-                </div>
-            </a>
-
-            <div class="flex items-center gap-3">
-                <span class="text-xs font-bold hidden sm:block">م. رامز عطالله</span>
-                <div aria-hidden="true"
-                    class="w-8 h-8 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-xs font-bold text-binnaGreen">
-                    RA
-                </div>
+        <header class="sticky top-0 z-50 w-full bg-charcoal text-white px-6 py-4 border-b border-binnaGreen/20">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:items-center justify-between">
+                <a href="{% url 'binnaCustomer:customer_dashboard' %}" class="flex items-center gap-3">
+                    <img class="relative h-24 w-auto object-contain" src="{% static 'img/binna-logo.png' %}" alt="Binna Logo">
+                    <div>
+                        <div class="font-grotesk font-black text-xl text-binnaGreen">{{ customer.first_name }}
+                            {{customer.last_name }}</div>
+                        <div class="text-white/50 text-xs font-bold">منصة العميل</div>
+                    </div>
+                </a>
+                <nav class="flex flex-wrap gap-2 text-xs font-black">
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="{% url 'binnaCustomer:customer_dashboard' %}">الرئيسية</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="stors-product.html">المتاجر والمواد</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-charcoal font-[900] text-[0.78rem] transition-colors bg-binnaGreen hover:bg-binnaGreen hover:text-charcoal"
+                        href="{% url 'binnaCustomer:ai_assistans' %}">تحليل AI</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="saved-ai-reports.html">نتائج التحليل</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="cart.html">السلة <span id="cartCount"
+                            class="bg-safetyOrange text-white rounded-full px-2">0</span></a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="customer-orders.html">طلباتي</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="customer-settings.html">الإعدادات</a>
+                    <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
+                        href="landing.html">خروج</a>
+                </nav>
             </div>
-
-        </div>
-    </header>
+        </header>
 
     <div class="flex flex-col md:flex-row flex-1">
 
-        <aside
-            class="w-full md:w-64 bg-charcoal text-white/80 p-4 border-t border-white/5 md:border-t-0 flex flex-col justify-between shrink-0">
-
-            <nav aria-label="القائمة الرئيسية">
-                <p class="text-white/30 text-[10px] font-bold uppercase tracking-wider px-3 mb-2">القائمة الرئيسية</p>
-                <ul class="space-y-1">
-                    <li>
-                        <a href="#"
-                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
-                            <span aria-hidden="true">🏪</span> سوق المواد الإنشائية
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-current="page"
-                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-black bg-binnaGreen text-charcoal rounded">
-                            <span aria-hidden="true">🧠</span> تحليل المخططات (AI)
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
-                            <span aria-hidden="true">📋</span> طلباتي السابقة
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center gap-3 px-3 py-2.5 text-xs font-bold hover:bg-white/5 transition-colors rounded">
-                            <span aria-hidden="true">📊</span> لوحة التحكم والتقارير
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <footer class="pt-4 border-t border-white/5 mt-4 hidden md:block">
-                <p class="text-[10px] text-white/20 px-3 font-semibold">تحديث المنظومة: 2026</p>
-            </footer>
-
-        </aside>
+        
 
         <main class="flex-1 p-6 lg:p-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start max-w-6xl mx-auto w-full">
