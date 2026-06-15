@@ -7,6 +7,7 @@ app_name = 'binnaCustomer'
 
 urlpatterns = [
     path('customer_dashboard/', views.customer_dashboard, name='customer_dashboard'),
+    path('stores_producs/', views.stores_producs, name='stores_producs'),
     path('upload/', views.upload_blueprint, name='upload_blueprint'),
     path('result/<int:pk>/', views.blueprint_detail, name='blueprint_detail'),
     path("api/analyze/<int:pk>/", views.analyze_blueprint_ajax, name="analyze_blueprint_ajax"),

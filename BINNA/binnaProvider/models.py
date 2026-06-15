@@ -1,5 +1,5 @@
 from django.db import models
-from binnacustomer.models import Customer
+from binnaCustomer.models import Customer
 
 
 # =========================

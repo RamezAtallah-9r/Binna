@@ -1,0 +1,593 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتاجر والمواد | بناء - BINNA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        binnaGreen: "#b0dc00",
+                        catYellow: "#FFCD11",
+                        warmYellow: "#F7B928",
+                        charcoal: "#1A1A1A",
+                        concrete: "#F3F4F6",
+                        steel: "#6B7280",
+                        safetyOrange: "#FF6B00",
+                        paleGreen: "#F3FFD1",
+                        paleYellow: "#FFF5CC",
+                        paleOrange: "#FFE7D2"
+                    },
+                    fontFamily: {
+                        arabic: ['"IBM Plex Arabic"', 'sans-serif'],
+                        grotesk: ['"Space Grotesk"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        soft: "0 24px 70px rgba(26,26,26,0.14)"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --green: #b0dc00;
+            --yellow: #FFCD11;
+            --charcoal: #1A1A1A;
+            --orange: #FF6B00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Arabic", sans-serif;
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 50%, #FFE7D2 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .cut-card {
+            clip-path: polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px);
+        }
+
+        .cut-card-sm {
+            clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+        }
+
+        .logo-shield {
+            clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+        }
+
+        .btn-orange,
+        .btn-green,
+        .btn-dark {
+            font-weight: 800;
+            padding: 12px 24px;
+            transition: all .28s ease;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        .btn-orange:hover {
+            background: #E65C00;
+            box-shadow: 0 5px 26px rgba(255, 107, 0, .45);
+            transform: translateY(-3px);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: var(--charcoal);
+        }
+
+        .btn-green:hover {
+            background: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .btn-dark {
+            background: var(--charcoal);
+            color: var(--green);
+        }
+
+        .btn-dark:hover {
+            background: var(--green);
+            color: var(--charcoal);
+            transform: translateY(-3px);
+        }
+
+        .section-divider {
+            width: 72px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
+            margin-bottom: 16px;
+            border-radius: 2px;
+        }
+
+        .mode-tab.active {
+            background: var(--green);
+            color: var(--charcoal);
+            box-shadow: 0 6px 28px rgba(176, 220, 0, .35);
+        }
+
+        .supplier-avatar {
+            background: linear-gradient(135deg, rgba(176, 220, 0, 0.2), rgba(255, 205, 17, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--charcoal);
+        }
+
+        .product-img-placeholder {
+            background: linear-gradient(135deg, #F3FFD1 0%, #FFF5CC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .glow-underline {
+            position: relative;
+            display: inline-block;
+            color: var(--charcoal);
+        }
+
+        .glow-underline::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            left: 0;
+            height: 6px;
+            background: var(--green);
+            box-shadow: 0 0 22px rgba(176, 220, 0, .85), 0 0 44px rgba(176, 220, 0, .35);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- TOP HEADER -->
+    <header
+        class="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-binnaGreen/20">
+        <a href="{% url 'binnaCustomer:customer_dashboard' %}" class="flex items-center gap-3">
+            <div class="logo-shield w-10 h-11 bg-binnaGreen flex items-center justify-center">
+                <span class="text-charcoal font-black text-lg font-grotesk">ب</span>
+            </div>
+
+            <div>
+                <div class="font-grotesk font-black text-lg tracking-wide text-binnaGreen">BINNA</div>
+                <div class="text-white/40 text-xs font-bold">المتاجر والمواد</div>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <a href="{% url 'binnaCustomer:customer_dashboard' %}"
+                class="text-xs font-bold text-white/70 hover:text-binnaGreen transition">
+                الرجوع للوحة العميل
+            </a>
+
+            <div
+                class="w-10 h-10 bg-binnaGreen/20 rounded-full border border-binnaGreen/40 flex items-center justify-center text-sm font-bold text-binnaGreen">
+                ع
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 p-6 sm:p-8 overflow-y-auto space-y-8">
+        <div class="max-w-7xl mx-auto w-full">
+
+            <!-- PAGE HEADER -->
+            <section class="bg-white p-6 md:p-8 cut-card shadow-soft border-r-4 border-binnaGreen mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="section-divider"></div>
+
+                        <h1 class="text-2xl md:text-3xl font-black text-charcoal font-grotesk mb-2">
+                            المتاجر والمواد <span class="glow-underline">المعتمدة</span> 🏪
+                        </h1>
+
+                        <p class="text-steel text-sm md:text-base font-semibold leading-relaxed">
+                            تصفح الموردين والمنتجات من قاعدة البيانات، وابحث حسب المدينة أو الفئة أو السعر.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col items-start md:items-end gap-2">
+                        <span
+                            class="px-3 py-1.5 bg-paleGreen text-charcoal text-xs font-black cut-card-sm border border-binnaGreen/30">
+                            ✓ {{ suppliers|length }} مورد
+                        </span>
+
+                        <span
+                            class="px-3 py-1.5 bg-paleYellow text-charcoal text-xs font-black cut-card-sm border border-catYellow/30">
+                            ✓ {{ products|length }} منتج
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODE CARDS -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
+                <a href="{% url 'binnaCustomer:stores_producs' %}?mode=suppliers"
+                    class="mode-tab {% if mode == 'suppliers' %}active{% endif %} bg-white p-6 md:p-8 cut-card shadow-soft border-r-4 border-binnaGreen hover:-translate-y-2 transition duration-300 text-right group">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-paleGreen flex items-center justify-center text-4xl cut-card-sm">
+                            🏪
+                        </div>
+
+                        <span class="bg-binnaGreen text-charcoal text-xs font-black px-3 py-1 cut-card-sm">
+                            {{ suppliers|length }} مورد
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-charcoal mb-2 font-grotesk">البحث عن الموردين</h3>
+
+                    <p class="text-steel text-sm font-semibold leading-relaxed mb-4">
+                        تصفح المتاجر والمصانع الفلسطينية المعتمدة حسب المدينة والفئة الرئيسية.
+                    </p>
+                </a>
+
+                <a href="{% url 'binnaCustomer:stores_producs' %}?mode=products"
+                    class="mode-tab {% if mode == 'products' %}active{% endif %} bg-white p-6 md:p-8 cut-card shadow-soft border-r-4 border-catYellow hover:-translate-y-2 transition duration-300 text-right group">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-paleYellow flex items-center justify-center text-4xl cut-card-sm">
+                            🧱
+                        </div>
+
+                        <span class="bg-catYellow text-charcoal text-xs font-black px-3 py-1 cut-card-sm">
+                            {{ products|length }} منتج
+                        </span>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-charcoal mb-2 font-grotesk">البحث عن المنتجات</h3>
+
+                    <p class="text-steel text-sm font-semibold leading-relaxed mb-4">
+                        ابحث عن مواد البناء بالاسم أو الفئة، وفلتر حسب السعر.
+                    </p>
+                </a>
+            </section>
+
+            <!-- SEARCH BAR -->
+            <section class="bg-white p-4 cut-card shadow-soft mb-6">
+                <form method="GET" action="{% url 'binnaCustomer:stores_producs' %}" class="flex items-center gap-3">
+                    <input type="hidden" name="mode" value="{{ mode }}">
+
+                    <div class="flex-1 relative">
+                        <input type="text" name="q" value="{{ search_query }}"
+                            placeholder="{% if mode == 'products' %}ابحث عن منتج أو مادة بناء...{% else %}ابحث عن مورد أو متجر...{% endif %}"
+                            class="w-full bg-concrete border-2 border-transparent p-3 pr-12 focus:border-binnaGreen focus:outline-none font-arabic transition-all duration-300">
+
+                        <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-steel" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+
+                    <button type="submit" class="btn-orange hidden sm:inline-block">بحث</button>
+                </form>
+            </section>
+
+            <!-- MAIN LAYOUT -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+                <!-- FILTERS -->
+                <aside class="lg:col-span-1">
+                    <div class="bg-white p-6 cut-card shadow-soft sticky top-24">
+
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-binnaGreen/20">
+                            <h3 class="font-black text-charcoal text-lg">الفلاتر</h3>
+
+                            <a href="{% url 'binnaCustomer:stores_producs' %}?mode={{ mode }}"
+                                class="text-xs font-bold text-safetyOrange hover:underline">
+                                إعادة تعيين
+                            </a>
+                        </div>
+
+                        {% if mode == 'products' %}
+
+                        <!-- PRODUCT FILTERS -->
+                        <form method="GET" action="{% url 'binnaCustomer:stores_producs' %}" class="space-y-5">
+                            <input type="hidden" name="mode" value="products">
+                            <input type="hidden" name="q" value="{{ search_query }}">
+
+                            <div>
+                                <label class="block text-sm font-bold text-charcoal mb-2">فئة المنتج</label>
+
+                                <select name="inventory_category"
+                                    class="w-full bg-concrete border border-charcoal/10 p-3 text-sm cut-card-sm focus:border-binnaGreen focus:outline-none">
+                                    <option value="">كل الفئات</option>
+
+                                    {% for category in inventory_categories %}
+                                    <option value="{{ category.id }}"
+                                        {% if selected_inventory_category == category.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-charcoal mb-2">نطاق السعر</label>
+
+                                <div class="space-y-2">
+                                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="من"
+                                        class="w-full bg-concrete border border-charcoal/10 p-3 text-sm cut-card-sm focus:border-binnaGreen focus:outline-none">
+
+                                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="إلى"
+                                        class="w-full bg-concrete border border-charcoal/10 p-3 text-sm cut-card-sm focus:border-binnaGreen focus:outline-none">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-green w-full">تطبيق الفلتر</button>
+                        </form>
+
+                        {% else %}
+
+                        <!-- SUPPLIER FILTERS -->
+                        <form method="GET" action="{% url 'binnaCustomer:stores_producs' %}" class="space-y-5">
+                            <input type="hidden" name="mode" value="suppliers">
+                            <input type="hidden" name="q" value="{{ search_query }}">
+
+                            <div>
+                                <label class="block text-sm font-bold text-charcoal mb-2">المدينة</label>
+
+                                <select name="city"
+                                    class="w-full bg-concrete border border-charcoal/10 p-3 text-sm cut-card-sm focus:border-binnaGreen focus:outline-none">
+                                    <option value="">كل المدن</option>
+
+                                    {% for city in cities %}
+                                    <option value="{{ city.id }}"
+                                        {% if selected_city == city.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ city.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-charcoal mb-2">الفئة الرئيسية</label>
+
+                                <select name="supplier_category"
+                                    class="w-full bg-concrete border border-charcoal/10 p-3 text-sm cut-card-sm focus:border-binnaGreen focus:outline-none">
+                                    <option value="">كل الفئات</option>
+
+                                    {% for category in supplier_categories %}
+                                    <option value="{{ category.id }}"
+                                        {% if selected_supplier_category == category.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-green w-full">تطبيق الفلتر</button>
+                        </form>
+
+                        {% endif %}
+                    </div>
+                </aside>
+
+                <!-- RESULTS -->
+                <div class="lg:col-span-3">
+
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            {% if mode == 'products' %}
+                            <h2 class="text-xl font-black text-charcoal">المنتجات والمواد</h2>
+                            <p class="text-sm text-steel font-semibold">عرض {{ products|length }} منتج</p>
+                            {% else %}
+                            <h2 class="text-xl font-black text-charcoal">الموردين المعتمدون</h2>
+                            <p class="text-sm text-steel font-semibold">عرض {{ suppliers|length }} مورد</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if mode == 'products' %}
+
+                    <!-- PRODUCTS LIST -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                        {% for product in products %}
+                        <div
+                            class="bg-white cut-card shadow-soft hover:-translate-y-2 transition duration-300 overflow-hidden">
+
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                                class="w-full h-40 object-cover">
+                            {% else %}
+                            <div class="product-img-placeholder h-40 w-full">🧱</div>
+                            {% endif %}
+
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-2 mb-2">
+                                    <span class="bg-paleGreen text-charcoal text-[10px] font-black px-2 py-1 cut-card-sm">
+                                        متوفر
+                                    </span>
+
+                                    <span class="text-xs text-steel">
+                                        📍 {{ product.supplier.city.name }}
+                                    </span>
+                                </div>
+
+                                <h3 class="font-black text-base text-charcoal mb-1">
+                                    {{ product.name }}
+                                </h3>
+
+                                <p class="text-xs text-steel mb-3">
+                                    {{ product.supplier.store_name }}
+                                </p>
+
+                                <p class="text-xs text-charcoal font-bold mb-3">
+                                    الفئة: {{ product.category.name }}
+                                </p>
+
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <div class="text-2xl font-black text-safetyOrange font-grotesk">
+                                            ₪{{ product.sell_price }}
+                                        </div>
+
+                                        <div class="text-xs text-steel">
+                                            الكمية المتوفرة: {{ product.amount }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button class="btn-green text-xs py-2">
+                                        + أضف للسلة
+                                    </button>
+
+                                    <a href="{% url 'binnaCustomer:inventory_details' product.id %}"
+                                        class="btn-dark text-xs py-2">
+                                        عرض التفاصيل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <div class="bg-white p-8 cut-card shadow-soft text-center sm:col-span-2">
+                            <h3 class="text-xl font-black text-charcoal mb-2">لا توجد منتجات</h3>
+                            <p class="text-steel font-semibold">جرّب تغيير البحث أو الفلاتر.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+
+                    <!-- SUPPLIERS LIST -->
+                    <div class="space-y-4">
+
+                        {% for supplier in suppliers %}
+                        <div
+                            class="bg-white p-5 cut-card shadow-soft border-r-4 border-binnaGreen hover:-translate-y-1 transition duration-300">
+                            <div class="flex flex-col md:flex-row gap-4">
+
+                                <div class="flex-shrink-0">
+                                    {% if supplier.image %}
+                                    <img src="{{ supplier.image.url }}" alt="{{ supplier.store_name }}"
+                                        class="w-20 h-20 object-cover cut-card-sm border-2 border-binnaGreen">
+                                    {% else %}
+                                    <div class="w-20 h-20 supplier-avatar cut-card-sm text-2xl border-2 border-binnaGreen">
+                                        {{ supplier.store_name|slice:":2" }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="flex-1">
+                                    <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                                        <div>
+                                            <h3 class="font-black text-lg text-charcoal">
+                                                {{ supplier.store_name }}
+                                            </h3>
+
+                                            <div class="flex flex-wrap items-center gap-3 text-xs text-steel mt-1">
+                                                <span>📍 {{ supplier.city.name }}</span>
+                                                <span>👤 {{ supplier.owner_name }}</span>
+                                                <span>🏷️ {{ supplier.category.name }}</span>
+                                            </div>
+                                        </div>
+
+                                        <span
+                                            class="bg-paleGreen text-charcoal text-[10px] font-black px-3 py-1 cut-card-sm border border-binnaGreen/30">
+                                            ✓ مورد معتمد
+                                        </span>
+                                    </div>
+
+                                    <p class="text-sm text-steel leading-relaxed mb-3">
+                                        {{ supplier.description }}
+                                    </p>
+
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="bg-concrete text-xs font-bold px-3 py-1 cut-card-sm">
+                                            {{ supplier.category.name }}
+                                        </span>
+
+                                        <span class="bg-concrete text-xs font-bold px-3 py-1 cut-card-sm">
+                                            {{ supplier.city.name }}
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-binnaGreen rounded-full animate-pulse"></span>
+                                        <span class="text-xs font-bold text-binnaGreen">متاح للتواصل</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2 md:flex-shrink-0">
+                                    <a href="{% url 'binnaCustomer:store_details' supplier.id %}"
+                                        class="btn-green text-xs py-2 px-4">
+                                        زيارة المتجر
+                                    </a>
+
+                                    <a href="https://wa.me/{{ supplier.phone }}"
+                                        class="btn-dark text-xs py-2 px-4"
+                                        target="_blank">
+                                        واتساب
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <div class="bg-white p-8 cut-card shadow-soft text-center">
+                            <h3 class="text-xl font-black text-charcoal mb-2">لا يوجد موردين</h3>
+                            <p class="text-steel font-semibold">جرّب تغيير البحث أو الفلاتر.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-charcoal text-white py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="logo-shield w-9 h-10 bg-binnaGreen flex items-center justify-center">
+                    <span class="text-charcoal font-black text-sm font-grotesk">ب</span>
+                </div>
+
+                <div>
+                    <div class="font-grotesk font-black text-sm text-binnaGreen">BINNA</div>
+                    <div class="text-white/50 text-xs">© 2026 جميع الحقوق محفوظة</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

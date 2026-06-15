@@ -70,7 +70,7 @@
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-charcoal font-[900] text-[0.78rem] transition-colors bg-binnaGreen"
                     href="{% url 'binnaCustomer:customer_dashboard' %}">الرئيسية</a>
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
-                    href="stors-product.html">المتاجر والمواد</a>
+                    href="{% url 'binnaCustomer:stores_producs' %}">المتاجر والمواد</a>
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
                     href="{% url 'binnaCustomer:ai_assistans' %}">تحليل AI</a>
                 <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
@@ -139,9 +139,9 @@
                     </div>
                 </div>
                 <div class="mt-6">
-                    <button
+                    <a href="{% url 'binnaCustomer:stores_producs' %}"
                         class="w-full font-extrabold px-6 py-3 transition-all duration-300 [clip-path:polygon(10px_0%,100%_0%,calc(100%-10px)_100%,0%_100%)] inline-block text-center cursor-pointer bg-binnaGreen text-charcoal hover:bg-catYellow hover:-translate-y-1 hover:shadow-[0_6px_28px_rgba(176,220,0,0.35)]">انتقل
-                        للمتاجر الآن ←</button>
+                        للمتاجر الآن ←</a>
                 </div>
             </div>
 
