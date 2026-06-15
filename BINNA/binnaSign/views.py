@@ -35,26 +35,26 @@ def confirm_page(request):
 
 # ── دوال المعالجة والمنطق (Logic & Process Only) ──────────
 
+# binnaSign/views.py
+
 def create_customer_process(request):
-    """معالجة بيانات نموذج التسجيل وتوليد رمز التحقق وإرساله عبر SendGrid"""
+    """معالجة التسجيل وإرسال بريد حقيقي 100% عبر SendGrid"""
     if request.method == "POST":
-        # 1. التحقق من البيانات باستخدام الـ Validator
         errors = Customer.objects.registration_validator(request.POST)
         if errors:
             for key, val in errors.items(): 
                 messages.error(request, val)
             return redirect('binnaSign:register')
         
-        # 2. توليد كود عشوائي من 6 أرقام وتخزينه في الـ Session
         code = str(random.randint(100000, 999999))
         request.session['verification_code'] = code
         request.session['temp_customer_data'] = request.POST.dict() 
         
-        # 3. إرسال البريد الإلكتروني عبر قوالب SendGrid الديناميكية
+        # 🌐 الإرسال الفعلي المباشر
         try:
             mail = EmailMultiAlternatives(
                 subject='رمز التحقق الخاص بمنصة بناء - BINNA',
-                body=' ', 
+                body=f'رمز التحقق الخاص بك هو: {code}', 
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[request.POST['email']]
             )
@@ -78,11 +78,10 @@ def create_customer_process(request):
             print("================ SENDGRID ERROR ================")
             print(str(e))
             print("================================================")
-            messages.error(request, "حدث خطأ أثناء إرسال كود التحقق، يرجى المحاولة لاحقاً.")
+            messages.error(request, f"خطأ في الاتصال بسيرفر الإرسال: {e}")
             return redirect('binnaSign:register')
             
     return redirect('binnaSign:register')
-
 
 def verify_code(request):
     """التحقق من الكود المدخل وإنشاء الحساب الفعلي في قاعدة البيانات"""

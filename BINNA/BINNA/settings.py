@@ -125,12 +125,13 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# ── إعدادات إرسال بريد التحقق الذكية (بين التطوير والإنتاج) ──────────────────
 
-# ── إعدادات SendGrid لإرسال بريد التحقق ──────────────────
+# ── تفعيل إرسال البريد الحقيقي عبر SendGrid دائماً ──────────────────
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'  # ثابتة دائماً لـ SendGrid
-EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')  # قراءة المفتاح من ملف .env
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')  # قراءة البريد الموثق من ملف .env
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY') # قراءة المفتاح من ملف .env
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL') # قراءة البريد الموثق من ملف .env
