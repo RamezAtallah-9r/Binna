@@ -280,26 +280,6 @@ def update_customer(request):
     
     return redirect('binnaCustomer:customer_settings')
 
-def inventory_details(request, inventory_id):
-    item = Inventory.objects.get_inventory_by_id(inventory_id)
- 
-    context = {
-        "item": item,
-        "supplier": item.supplier,
-        "customer": request.session.get("customer")
-    }
- 
-    return render(request, "product_details.html", context)
-
-def store_details(request, supplier_id):
-    supplier = Supplier.objects.get_supplier_by_id(supplier_id)
-    inventory_items = Inventory.objects.get_supplier_inventory(supplier_id)
-    customer = Customer.objects.get(id=request.session["customer_id"])
- 
-    context = {
-        "supplier": supplier,
-        "inventory_items": inventory_items,
-        "customer": customer,
-    }
- 
-    return render(request, "store-details.html", context)
+def logout(request):
+    request.session.flush()
+    return redirect('binnaSign:login')
