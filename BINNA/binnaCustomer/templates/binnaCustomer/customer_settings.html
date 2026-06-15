@@ -72,7 +72,7 @@
         <a class="p-[0.65rem_0.9rem] border border-white/10 text-charcoal font-[900] text-[0.78rem] transition-colors bg-binnaGreen"
           href="customer-settings.html">الإعدادات</a>
         <a class="p-[0.65rem_0.9rem] border border-white/10 text-white/75 font-[900] text-[0.78rem] transition-colors hover:bg-binnaGreen hover:text-charcoal"
-          href="landing.html">خروج</a>
+          href="{% url 'binnaCustomer:logout' %}">خروج</a>
       </nav>
     </div>
   </header>
@@ -91,47 +91,50 @@
       <form method="POST" action="{% url 'binnaCustomer:update_customer' %}"
         class="w-full lg:col-span-2 bg-white p-6 shadow-soft space-y-4 [clip-path:polygon(18px_0%,100%_0%,100%_calc(100%-18px),calc(100%-18px)_100%,0%_100%,0%_18px)]">
         {% csrf_token %}
-      
+
         <div>
           <label class="block text-charcoal font-bold text-sm mb-2">اسمك الاول</label>
           <input type="text" name="first_name" value="{{ customer.first_name }}" required
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
         </div>
-      
+
         <div>
           <label class="block text-charcoal font-bold text-sm mb-2">اسم العائلة</label>
           <input type="text" name="last_name" value="{{ customer.last_name }}" required
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
         </div>
-      
+
         <div>
           <label class="block text-charcoal font-bold text-sm mb-2">المدينة</label>
           <select name="city" required
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
-            <option value="القدس" {% if customer.city=='القدس' %}selected{% endif %}>القدس</option>
-            <option value="رام الله" {% if customer.city=='رام الله' %}selected{% endif %}>رام الله</option>
-            <option value="نابلس" {% if customer.city=='نابلس' %}selected{% endif %}>نابلس</option>
+          
+            <option value="القدس">القدس</option>
+            <option value="رام الله" >رام الله</option>
+            <option value="نابلس" >نابلس</option>
+          
           </select>
         </div>
-      
+
         <div>
           <label class="block text-charcoal font-bold text-sm mb-2">رقم الهاتف</label>
           <input type="tel" name="phone" value="{{ customer.phone }}" required
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
         </div>
-      
+
         <div>
           <label class="block text-charcoal font-bold text-sm mb-2">البريد الإلكتروني</label>
           <input type="email" value="{{ customer.email }}" name="email" required
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
         </div>
-      
+
         <div>
-          <label class="block text-charcoal font-bold text-sm mb-2">كلمة المرور (اتركها فارغة إذا لم ترد التغيير)</label>
+          <label class="block text-charcoal font-bold text-sm mb-2">كلمة المرور (اتركها فارغة إذا لم ترد
+            التغيير)</label>
           <input type="password" name="password"
             class="w-full border-2 border-charcoal/15 p-[0.8rem] focus:border-binnaGreen outline-none bg-white">
         </div>
-      
+
         <button type="submit"
           class="font-[900] px-[22px] py-3 transition-all duration-250 [clip-path:polygon(10px_0%,100%_0%,calc(100%-10px)_100%,0%_100%)] inline-flex items-center justify-center gap-[0.35rem] text-center cursor-pointer bg-safetyOrange text-white hover:-translate-y-[3px]">
           حفظ التغييرات

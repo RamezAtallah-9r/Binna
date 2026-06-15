@@ -278,3 +278,7 @@ def update_customer(request):
         return redirect('binnaCustomer:customer_settings')
     
     return redirect('binnaCustomer:customer_settings')
+
+def logout(request):
+    request.session.flush()
+    return redirect('binnaSign:login')

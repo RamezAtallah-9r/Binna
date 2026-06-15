@@ -13,4 +13,5 @@ urlpatterns = [
     path("ai_assistans/", views.ai_assistans, name="ai_assistans"),
     path('customer_settings/', views.customer_settings, name='customer_settings'),
     path('update_customer/', views.update_customer, name='update_customer'),
+    path('logout/', views.logout, name='logout'),
 ]
