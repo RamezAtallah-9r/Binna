@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from django.contrib import messages  
 from .models import *
+from binnaProvider.models import *
 
 from google import genai
 from PIL import Image

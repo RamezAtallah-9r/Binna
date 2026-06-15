@@ -1,2 +1,171 @@
-.DS_Store
-**/ .DS_Store
+# ==========================================
+
+# Django Core & Databases
+
+# ==========================================
+
+*.log
+
+*.pot
+
+*.pyc
+
+__pycache__/
+
+db.sqlite3
+
+db.sqlite3-journal
+ 
+# ==========================================
+
+# Environments & Secrets (NEVER commit these)
+
+# ==========================================
+
+.env
+
+.venv
+
+env/
+
+venv/
+
+ENV/
+
+env.bak
+
+.env.local
+
+.env.*.local
+ 
+# ==========================================
+
+# Django Media & Collected Static Files
+
+# ==========================================
+
+# Media files (user uploads) should not be tracked
+
+/media/
+ 
+# Static files should only be tracked if they are source files.
+
+# If you run 'collectstatic' into a dedicated folder, ignore it.
+
+/staticfiles/
+ 
+# ==========================================
+
+# Python & Packaging Artifacts
+
+# ==========================================
+
+*.py[cod]
+
+*$py.class
+
+*.so
+
+.Python
+
+build/
+
+develop-eggs/
+
+dist/
+
+downloads/
+
+eggs/
+
+.installed.cfg
+
+*.egg-info/
+
++at-spy/
+
+.eggs/
+
+parts/
+
+sdist/
+
+var/
+
+wheels/
+
+share/python-wheels/
+
+*.egg
+
+MANIFEST
+ 
+# ==========================================
+
+# Testing, Coverage, & Code Quality
+
+# ==========================================
+
+.htmlcov/
+
+.tox/
+
+.nosetests
+
+.coverage
+
+.coverage.*
+
+.cache
+
+nosetests.xml
+
+coverage.xml
+
+*.cover
+
+*.py,cover
+
+.hypothesis/
+
+.pytest_cache/
+
+cover/
+
+.backport/
+
+.mypy_cache/
+
+.dmypy.json
+
+dmypy.json
+
+.pyre/
+
+.pytype/
+
+cython_debug/
+ 
+# ==========================================
+
+# IDEs and Editors
+
+# ==========================================
+
+.vscode/
+
+.idea/
+
+*.suo
+
+*.ntvs*
+
+*.njsproj
+
+*.sln
+
+*.sw?
+
+.elasticbeanstalk/
+
+ 

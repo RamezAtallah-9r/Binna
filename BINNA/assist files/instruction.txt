@@ -1,0 +1,263 @@
+In binnaCustomer, you need to import Supplier + Inventory from binnaProviders and display them.
+1. binnaCustomer/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('stores/', views.display_stores, name='display_stores'),
+    path('stores/<int:supplier_id>/', views.store_details, name='store_details'),
+    path('inventory/<int:inventory_id>/', views.inventory_details, name='inventory_details'),
+]
+2. binnaCustomer/views.py
+from django.shortcuts import render, redirect
+from binnaProviders.models import Supplier, Inventory, SupplierCategory, InventoryCategory, City
+
+
+def display_stores(request):
+    suppliers = Supplier.objects.get_all_suppliers()
+
+    context = {
+        'suppliers': suppliers,
+        'cities': City.objects.get_all_cities(),
+        'supplier_categories': SupplierCategory.objects.get_all_categories(),
+    }
+
+    return render(request, 'display_stores.html', context)
+
+
+def store_details(request, supplier_id):
+    supplier = Supplier.objects.get_supplier_by_id(supplier_id)
+    inventory_items = Inventory.objects.get_supplier_inventory(supplier_id)
+
+    context = {
+        'supplier': supplier,
+        'inventory_items': inventory_items,
+    }
+
+    return render(request, 'store_details.html', context)
+
+
+def inventory_details(request, inventory_id):
+    item = Inventory.objects.get_inventory_by_id(inventory_id)
+
+    context = {
+        'item': item,
+        'supplier': item.supplier,
+    }
+
+    return render(request, 'inventory_details.html', context)
+3. display_stores.html
+{% for supplier in suppliers %}
+
+<div class="store-card">
+
+    <img src="{{ supplier.image.url }}" alt="{{ supplier.store_name }}" width="200">
+
+    <h3>{{ supplier.store_name }}</h3>
+    <p>Owner: {{ supplier.owner_name }}</p>
+    <p>City: {{ supplier.city.name }}</p>
+    <p>Category: {{ supplier.category.name }}</p>
+    <p>{{ supplier.description }}</p>
+
+    <a href="{% url 'store_details' supplier.id %}">
+        View Store
+    </a>
+
+</div>
+
+{% endfor %}
+4. store_details.html
+<h1>{{ supplier.store_name }}</h1>
+
+<img src="{{ supplier.image.url }}" alt="{{ supplier.store_name }}" width="250">
+
+<p>Owner: {{ supplier.owner_name }}</p>
+<p>Phone: {{ supplier.phone }}</p>
+<p>Email: {{ supplier.email }}</p>
+<p>City: {{ supplier.city.name }}</p>
+<p>Street: {{ supplier.street }}</p>
+<p>Category: {{ supplier.category.name }}</p>
+<p>{{ supplier.description }}</p>
+
+<hr>
+
+<h2>Inventory</h2>
+
+{% for item in inventory_items %}
+
+<div class="product-card">
+
+    <img src="{{ item.image.url }}" alt="{{ item.name }}" width="150">
+
+    <h3>{{ item.name }}</h3>
+    <p>Category: {{ item.category.name }}</p>
+    <p>Available: {{ item.amount }}</p>
+    <p>Price: {{ item.sell_price }}</p>
+
+    <a href="{% url 'inventory_details' item.id %}">
+        View Product
+    </a>
+
+</div>
+
+{% empty %}
+<p>No products yet.</p>
+{% endfor %}
+5. inventory_details.html
+<h1>{{ item.name }}</h1>
+
+<img src="{{ item.image.url }}" alt="{{ item.name }}" width="250">
+
+<p>Supplier: {{ supplier.store_name }}</p>
+<p>Category: {{ item.category.name }}</p>
+<p>Available Amount: {{ item.amount }}</p>
+<p>Sell Price: {{ item.sell_price }}</p>
+
+<a href="{% url 'store_details' supplier.id %}">
+    Back to Store
+</a>
+6. main project urls.py
+Make sure your project urls.py includes binnaCustomer:
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('', include('binnaCustomer.urls')),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+And in settings.py:
+MEDIA_URL = '/static/'
+MEDIA_ROOT = BASE_DIR / 'static'
+This lets binnaCustomer display supplier and inventory images saved by binnaProviders.
+
+
+
+
+
+
+
+-------------------------------
+-------------------------------
+from binnaProviders.models import City, SupplierCategory, InventoryCategory, Supplier, Inventory
+
+
+# =====================
+# المدن الفلسطينية
+# =====================
+cities = [
+    "القدس", "رام الله", "البيرة", "بيت لحم", "بيت جالا", "بيت ساحور",
+    "الخليل", "يطا", "دورا", "حلحول", "نابلس", "جنين", "طولكرم",
+    "قلقيلية", "سلفيت", "طوباس", "أريحا", "غزة", "خانيونس",
+    "رفح", "دير البلح", "بيت لاهيا", "بيت حانون", "جباليا",
+    "النصيرات", "البريج", "المغازي", "عنبتا", "عرابة", "قباطية",
+    "يعبد", "عزون", "بيتونيا", "بيرزيت", "الطيبة", "سلواد",
+    "أبو ديس", "العيزرية", "إذنا", "بيت أمر", "سعير",
+    "السموع", "بني نعيم", "ترقوميا"
+]
+
+for city in cities:
+    City.objects.get_or_create(name=city)
+
+
+# =====================
+# تصنيفات الموردين
+# =====================
+supplier_categories = [
+    "مواد بناء",
+    "عدد ومستلزمات",
+    "مستلزمات حدائق",
+    "ديكور وتشطيبات",
+    "مواد كهربائية",
+    "مواد صحية",
+    "دهانات",
+    "حديد ومعادن",
+    "إسمنت وخرسانة",
+    "بلاط وسيراميك"
+]
+
+for category in supplier_categories:
+    SupplierCategory.objects.get_or_create(name=category)
+
+
+# =====================
+# تصنيفات المنتجات
+# =====================
+inventory_categories = [
+    "إسمنت",
+    "حديد",
+    "بلوك",
+    "رمل",
+    "حصمة",
+    "دهانات",
+    "كهربائيات",
+    "مواد صحية",
+    "بلاط",
+    "مستلزمات حدائق"
+]
+
+for category in inventory_categories:
+    InventoryCategory.objects.get_or_create(name=category)
+
+
+# =====================
+# الموردين
+# =====================
+supplier_data = [
+    ["محلات المنصور لمواد البناء", "مراد شاهين", "0599000001", "mansour@example.com", "رام الله", "شارع الإرسال", "متخصصون في مواد البناء والعدد.", "مواد بناء"],
+    ["القدس للخرسانة الجاهزة", "رامز عطالله", "0599000002", "quds@example.com", "القدس", "الشارع الرئيسي", "توريد الخرسانة والإسمنت.", "إسمنت وخرسانة"],
+    ["مركز عواد للحديد", "عبدالله عواد", "0599000003", "awad@example.com", "الخليل", "المنطقة الصناعية", "توريد الحديد ومواد التسليح.", "حديد ومعادن"],
+    ["الحديقة الخضراء", "أحمد خليل", "0599000004", "garden@example.com", "نابلس", "شارع رفيديا", "مستلزمات الحدائق والري.", "مستلزمات حدائق"],
+    ["ديكور مودرن", "سامي نصار", "0599000005", "decor@example.com", "بيت لحم", "شارع المهد", "ديكورات وتشطيبات داخلية.", "ديكور وتشطيبات"],
+    ["إلكترو فلسطين", "عمر صالح", "0599000006", "electric@example.com", "جنين", "وسط البلد", "مواد وأدوات كهربائية.", "مواد كهربائية"],
+    ["السباك الحديث", "محمود علي", "0599000007", "plumbing@example.com", "طولكرم", "شارع السوق", "مواد صحية وأنظمة مياه.", "مواد صحية"],
+    ["عالم الدهانات", "فادي حسن", "0599000008", "paint@example.com", "قلقيلية", "الشارع الرئيسي", "جميع أنواع الدهانات.", "دهانات"],
+    ["عالم البلاط", "خالد درويش", "0599000009", "tiles@example.com", "غزة", "شارع الوحدة", "بلاط وسيراميك.", "بلاط وسيراميك"],
+    ["سيد الأدوات", "يوسف نمر", "0599000010", "tools@example.com", "أريحا", "وسط المدينة", "عدد ومستلزمات البناء.", "عدد ومستلزمات"]
+]
+
+for s in supplier_data:
+    Supplier.objects.get_or_create(
+        store_name=s[0],
+        defaults={
+            "owner_name": s[1],
+            "phone": s[2],
+            "email": s[3],
+            "city": City.objects.get(name=s[4]),
+            "street": s[5],
+            "description": s[6],
+            "category": SupplierCategory.objects.get(name=s[7]),
+        }
+    )
+
+
+# =====================
+# المنتجات والمخزون
+# =====================
+inventory_data = [
+    ["محلات المنصور لمواد البناء", "إسمنت بورتلاندي 50 كغم", "إسمنت", 200, 35, 45],
+    ["القدس للخرسانة الجاهزة", "خرسانة جاهزة C30", "إسمنت", 80, 330, 420],
+    ["مركز عواد للحديد", "حديد تسليح 12 ملم", "حديد", 150, 2500, 2850],
+    ["محلات المنصور لمواد البناء", "بلوك 20 سم", "بلوك", 1000, 2.5, 3.5],
+    ["محلات المنصور لمواد البناء", "رمل ناعم", "رمل", 60, 45, 65],
+    ["محلات المنصور لمواد البناء", "حصمة", "حصمة", 70, 50, 75],
+    ["عالم الدهانات", "دهان أبيض 18 لتر", "دهانات", 40, 110, 145],
+    ["إلكترو فلسطين", "سلك كهرباء 2.5 ملم", "كهربائيات", 300, 2.2, 3.5],
+    ["السباك الحديث", "ماسورة PVC 4 إنش", "مواد صحية", 120, 18, 25],
+    ["عالم البلاط", "بلاط سيراميك 60×60", "بلاط", 500, 28, 40]
+]
+
+for item in inventory_data:
+    Inventory.objects.get_or_create(
+        supplier=Supplier.objects.get(store_name=item[0]),
+        name=item[1],
+        defaults={
+            "category": InventoryCategory.objects.get(name=item[2]),
+            "amount": item[3],
+            "buy_price": item[4],
+            "sell_price": item[5],
+        }
+    )
+
+print("تمت إضافة البيانات بنجاح")
